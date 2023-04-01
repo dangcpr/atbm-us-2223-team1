@@ -28,12 +28,12 @@ E:\atbm-us-2223-team1\QLDeAn\bin\Debug\System.Threading.Tasks.Extensions.xml
 E:\atbm-us-2223-team1\QLDeAn\bin\Debug\System.ValueTuple.xml
 E:\atbm-us-2223-team1\QLDeAn\obj\Debug\QLDeAn.DBAUI.resources
 E:\atbm-us-2223-team1\QLDeAn\obj\Debug\QLDeAn.LoginUI.resources
+E:\atbm-us-2223-team1\QLDeAn\obj\Debug\QLDeAn.PrivilegeUI.resources
 E:\atbm-us-2223-team1\QLDeAn\obj\Debug\QLDeAn.Properties.Resources.resources
+E:\atbm-us-2223-team1\QLDeAn\obj\Debug\QLDeAn.RoleUI.resources
+E:\atbm-us-2223-team1\QLDeAn\obj\Debug\QLDeAn.UserAndRoleUI.resources
 E:\atbm-us-2223-team1\QLDeAn\obj\Debug\QLDeAn.csproj.GenerateResource.cache
 E:\atbm-us-2223-team1\QLDeAn\obj\Debug\QLDeAn.csproj.CoreCompileInputs.cache
 E:\atbm-us-2223-team1\QLDeAn\obj\Debug\QLDeAn.csproj.CopyComplete
 E:\atbm-us-2223-team1\QLDeAn\obj\Debug\QLDeAn.exe
 E:\atbm-us-2223-team1\QLDeAn\obj\Debug\QLDeAn.pdb
-E:\atbm-us-2223-team1\QLDeAn\obj\Debug\QLDeAn.UserAndRoleUI.resources
-E:\atbm-us-2223-team1\QLDeAn\obj\Debug\QLDeAn.PrivilegeUI.resources
-E:\atbm-us-2223-team1\QLDeAn\obj\Debug\QLDeAn.RoleUI.resources
