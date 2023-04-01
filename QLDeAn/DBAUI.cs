@@ -76,5 +76,15 @@ namespace QLDeAn
         {
 
         }
+
+        private void roleUI1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Reset_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

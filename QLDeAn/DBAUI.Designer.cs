@@ -33,11 +33,12 @@ namespace QLDeAn
             this.Close = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabUserARole = new System.Windows.Forms.TabPage();
-            this.tabPrivilege = new System.Windows.Forms.TabPage();
-            this.tabRole = new System.Windows.Forms.TabPage();
             this.userAndRoleUI1 = new QLDeAn.UserAndRoleUI();
+            this.tabPrivilege = new System.Windows.Forms.TabPage();
             this.privilegeUI1 = new QLDeAn.PrivilegeUI();
+            this.tabRole = new System.Windows.Forms.TabPage();
             this.roleUI1 = new QLDeAn.RoleUI();
+            this.Reset = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabUserARole.SuspendLayout();
             this.tabPrivilege.SuspendLayout();
@@ -89,6 +90,14 @@ namespace QLDeAn
             this.tabUserARole.UseVisualStyleBackColor = true;
             this.tabUserARole.Click += new System.EventHandler(this.tabUserARole_Click);
             // 
+            // userAndRoleUI1
+            // 
+            this.userAndRoleUI1.Location = new System.Drawing.Point(0, 0);
+            this.userAndRoleUI1.Name = "userAndRoleUI1";
+            this.userAndRoleUI1.Size = new System.Drawing.Size(1261, 620);
+            this.userAndRoleUI1.TabIndex = 2;
+            this.userAndRoleUI1.Load += new System.EventHandler(this.userAndRoleUI1_Load);
+            // 
             // tabPrivilege
             // 
             this.tabPrivilege.Controls.Add(this.privilegeUI1);
@@ -100,6 +109,13 @@ namespace QLDeAn
             this.tabPrivilege.Text = "Privilege";
             this.tabPrivilege.UseVisualStyleBackColor = true;
             // 
+            // privilegeUI1
+            // 
+            this.privilegeUI1.Location = new System.Drawing.Point(0, 0);
+            this.privilegeUI1.Name = "privilegeUI1";
+            this.privilegeUI1.Size = new System.Drawing.Size(1261, 620);
+            this.privilegeUI1.TabIndex = 0;
+            // 
             // tabRole
             // 
             this.tabRole.Controls.Add(this.roleUI1);
@@ -110,33 +126,30 @@ namespace QLDeAn
             this.tabRole.Text = "Role";
             this.tabRole.UseVisualStyleBackColor = true;
             // 
-            // userAndRoleUI1
-            // 
-            this.userAndRoleUI1.Location = new System.Drawing.Point(0, 0);
-            this.userAndRoleUI1.Name = "userAndRoleUI1";
-            this.userAndRoleUI1.Size = new System.Drawing.Size(1261, 620);
-            this.userAndRoleUI1.TabIndex = 2;
-            this.userAndRoleUI1.Load += new System.EventHandler(this.userAndRoleUI1_Load);
-            // 
-            // privilegeUI1
-            // 
-            this.privilegeUI1.Location = new System.Drawing.Point(0, 0);
-            this.privilegeUI1.Name = "privilegeUI1";
-            this.privilegeUI1.Size = new System.Drawing.Size(1261, 620);
-            this.privilegeUI1.TabIndex = 0;
-            // 
             // roleUI1
             // 
-            this.roleUI1.Location = new System.Drawing.Point(3, 3);
+            this.roleUI1.Location = new System.Drawing.Point(0, 0);
             this.roleUI1.Name = "roleUI1";
-            this.roleUI1.Size = new System.Drawing.Size(1258, 617);
+            this.roleUI1.Size = new System.Drawing.Size(1261, 620);
             this.roleUI1.TabIndex = 0;
+            this.roleUI1.Load += new System.EventHandler(this.roleUI1_Load);
+            // 
+            // Reset
+            // 
+            this.Reset.Location = new System.Drawing.Point(1112, 667);
+            this.Reset.Name = "Reset";
+            this.Reset.Size = new System.Drawing.Size(75, 33);
+            this.Reset.TabIndex = 3;
+            this.Reset.Text = "Reset";
+            this.Reset.UseVisualStyleBackColor = true;
+            this.Reset.Click += new System.EventHandler(this.Reset_Click);
             // 
             // DBAUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1293, 712);
+            this.Controls.Add(this.Reset);
             this.Controls.Add(this.logout);
             this.Controls.Add(this.Close);
             this.Controls.Add(this.tabControl);
@@ -162,5 +175,6 @@ namespace QLDeAn
         private UserAndRoleUI userAndRoleUI1;
         private PrivilegeUI privilegeUI1;
         private RoleUI roleUI1;
+        private System.Windows.Forms.Button Reset;
     }
 }
