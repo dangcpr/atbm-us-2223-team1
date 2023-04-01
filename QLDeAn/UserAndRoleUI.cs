@@ -19,7 +19,7 @@ namespace QLDeAn
 
         private void UserAndRole_Load(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

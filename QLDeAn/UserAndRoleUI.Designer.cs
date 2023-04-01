@@ -41,13 +41,13 @@ namespace QLDeAn
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             // 
-            // UserAndRole
+            // UserAndRoleUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label1);
-            this.Name = "UserAndRole";
-            this.Size = new System.Drawing.Size(916, 514);
+            this.Name = "UserAndRoleUI";
+            this.Size = new System.Drawing.Size(1261, 620);
             this.Load += new System.EventHandler(this.UserAndRole_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

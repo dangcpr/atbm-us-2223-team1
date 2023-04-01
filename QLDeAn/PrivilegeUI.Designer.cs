@@ -29,33 +29,64 @@ namespace QLDeAn
         /// </summary>
         private void InitializeComponent()
         {
-            this.label2 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.grantPrivilege = new System.Windows.Forms.Button();
+            this.revokePrivilege = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // label2
+            // dataGridView1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(113, 91);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 17);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "label2";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(30, 60);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(1201, 537);
+            this.dataGridView1.TabIndex = 3;
+            // 
+            // grantPrivilege
+            // 
+            this.grantPrivilege.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grantPrivilege.Location = new System.Drawing.Point(30, 12);
+            this.grantPrivilege.Name = "grantPrivilege";
+            this.grantPrivilege.Size = new System.Drawing.Size(172, 42);
+            this.grantPrivilege.TabIndex = 4;
+            this.grantPrivilege.Text = "CẤP QUYỀN CHO ROLE/USER";
+            this.grantPrivilege.UseCompatibleTextRendering = true;
+            this.grantPrivilege.UseVisualStyleBackColor = true;
+            this.grantPrivilege.Click += new System.EventHandler(this.grantPrivilege_Click);
+            // 
+            // revokePrivilege
+            // 
+            this.revokePrivilege.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.revokePrivilege.Location = new System.Drawing.Point(208, 12);
+            this.revokePrivilege.Name = "revokePrivilege";
+            this.revokePrivilege.Size = new System.Drawing.Size(172, 42);
+            this.revokePrivilege.TabIndex = 5;
+            this.revokePrivilege.Text = "HỦY QUYỀN CỦA ROLE/USER";
+            this.revokePrivilege.UseCompatibleTextRendering = true;
+            this.revokePrivilege.UseVisualStyleBackColor = true;
             // 
             // PrivilegeUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.revokePrivilege);
+            this.Controls.Add(this.grantPrivilege);
+            this.Controls.Add(this.dataGridView1);
             this.Name = "PrivilegeUI";
-            this.Size = new System.Drawing.Size(1035, 537);
+            this.Size = new System.Drawing.Size(1261, 620);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button grantPrivilege;
+        private System.Windows.Forms.Button revokePrivilege;
     }
 }
