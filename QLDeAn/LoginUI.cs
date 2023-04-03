@@ -19,9 +19,9 @@ namespace QLDeAn
             InitializeComponent();
         }
         public static OracleConnection con;
-        private void Form1_Load(object sender, EventArgs e) 
+        private void LoginUI_Load(object sender, EventArgs e) 
         {
-            this.ControlBox = false;
+            
         }
         private void title_Click(object sender, EventArgs e) { }
         private void label_user_Click(object sender, EventArgs e) { }

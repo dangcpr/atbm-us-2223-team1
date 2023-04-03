@@ -107,6 +107,7 @@ namespace QLDeAn
             // 
             // role
             // 
+            this.role.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.role.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.role.FormattingEnabled = true;
             this.role.Items.AddRange(new object[] {
@@ -143,6 +144,7 @@ namespace QLDeAn
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1096, 622);
+            this.ControlBox = false;
             this.Controls.Add(this.Close);
             this.Controls.Add(this.role);
             this.Controls.Add(this.login);
@@ -155,7 +157,7 @@ namespace QLDeAn
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "LoginUI";
             this.Text = "ĐĂNG NHẬP HỆ THỐNG";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.LoginUI_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
