@@ -122,11 +122,11 @@ return int
 as
     user_role_exist int;
 BEGIN
-    user_role_exist := check_user_role_exist(user_name);
+    check_user_role_exist(user_name, user_role_exist);
     if user_role_exist = 0 then --Nếu user_name không tồn tại
         return -1;
     end if;
-    user_role_exist := check_user_role_exist(role_name);
+    check_user_role_exist(role_name, user_role_exist);
     if user_role_exist = 0 then --Nếu role_name không tồn tại
         return -2;
     end if;
