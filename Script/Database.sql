@@ -43,3 +43,5 @@ ALTER TABLE QLDA_NHANVIEN ADD CONSTRAINT MANQL_FK FOREIGN KEY (MANQL) REFERENCES
 SELECT *
   FROM user_cons_columns WHERE table_name = 'QLDA_NHANVIEN' OR table_name = 'QLDA_PHONGBAN' or table_name ='QLDA_DEAN' or table_name = 'QLDA_PHANCONG';
 select role from dba_roles;
+
+select * from tabs

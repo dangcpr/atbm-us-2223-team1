@@ -136,9 +136,6 @@ namespace QLDeAn
             // 
             this.column.Enabled = false;
             this.column.FormattingEnabled = true;
-            this.column.Items.AddRange(new object[] {
-            "ABC",
-            "DEF"});
             this.column.Location = new System.Drawing.Point(375, 40);
             this.column.Name = "column";
             this.column.Size = new System.Drawing.Size(150, 157);
@@ -194,10 +191,10 @@ namespace QLDeAn
             this.table.Enabled = false;
             this.table.FormattingEnabled = true;
             this.table.Items.AddRange(new object[] {
-            "INSERT",
-            "DELETE",
-            "UPDATE",
-            "SELECT"});
+            "QLDA_NHANVIEN",
+            "QLDA_DEAN",
+            "QLDA_PHANCONG",
+            "QLDA_PHONGBAN"});
             this.table.Location = new System.Drawing.Point(173, 154);
             this.table.Name = "table";
             this.table.Size = new System.Drawing.Size(162, 24);

@@ -30,8 +30,8 @@ namespace QLDeAn
         private void InitializeComponent()
         {
             this.revokePrivilege = new System.Windows.Forms.Button();
-            this.grantPrivilege = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.grantRole = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,17 +46,6 @@ namespace QLDeAn
             this.revokePrivilege.UseCompatibleTextRendering = true;
             this.revokePrivilege.UseVisualStyleBackColor = true;
             // 
-            // grantPrivilege
-            // 
-            this.grantPrivilege.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grantPrivilege.Location = new System.Drawing.Point(30, 12);
-            this.grantPrivilege.Name = "grantPrivilege";
-            this.grantPrivilege.Size = new System.Drawing.Size(172, 42);
-            this.grantPrivilege.TabIndex = 7;
-            this.grantPrivilege.Text = "CẤP ROLE CHO USER";
-            this.grantPrivilege.UseCompatibleTextRendering = true;
-            this.grantPrivilege.UseVisualStyleBackColor = true;
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToOrderColumns = true;
@@ -68,12 +57,24 @@ namespace QLDeAn
             this.dataGridView1.Size = new System.Drawing.Size(1201, 537);
             this.dataGridView1.TabIndex = 6;
             // 
+            // grantRole
+            // 
+            this.grantRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grantRole.Location = new System.Drawing.Point(30, 12);
+            this.grantRole.Name = "grantRole";
+            this.grantRole.Size = new System.Drawing.Size(172, 42);
+            this.grantRole.TabIndex = 9;
+            this.grantRole.Text = "CẤP ROLE CHO USER";
+            this.grantRole.UseCompatibleTextRendering = true;
+            this.grantRole.UseVisualStyleBackColor = true;
+            this.grantRole.Click += new System.EventHandler(this.grantRole_Click);
+            // 
             // RoleUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.grantRole);
             this.Controls.Add(this.revokePrivilege);
-            this.Controls.Add(this.grantPrivilege);
             this.Controls.Add(this.dataGridView1);
             this.Name = "RoleUI";
             this.Size = new System.Drawing.Size(1261, 620);
@@ -85,7 +86,7 @@ namespace QLDeAn
         #endregion
 
         private System.Windows.Forms.Button revokePrivilege;
-        private System.Windows.Forms.Button grantPrivilege;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button grantRole;
     }
 }

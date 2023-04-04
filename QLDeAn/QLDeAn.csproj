@@ -54,6 +54,8 @@
     <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.122.21.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>packages\Oracle.ManagedDataAccess.EntityFramework.21.9.0\lib\net462\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -92,6 +94,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBAUI.cs">
@@ -99,6 +102,12 @@
     </Compile>
     <Compile Include="DBAUI.Designer.cs">
       <DependentUpon>DBAUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GrantRole_F.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GrantRole_F.Designer.cs">
+      <DependentUpon>GrantRole_F.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginUI.cs">
       <SubType>Form</SubType>
@@ -134,6 +143,9 @@
     </Compile>
     <EmbeddedResource Include="DBAUI.resx">
       <DependentUpon>DBAUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GrantRole_F.resx">
+      <DependentUpon>GrantRole_F.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginUI.resx">
       <DependentUpon>LoginUI.cs</DependentUpon>

@@ -65,6 +65,8 @@ namespace QLDeAn
 
                 if (role.Text == "DBA")
                 {
+                    OracleCommand command = new OracleCommand("alter session set \"_ORACLE_SCRIPT\"=true", con);
+                    command.ExecuteNonQuery();
                     DBAUI dba = new DBAUI();
                     dba.Show();
                 }
