@@ -51,7 +51,7 @@ namespace QLDeAn
                     //cmd.Connection.Open();
                     cmd.ExecuteNonQuery();
 
-                    var result_roleuser = Convert.ToString(cmd.Parameters["res"].Value);
+                    result_roleuser = Convert.ToString(cmd.Parameters["res"].Value);
 
                     if (result_roleuser != "1" && result_roleuser != "2")
                     {

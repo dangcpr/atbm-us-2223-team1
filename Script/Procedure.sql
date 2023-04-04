@@ -66,9 +66,13 @@ EXEC drop_proc('grant_insert_privilege');
 EXEC drop_proc('grant_delete_privilege');
 EXEC drop_proc('grant_role');
 EXEC drop_user('NV001');
+EXEC drop_role('KH')
 EXEC drop_role('NV');
+EXEC drop_role('DV');
 create user NV001 IDENTIFIED BY NV001;
 create role NV;
+create role KH;
+create role DV;
 grant connect to NV001;
 
 --Kiểm tra user hoặc role có tồn tại hay không và trả về kêt quả 0 nếu không tồn tại, 1 nếu là user, 2 nếu là role
@@ -206,8 +210,8 @@ select * from DBA_ROLE_PRIVS where GRANTEE = 'NV001';
 
 --Check quyền của 1 user/role có quyền update, insert.
 select * from DBA_TAB_PRIVS where GRANTEE = 'NV001';
-select * from DBA_TAB_PRIVS where GRANTEE = 'NV';
-exec GRANT_UPDATE_PRIVILEGE('NV','TONGHOP','Nam, MaPB', '');
+select * from DBA_TAB_PRIVS where GRANTEE = 'KH';
+--exec GRANT_UPDATE_PRIVILEGE('NV','TONGHOP','Nam, MaPB', '');
 --Check thuộc tính trên một view mà user có quyền.
 select * from DBA_COL_PRIVS where GRANTEE = 'NV001';
 DESCRIBE V_NV001_QLDA_PHANCONG;
