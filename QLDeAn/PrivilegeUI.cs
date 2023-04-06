@@ -15,11 +15,13 @@ namespace QLDeAn
         public PrivilegeUI()
         {
             InitializeComponent();
+
         }
 
         private void grantPrivilege_Click(object sender, EventArgs e)
         {
-
+            GrantPrivil_F grantPrivil = new GrantPrivil_F();
+            grantPrivil.Show();
         }
     }
 }

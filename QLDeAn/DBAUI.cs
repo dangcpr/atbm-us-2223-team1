@@ -20,7 +20,6 @@ namespace QLDeAn
         public static OracleConnection conNow;
         private void DBAUI_Load(object sender, EventArgs e)
         {
-             this.ControlBox = false;
              conNow = LoginUI.con;
              /* Test kết nối (thành công)
              OracleCommand selectGD = conNow.CreateCommand();
