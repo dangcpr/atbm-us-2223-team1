@@ -231,6 +231,3 @@ BEGIN
     WHEN OTHERS THEN
         result_ := 0;
 END;
-
-
-
