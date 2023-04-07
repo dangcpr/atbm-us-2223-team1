@@ -120,7 +120,7 @@ create or replace procedure grant_select_privilege(
 as
     view_string char(100);
 begin
-    view_string := 'V_' || user_role || '_' || table_name;
+    view_string := 'V_' || table_name || '_' || user_role ;
     drop_view(view_string);
     execute immediate 'CREATE OR REPLACE VIEW ' || view_string || ' AS SELECT ' || column_name || ' FROM ' || table_name;
     execute immediate 'GRANT SELECT ON ' || view_string || ' TO ' || user_role || ' ' || withgrantoption;   
@@ -215,6 +215,22 @@ select * from DBA_TAB_PRIVS where GRANTEE = 'KH';
 --Check thuộc tính trên một view mà user có quyền.
 select * from DBA_COL_PRIVS where GRANTEE = 'NV001';
 DESCRIBE V_NV001_QLDA_PHANCONG;
+
+CREATE OR REPLACE PROCEDURE revoke_privil
+(
+    username varchar2,
+    table_view varchar2,
+    privil varchar,
+    result_ OUT int
+)
+IS
+BEGIN  
+    EXECUTE IMMEDIATE ('REVOKE ' || privil || ' ON ' || table_view || ' from ' || username);
+    result_ := 1;
+    EXCEPTION
+    WHEN OTHERS THEN
+        result_ := 0;
+END;
 
 
 
