@@ -216,6 +216,14 @@ namespace QLDeAn
                     cmd.Parameters.Add("withgrantoption", withgrantoption_);
                     cmd.ExecuteNonQuery();
 
+                    //cập nhật lại Privilge
+                    string sql = "select * from DBA_TAB_PRIVS where TABLE_NAME LIKE 'QLDA_%' OR TABLE_NAME LIKE 'V_QLDA_%' ";
+
+                    OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
+                    DataTable dt1 = new DataTable();
+                    da.Fill(dt1);
+                    PrivilegeUI.data_grid_view1.DataSource = dt1;
+
                 }
                 else if (privil.Text.ToString() == "DELETE")
                 {
@@ -226,6 +234,14 @@ namespace QLDeAn
                     cmd.Parameters.Add("table_name", table.Text.ToString());
                     cmd.Parameters.Add("withgrantoption", withgrantoption_);
                     cmd.ExecuteNonQuery();
+
+                    //cập nhật lại Privilge
+                    string sql = "select * from DBA_TAB_PRIVS where TABLE_NAME LIKE 'QLDA_%' OR TABLE_NAME LIKE 'V_QLDA_%' ";
+
+                    OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
+                    DataTable dt1 = new DataTable();
+                    da.Fill(dt1);
+                    PrivilegeUI.data_grid_view1.DataSource = dt1;
                 }
                 else if (privil.Text.ToString() == "UPDATE")
                 {
@@ -237,6 +253,14 @@ namespace QLDeAn
                     cmd.Parameters.Add("column_name", column_list);
                     cmd.Parameters.Add("withgrantoption", withgrantoption_);
                     cmd.ExecuteNonQuery();
+
+                    //cập nhật lại Privilge
+                    string sql = "select * from DBA_COL_PRIVS where TABLE_NAME LIKE 'QLDA_%' ";
+
+                    OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
+                    DataTable dt1 = new DataTable();
+                    da.Fill(dt1);
+                    PrivilegeUI.data_grid_view2.DataSource = dt1;
                 }
                 else if (privil.Text.ToString() == "SELECT")
                 {
@@ -248,9 +272,20 @@ namespace QLDeAn
                     cmd.Parameters.Add("column_name", column_list);
                     cmd.Parameters.Add("withgrantoption", withgrantoption_);
                     cmd.ExecuteNonQuery();
+
+                    //cập nhật lại Privilge
+                    string sql = "select * from DBA_TAB_PRIVS where TABLE_NAME LIKE 'QLDA_%' OR TABLE_NAME LIKE 'V_QLDA_%'";
+
+                    OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
+                    DataTable dt1 = new DataTable();
+                    da.Fill(dt1);
+                    PrivilegeUI.data_grid_view1.DataSource = dt1;
                 }
+
                 MessageBox.Show("Cấp quyền cho " + ((result_roleuser == "1") ? "user " : "role ") + roleuser.Text.ToString() + " thành công");
                 this.Hide();
+
+                
             }
             catch (System.Data.OracleClient.OracleException ex)
             {
