@@ -353,15 +353,53 @@ BEGIN
   END IF;
 END;
 /
+GRANT NV TO NV001;
+REVOKE NV FROM NV001;
 
 --BEGIN
 --  change_role_password('YUGI', '123');
 --END;
 --/
+--Proc revoke role của user, kiểm tra user có tồn tại hay không, role có tồn tại hay không, role đó có được cấp cho user chưa.
+CREATE OR REPLACE PROCEDURE revoke_role
+(
+    user_name varchar2,
+    role_name varchar2,
+    result_ OUT int
+)
+IS
+    user_role_exist int;
+    res int;
+BEGIN
+    check_user_role_exist(user_name, user_role_exist);
+    if user_role_exist = 0 or user_role_exist = 2 then --Nếu user_name không tồn tại
+        result_ := -1;
+        return;
+    end if;
+    check_user_role_exist(role_name, user_role_exist);
+    if user_role_exist = 0 or user_role_exist = 1 then --Nếu role_name không tồn tại
+        result_ := -2;
+        return;
+    end if;
+    select count(*) into res from dba_role_privs where grantee = user_name and granted_role = role_name;
+    if res = 0 then
+        result_ := -3;
+        return;
+    end if;
+    execute immediate ('REVOKE ' || role_name || ' FROM ' || user_name);
+    result_ := 3;
+EXCEPTION
+    WHEN OTHERS THEN
+        IF SQLCODE != -01918 THEN
+            RAISE;
+        END IF;
+END;
+/
+revoke NV from NV001;
+grant role DV to NV001;
 
-
-
-
+--select bảng role của user
+select * from dba_role_privs where grantee = 'NV001';
 
 
 

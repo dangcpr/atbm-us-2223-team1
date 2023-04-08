@@ -165,6 +165,12 @@
     <Compile Include="RevokePrivil_F.Designer.cs">
       <DependentUpon>RevokePrivil_F.cs</DependentUpon>
     </Compile>
+    <Compile Include="RevokeRole_F.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RevokeRole_F.Designer.cs">
+      <DependentUpon>RevokeRole_F.cs</DependentUpon>
+    </Compile>
     <Compile Include="RoleUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -227,6 +233,9 @@
     </Compile>
     <EmbeddedResource Include="RevokePrivil_F.resx">
       <DependentUpon>RevokePrivil_F.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RevokeRole_F.resx">
+      <DependentUpon>RevokeRole_F.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RoleUI.resx">
       <DependentUpon>RoleUI.cs</DependentUpon>

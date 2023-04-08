@@ -45,6 +45,7 @@ namespace QLDeAn
             this.revokePrivilege.Text = "HỦY ROLE CỦA USER";
             this.revokePrivilege.UseCompatibleTextRendering = true;
             this.revokePrivilege.UseVisualStyleBackColor = true;
+            this.revokePrivilege.Click += new System.EventHandler(this.revokePrivilege_Click);
             // 
             // dataGridView1
             // 
@@ -56,6 +57,7 @@ namespace QLDeAn
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(1201, 537);
             this.dataGridView1.TabIndex = 6;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
             // 
             // grantRole
             // 
@@ -78,6 +80,7 @@ namespace QLDeAn
             this.Controls.Add(this.dataGridView1);
             this.Name = "RoleUI";
             this.Size = new System.Drawing.Size(1261, 620);
+            this.Load += new System.EventHandler(this.RoleUI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

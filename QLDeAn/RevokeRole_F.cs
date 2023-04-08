@@ -11,23 +11,28 @@ using Oracle.ManagedDataAccess.Client;
 
 namespace QLDeAn
 {
-    public partial class GrantRole_F : Form
+    public partial class RevokeRole_F : Form
     {
-        public GrantRole_F()
+        public RevokeRole_F()
         {
             InitializeComponent();
         }
-        public static OracleConnection conNow;        
-        private void GrantRole_F_Load(object sender, EventArgs e)
+        public static OracleConnection conNow;
+        private void RevokeRole_F_Load(object sender, EventArgs e)
         {
             conNow = LoginUI.con;
         }
+        private void user_TextChanged(object sender, EventArgs e)
+        {
 
-        private void user_TextChanged(object sender, EventArgs e) { }
-        private void role_TextChanged(object sender, EventArgs e) { }
-        private void withadminoption_CheckedChanged(object sender, EventArgs e) { }        
-       
-        private void grantButton_Click(object sender, EventArgs e)
+        }
+
+        private void role_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void revokeButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -36,22 +41,20 @@ namespace QLDeAn
                     MessageBox.Show("Không được để trống User");
                     return;
                 }
-                
+
                 if (role.Text.Length == 0)
                 {
                     MessageBox.Show("Không được để trống Role");
                     return;
                 }
                 var cmd = new OracleCommand();
-                string withadminoption_ = (withadminoption.Checked) ? "WITH ADMIN OPTION" : "";
 
                 cmd.Connection = conNow;
-                cmd.CommandText = "grant_role";
+                cmd.CommandText = "revoke_role";
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add("user_name", user.Text.ToString());
                 cmd.Parameters.Add("role_name", role.Text.ToString());
-                cmd.Parameters.Add("withadminoption", withadminoption_);
                 cmd.Parameters.Add("res", OracleDbType.Int32).Direction = ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
 
@@ -59,15 +62,19 @@ namespace QLDeAn
 
                 if (result_roleuser == "-1")
                 {
-                    MessageBox.Show("User cần cấp role không tồn tại");
+                    MessageBox.Show("User cần thu hồi role không tồn tại");
                 }
                 else if (result_roleuser == "-2")
                 {
-                    MessageBox.Show("Role cần cấp cho User không tồn tại");
+                    MessageBox.Show("Role không tồn tại");
+                }
+                else if (result_roleuser == "-3")
+                {
+                    MessageBox.Show("Role này chưa được cấp cho user");
                 }
                 else if (result_roleuser == "3")
                 {
-                    MessageBox.Show("Cấp role " + role.Text.ToString() + " cho user " + user.Text.ToString() + " thành công");
+                    MessageBox.Show("Hủy role " + role.Text.ToString() + " của user " + user.Text.ToString() + " thành công");
                     this.Hide();
 
                     string sql = "select * from dba_role_privs";
@@ -89,5 +96,7 @@ namespace QLDeAn
         {
             this.Hide();
         }
+
+
     }
 }
