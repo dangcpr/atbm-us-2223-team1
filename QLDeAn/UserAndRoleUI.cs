@@ -19,6 +19,8 @@ namespace QLDeAn
             InitializeComponent();
         }
         public static OracleConnection conNow;
+        public static DataGridView data_grid_view1;
+        public static DataGridView data_grid_view2;
 
         private void UserAndRole_Load(object sender, EventArgs e)
         {
@@ -36,6 +38,7 @@ namespace QLDeAn
             DataTable dt = new DataTable();
             da.Fill(dt);
             dataGridView1.DataSource = dt;
+            data_grid_view1 = dataGridView1;
 
         }
 
@@ -47,7 +50,7 @@ namespace QLDeAn
             DataTable dt = new DataTable();
             da.Fill(dt);
             dataGridView2.DataSource = dt;
-
+            data_grid_view2 = dataGridView2;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
