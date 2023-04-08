@@ -94,5 +94,10 @@ namespace QLDeAn
             UpdateRole_F updaterole = new UpdateRole_F();
             updaterole.Show();
         }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

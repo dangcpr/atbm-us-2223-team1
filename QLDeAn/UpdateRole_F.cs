@@ -70,6 +70,14 @@ namespace QLDeAn
                         cmd1.Parameters.Add("p_new_password", passwordBox.Text.ToString());
 
                         cmd1.ExecuteNonQuery();
+
+                        //cập nhật lại ROLE
+                        string sql = "SELECT ROLE, ROLE_ID, PASSWORD_REQUIRED FROM DBA_ROLES";
+
+                        OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
+                        DataTable dt1 = new DataTable();
+                        da.Fill(dt1);
+                        UserAndRoleUI.data_grid_view2.DataSource = dt1;
                     }
                 }
                 MessageBox.Show("Sửa role thành công.");

@@ -224,6 +224,7 @@ CREATE OR REPLACE PROCEDURE create_user(p_username IN VARCHAR2, p_password IN VA
 IS
 BEGIN
   EXECUTE IMMEDIATE 'CREATE USER ' || p_username || ' IDENTIFIED BY ' || p_password;
+  EXECUTE IMMEDIATE 'GRANT CONNECT TO ' || p_username;
 END;
 /
 --BEGIN 
@@ -280,7 +281,10 @@ CREATE OR REPLACE PROCEDURE create_role(
 IS
 BEGIN
   IF p_password IS NULL THEN
+  BEGIN
     EXECUTE IMMEDIATE ('CREATE ROLE ' || p_role_name);
+    EXECUTE IMMEDIATE 'GRANT CONNECT TO ' || p_role_name;
+  END;
   ELSE
     EXECUTE IMMEDIATE ('CREATE ROLE ' || p_role_name || ' IDENTIFIED BY ' || p_password);
   END IF;
@@ -322,8 +326,13 @@ BEGIN
   WHERE role = p_role_name;
 
   IF role_exists > 0 THEN
-    EXECUTE IMMEDIATE 'ALTER ROLE ' || p_role_name || ' IDENTIFIED BY ' || p_new_password;
-    DBMS_OUTPUT.PUT_LINE('Password for role ' || p_role_name || ' has been changed.');
+    IF (p_new_password IS NULL) THEN
+      EXECUTE IMMEDIATE 'ALTER ROLE ' || p_role_name || ' NOT IDENTIFIED';
+      DBMS_OUTPUT.PUT_LINE('Password for role ' || p_role_name || ' has been removed.');
+    ELSE
+      EXECUTE IMMEDIATE 'ALTER ROLE ' || p_role_name || ' IDENTIFIED BY ' || p_new_password;
+      DBMS_OUTPUT.PUT_LINE('Password for role ' || p_role_name || ' has been changed.');
+    END IF;
   ELSE
     DBMS_OUTPUT.PUT_LINE('Role ' || p_role_name || ' does not exist.');
   END IF;
