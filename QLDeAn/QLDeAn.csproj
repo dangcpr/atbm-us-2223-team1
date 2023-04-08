@@ -97,11 +97,35 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateRole_F.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateRole_F.Designer.cs">
+      <DependentUpon>CreateRole_F.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreateUser_F.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateUser_F.Designer.cs">
+      <DependentUpon>CreateUser_F.cs</DependentUpon>
+    </Compile>
     <Compile Include="DBAUI.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DBAUI.Designer.cs">
       <DependentUpon>DBAUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteRole_F.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeleteRole_F.Designer.cs">
+      <DependentUpon>DeleteRole_F.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteUser_F.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeleteUser_F.Designer.cs">
+      <DependentUpon>DeleteUser_F.cs</DependentUpon>
     </Compile>
     <Compile Include="GrantRole_F.cs">
       <SubType>Form</SubType>
@@ -135,14 +159,38 @@
     <Compile Include="RoleUI.Designer.cs">
       <DependentUpon>RoleUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="UpdateRole_F.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateRole_F.Designer.cs">
+      <DependentUpon>UpdateRole_F.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateUser_F.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateUser_F.Designer.cs">
+      <DependentUpon>UpdateUser_F.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserAndRoleUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserAndRoleUI.Designer.cs">
       <DependentUpon>UserAndRoleUI.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CreateRole_F.resx">
+      <DependentUpon>CreateRole_F.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateUser_F.resx">
+      <DependentUpon>CreateUser_F.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DBAUI.resx">
       <DependentUpon>DBAUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeleteRole_F.resx">
+      <DependentUpon>DeleteRole_F.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeleteUser_F.resx">
+      <DependentUpon>DeleteUser_F.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GrantRole_F.resx">
       <DependentUpon>GrantRole_F.cs</DependentUpon>
@@ -167,6 +215,12 @@
     </Compile>
     <EmbeddedResource Include="RoleUI.resx">
       <DependentUpon>RoleUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateRole_F.resx">
+      <DependentUpon>UpdateRole_F.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateUser_F.resx">
+      <DependentUpon>UpdateUser_F.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserAndRoleUI.resx">
       <DependentUpon>UserAndRoleUI.cs</DependentUpon>

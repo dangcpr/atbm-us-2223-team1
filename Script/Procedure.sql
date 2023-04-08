@@ -218,3 +218,125 @@ DESCRIBE V_NV001_QLDA_PHANCONG;
 
 
 
+
+--Tao user.
+CREATE OR REPLACE PROCEDURE create_user(p_username IN VARCHAR2, p_password IN VARCHAR2)
+IS
+BEGIN
+  EXECUTE IMMEDIATE 'CREATE USER ' || p_username || ' IDENTIFIED BY ' || p_password;
+END;
+/
+
+--Xoa user.
+CREATE OR REPLACE PROCEDURE delete_user(p_username IN VARCHAR2)
+IS
+BEGIN
+  EXECUTE IMMEDIATE 'DROP USER ' || p_username;
+END;
+/
+
+
+
+
+--Update tai khoan
+CREATE OR REPLACE PROCEDURE change_password (
+   p_username IN VARCHAR2,
+   p_old_password IN VARCHAR2,
+   p_new_password IN VARCHAR2
+) AS
+   v_user_count NUMBER;
+BEGIN
+   -- Check if the user exists and the old password is correct
+   SELECT COUNT(*)
+   INTO v_user_count
+   FROM dba_users
+   WHERE username = p_username
+   AND password = p_old_password;
+   
+   IF v_user_count = 0 THEN
+      RAISE_APPLICATION_ERROR(-20001, 'User does not exist or old password is incorrect');
+   END IF;
+
+   -- Change the user's password
+   EXECUTE IMMEDIATE 'ALTER USER ' || p_username || ' IDENTIFIED BY ' || p_new_password;
+   
+   DBMS_OUTPUT.PUT_LINE('Password changed successfully');
+EXCEPTION
+   WHEN OTHERS THEN
+      DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
+END;
+/
+
+
+--Tao role 
+CREATE OR REPLACE PROCEDURE create_role(
+  p_role_name IN VARCHAR2,
+  p_password IN VARCHAR2 DEFAULT NULL
+)
+IS
+BEGIN
+  IF p_password IS NULL THEN
+    EXECUTE IMMEDIATE 'CREATE ROLE ' || p_role_name;
+  ELSE
+    EXECUTE IMMEDIATE 'CREATE ROLE ' || p_role_name || ' IDENTIFIED BY ' || p_password;
+  END IF;
+END;
+/
+BEGIN
+create_role ('XYZ');
+END;
+
+
+
+--Drop role
+CREATE OR REPLACE PROCEDURE delete_role (
+    p_role_name IN VARCHAR2,
+    p_password IN VARCHAR2 DEFAULT NULL
+) AS
+BEGIN
+    IF p_password IS NOT NULL THEN
+        EXECUTE IMMEDIATE 'DROP ROLE ' || p_role_name || ' IDENTIFIED BY ' || p_password;
+    ELSE
+        EXECUTE IMMEDIATE 'DROP ROLE ' || p_role_name;
+    END IF;
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Error deleting role: ' || SQLERRM);
+END;
+/
+
+--Change role
+CREATE OR REPLACE PROCEDURE CHANGE_ROLE_PASSWORD(
+    p_role_name IN VARCHAR2,
+    p_new_password IN VARCHAR2
+)
+IS
+    v_password VARCHAR2(100);
+BEGIN
+    -- Check if the role already has a password
+    SELECT password INTO v_password FROM dba_roles WHERE role = p_role_name;
+    
+    -- If the role does not have a password, create one
+    IF v_password IS NULL THEN
+        EXECUTE IMMEDIATE 'ALTER ROLE ' || p_role_name || ' IDENTIFIED BY ' || p_new_password;
+    ELSE
+        -- If the role already has a password, change it
+        EXECUTE IMMEDIATE 'ALTER ROLE ' || p_role_name || ' IDENTIFIED BY ' || p_new_password || ' REPLACE ' || v_password;
+    END IF;
+    
+    DBMS_OUTPUT.PUT_LINE('Password changed for role ' || p_role_name);
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Role ' || p_role_name || ' does not exist.');
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLERRM);
+END;
+
+
+
+
+
+
+
+
+

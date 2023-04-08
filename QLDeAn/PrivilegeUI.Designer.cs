@@ -38,6 +38,8 @@ namespace QLDeAn
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(30, 60);
             this.dataGridView1.Name = "dataGridView1";
@@ -45,6 +47,7 @@ namespace QLDeAn
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(1201, 537);
             this.dataGridView1.TabIndex = 3;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // grantPrivilege
             // 
@@ -78,6 +81,7 @@ namespace QLDeAn
             this.Controls.Add(this.dataGridView1);
             this.Name = "PrivilegeUI";
             this.Size = new System.Drawing.Size(1261, 620);
+            this.Load += new System.EventHandler(this.PrivilegeUI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

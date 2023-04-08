@@ -54,5 +54,42 @@ namespace QLDeAn
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DeleteUser_F deleteuser = new DeleteUser_F();
+            deleteuser.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CreateUser_F createuser = new CreateUser_F();
+            createuser.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            UpdateUser_F updateuser = new UpdateUser_F();
+            updateuser.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            CreateRole_F createrole = new CreateRole_F();
+            createrole.Show();
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            DeleteRole_F deleterole = new DeleteRole_F();
+            deleterole.Show();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            UpdateRole_F updaterole = new UpdateRole_F();
+            updaterole.Show();
+        }
     }
 }
