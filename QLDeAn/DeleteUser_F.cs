@@ -69,6 +69,14 @@ namespace QLDeAn
                         cmd1.Parameters.Add("p_username", usernameBox.Text.ToString());
 
                         cmd1.ExecuteNonQuery();
+
+                        //cập nhật lại User
+                        string sql = "SELECT USERNAME, USER_ID, CREATED FROM ALL_USERS";
+
+                        OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
+                        DataTable dt1 = new DataTable();
+                        da.Fill(dt1);
+                        UserAndRoleUI.data_grid_view1.DataSource = dt1;
                     }
                 }
                 MessageBox.Show("Xóa user thành công.");
