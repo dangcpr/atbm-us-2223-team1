@@ -98,5 +98,44 @@ namespace QLDeAn
         {
 
         }
+
+        private void findU_Click(object sender, EventArgs e)
+        {
+            string sql;
+            if (textFU.Text.Length == 0)
+                sql = "SELECT USERNAME, USER_ID, CREATED FROM ALL_USERS";
+            else
+                sql = "SELECT USERNAME, USER_ID, CREATED FROM ALL_USERS WHERE USERNAME = \'" + textFU.Text + '\'';
+            OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
+            data_grid_view1 = dataGridView1;
+        }
+
+
+        private void textFR_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textFU_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void findR_Click_1(object sender, EventArgs e)
+        {
+            string sql;
+            if (textFR.Text.Length == 0)
+                sql = "SELECT ROLE, ROLE_ID, PASSWORD_REQUIRED FROM DBA_ROLES";
+            else
+                sql = "SELECT ROLE, ROLE_ID, PASSWORD_REQUIRED FROM DBA_ROLES where ROLE = \'" + textFR.Text + '\'';
+            OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dataGridView2.DataSource = dt;
+            data_grid_view2 = dataGridView2;
+        }
     }
 }

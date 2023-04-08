@@ -61,5 +61,42 @@ namespace QLDeAn
             RevokeRole_F revokerole = new RevokeRole_F();
             revokerole.Show();
         }
+
+        private void findU_Click(object sender, EventArgs e)
+        {
+            string sql;
+            if (textFU.Text.Length == 0)
+                sql = "select * from dba_role_privs";
+            else
+                sql = "select * from dba_role_privs where grantee = \'" + textFU.Text + '\'';
+            OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
+            data_grid_view1 = dataGridView1;
+        }
+
+        private void textFU_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void findR_Click(object sender, EventArgs e)
+        {
+            string sql;
+            if (textFR.Text.Length == 0)
+                sql = "select * from dba_role_privs";
+            else
+                sql = "select * from dba_role_privs where granted_role = \'" + textFR.Text + '\'';
+            OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
+            data_grid_view1 = dataGridView1;
+        }
+        private void textFR_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

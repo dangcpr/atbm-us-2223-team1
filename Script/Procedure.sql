@@ -108,7 +108,7 @@ end;
 /
 
 --Test tạo user NV001 và phân quyền Connect. Nếu user đã tồn tại thì drop user đó đi
-grant connect to NV001;
+--grant connect to NV001;
 
 --Thủ tục cấp quyền select trên thuộc tính của một bảng cho một user hoặc role (không được dùng grant select vì trong Oracle không cho phép)
 create or replace procedure grant_select_privilege(
@@ -126,8 +126,8 @@ begin
     execute immediate 'GRANT SELECT ON ' || view_string || ' TO ' || user_role || ' ' || withgrantoption;   
 end;
 /
-exec grant_select_privilege('NV001','TONGHOP','Nam, MaPB', 'WITH GRANT OPTION');
-exec drop_view('V_NV001_TONGHOP')
+--exec grant_select_privilege('NV001','TONGHOP','Nam, MaPB', 'WITH GRANT OPTION');
+--exec drop_view('V_NV001_TONGHOP')
 
 --Thủ tục cấp quyền UPDATE trên thuộc tính của một bảng cho một user hoặc role (không được dùng grant select vì trong Oracle không cho phép)
 create or replace procedure grant_update_privilege(
@@ -141,7 +141,7 @@ begin
     execute immediate 'GRANT UPDATE (' || column_name || ') ON ' || table_name || ' TO ' || user_role || ' ' || withgrantoption;
 end;
 /
-exec grant_update_privilege('NV001','TONGHOP','Nam, MaPB', '');
+--exec grant_update_privilege('NV001','TONGHOP','Nam, MaPB', '');
 
 
 create or replace procedure grant_insert_privilege(
@@ -166,7 +166,7 @@ begin
     execute immediate 'GRANT DELETE ON ' || table_name || ' TO ' || user_role || ' ' || withgrantoption;
 end;
 /
-exec grant_delete_privilege('NV001','TONGHOP','WITH GRANT OPTION');
+--exec grant_delete_privilege('NV001','TONGHOP','WITH GRANT OPTION');
 
 --Viết proc cấp role cho user, kiểm tra xem user và role đó đã tồn tại hay chưa
 create or replace procedure grant_role(
@@ -395,8 +395,8 @@ EXCEPTION
         END IF;
 END;
 /
-revoke NV from NV001;
-grant role DV to NV001;
+--revoke NV from NV001;
+--grant role DV to NV001;
 
 --select bảng role của user
 select * from dba_role_privs where grantee = 'NV001';

@@ -110,7 +110,7 @@ namespace QLDeAn
             this.Controls.Add(this.userrolelabel);
             this.Controls.Add(this.Close);
             this.Name = "RevokeRole_F";
-            this.Text = "RevokeRole_F";
+            this.Text = "THU HỒI ROLE CỦA USER";
             this.Load += new System.EventHandler(this.RevokeRole_F_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
