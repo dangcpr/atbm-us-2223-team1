@@ -69,6 +69,7 @@ namespace QLDeAn
 
                         cmd1.ExecuteNonQuery();
                     }
+
                 }
                 MessageBox.Show("Tạo user thành công.");
             }
