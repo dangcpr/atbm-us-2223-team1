@@ -85,5 +85,10 @@ namespace QLDeAn
         {
 
         }
+
+        private void tabPrivilege_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

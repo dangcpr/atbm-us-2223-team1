@@ -231,3 +231,140 @@ BEGIN
     WHEN OTHERS THEN
         result_ := 0;
 END;
+
+/
+
+--Tao user.
+CREATE OR REPLACE PROCEDURE create_user(p_username IN VARCHAR2, p_password IN VARCHAR2)
+IS
+BEGIN
+  EXECUTE IMMEDIATE 'CREATE USER ' || p_username || ' IDENTIFIED BY ' || p_password;
+  EXECUTE IMMEDIATE 'GRANT CONNECT TO ' || p_username;
+END;
+/
+--BEGIN 
+--create_user('MANGA', '123');
+--END;
+--/
+
+--Xoa user.
+CREATE OR REPLACE PROCEDURE delete_user(p_username IN VARCHAR2)
+IS
+BEGIN
+  EXECUTE IMMEDIATE ('DROP USER ' || p_username);
+END;
+/
+
+
+
+
+--Update tai khoan
+CREATE OR REPLACE PROCEDURE change_password (
+   p_username IN VARCHAR2,
+   p_new_password IN VARCHAR2
+) AS
+   v_user_count NUMBER;
+BEGIN
+   -- Check if the user exists and the old password is correct
+   SELECT COUNT(*)
+   INTO v_user_count
+   FROM dba_users
+   WHERE username = p_username;
+   
+   IF v_user_count = 0 THEN
+      RAISE_APPLICATION_ERROR(-20001, 'User does not exist is incorrect');
+   END IF;
+   
+   -- Change the user's password
+   EXECUTE IMMEDIATE 'ALTER USER ' || p_username || ' IDENTIFIED BY ' || p_new_password;
+   DBMS_OUTPUT.PUT_LINE('Password changed successfully');
+EXCEPTION
+   WHEN OTHERS THEN
+      DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
+END;
+/
+--BEGIN
+--    change_password('MANGA','234');
+--END;
+--/
+
+--Tao role 
+CREATE OR REPLACE PROCEDURE create_role(
+  p_role_name IN VARCHAR2,
+  p_password IN VARCHAR2 DEFAULT NULL
+)
+IS
+BEGIN
+  IF p_password IS NULL THEN
+  BEGIN
+    EXECUTE IMMEDIATE ('CREATE ROLE ' || p_role_name);
+    EXECUTE IMMEDIATE 'GRANT CONNECT TO ' || p_role_name;
+  END;
+  ELSE
+    EXECUTE IMMEDIATE ('CREATE ROLE ' || p_role_name || ' IDENTIFIED BY ' || p_password);
+  END IF;
+END;
+/
+--BEGIN
+--create_role ('LMN');
+--END;
+--/
+
+
+--Drop role
+CREATE OR REPLACE PROCEDURE delete_role (
+    p_role_name IN VARCHAR2
+) AS
+BEGIN
+        EXECUTE IMMEDIATE ('DROP ROLE ' || p_role_name);
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Error deleting role: ' || SQLERRM);
+END delete_role;
+/
+--BEGIN
+--delete_role('LMN');
+--END;
+--/
+
+--Change role
+CREATE OR REPLACE PROCEDURE change_role_password(
+  p_role_name IN VARCHAR2,
+  p_new_password IN VARCHAR2
+)
+IS
+  role_exists NUMBER;
+BEGIN
+  SELECT COUNT(*)
+  INTO role_exists
+  FROM dba_roles
+  WHERE role = p_role_name;
+
+  IF role_exists > 0 THEN
+    IF (p_new_password IS NULL) THEN
+      EXECUTE IMMEDIATE 'ALTER ROLE ' || p_role_name || ' NOT IDENTIFIED';
+      DBMS_OUTPUT.PUT_LINE('Password for role ' || p_role_name || ' has been removed.');
+    ELSE
+      EXECUTE IMMEDIATE 'ALTER ROLE ' || p_role_name || ' IDENTIFIED BY ' || p_new_password;
+      DBMS_OUTPUT.PUT_LINE('Password for role ' || p_role_name || ' has been changed.');
+    END IF;
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('Role ' || p_role_name || ' does not exist.');
+  END IF;
+END;
+/
+
+--BEGIN
+--  change_role_password('YUGI', '123');
+--END;
+--/
+
+
+
+
+
+
+
+
+
+

@@ -108,6 +108,7 @@ namespace QLDeAn
             this.tabPrivilege.TabIndex = 1;
             this.tabPrivilege.Text = "Privilege";
             this.tabPrivilege.UseVisualStyleBackColor = true;
+            this.tabPrivilege.Click += new System.EventHandler(this.tabPrivilege_Click);
             // 
             // privilegeUI1
             // 

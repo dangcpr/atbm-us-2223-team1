@@ -18,6 +18,8 @@ namespace QLDeAn
             InitializeComponent();
         }
         public static OracleConnection conNow;
+        public static DataGridView data_grid_view1;
+        public static DataGridView data_grid_view2;
 
         private void UserAndRole_Load(object sender, EventArgs e)
         {
@@ -35,6 +37,7 @@ namespace QLDeAn
             DataTable dt = new DataTable();
             da.Fill(dt);
             dataGridView1.DataSource = dt;
+            data_grid_view1 = dataGridView1;
 
         }
 
@@ -46,12 +49,49 @@ namespace QLDeAn
             DataTable dt = new DataTable();
             da.Fill(dt);
             dataGridView2.DataSource = dt;
-
+            data_grid_view2 = dataGridView2;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DeleteUser_F deleteuser = new DeleteUser_F();
+            deleteuser.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CreateUser_F createuser = new CreateUser_F();
+            createuser.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            UpdateUser_F updateuser = new UpdateUser_F();
+            updateuser.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            CreateRole_F createrole = new CreateRole_F();
+            createrole.Show();
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            DeleteRole_F deleterole = new DeleteRole_F();
+            deleterole.Show();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            UpdateRole_F updaterole = new UpdateRole_F();
+            updaterole.Show();
         }
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
