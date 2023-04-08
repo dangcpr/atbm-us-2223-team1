@@ -31,7 +31,7 @@ namespace QLDeAn
         {
             try
             {
-                if (usernameBox.Text.Length == 0 || oldpasswordBox.Text.Length == 0 || newpasswordBox.Text.Length == 0)
+                if (usernameBox.Text.Length == 0 || newpasswordBox.Text.Length == 0)
                 {
                     MessageBox.Show("Vui lòng nhập đủ username, password cũ và mới.");
                     return;
@@ -67,9 +67,7 @@ namespace QLDeAn
                         cmd1.CommandType = CommandType.StoredProcedure;
 
                         cmd1.Parameters.Add("p_username", usernameBox.Text.ToString());
-                        cmd1.Parameters.Add("p_oldpassword", oldpasswordBox.Text.ToString());
                         cmd1.Parameters.Add("p_newpassword", newpasswordBox.Text.ToString());
-
                         cmd1.ExecuteNonQuery();
                     }
                 }
@@ -84,8 +82,11 @@ namespace QLDeAn
 
         private void usernameBox_TextChanged(object sender, EventArgs e) { }
         
-        private void oldpasswordBox_TextChanged(object sender, EventArgs e) { }
-
         private void newpasswordBox_TextChanged(object sender, EventArgs e) { }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

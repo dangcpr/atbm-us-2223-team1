@@ -67,7 +67,6 @@ namespace QLDeAn
                         cmd1.CommandType = CommandType.StoredProcedure;
 
                         cmd1.Parameters.Add("p_role_name", roleBox.Text.ToString());
-                        cmd1.Parameters.Add("p_password", passwordBox.Text.ToString());
 
                         cmd1.ExecuteNonQuery();
 
@@ -98,6 +97,11 @@ namespace QLDeAn
         private void passwordBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

@@ -90,5 +90,10 @@ namespace QLDeAn
         {
 
         }
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

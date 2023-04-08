@@ -245,7 +245,6 @@ END;
 --Update tai khoan
 CREATE OR REPLACE PROCEDURE change_password (
    p_username IN VARCHAR2,
-   p_old_password IN VARCHAR2,
    p_new_password IN VARCHAR2
 ) AS
    v_user_count NUMBER;
@@ -254,16 +253,14 @@ BEGIN
    SELECT COUNT(*)
    INTO v_user_count
    FROM dba_users
-   WHERE username = p_username
-   AND password = p_old_password;
+   WHERE username = p_username;
    
    IF v_user_count = 0 THEN
-      RAISE_APPLICATION_ERROR(-20001, 'User does not exist or old password is incorrect');
+      RAISE_APPLICATION_ERROR(-20001, 'User does not exist is incorrect');
    END IF;
-
+   
    -- Change the user's password
    EXECUTE IMMEDIATE 'ALTER USER ' || p_username || ' IDENTIFIED BY ' || p_new_password;
-   
    DBMS_OUTPUT.PUT_LINE('Password changed successfully');
 EXCEPTION
    WHEN OTHERS THEN
@@ -271,7 +268,7 @@ EXCEPTION
 END;
 /
 --BEGIN
---    change_password('MANGA','123','234');
+--    change_password('MANGA','234');
 --END;
 --/
 
@@ -297,15 +294,10 @@ END;
 
 --Drop role
 CREATE OR REPLACE PROCEDURE delete_role (
-    p_role_name IN VARCHAR2,
-    p_password IN VARCHAR2 DEFAULT NULL
+    p_role_name IN VARCHAR2
 ) AS
 BEGIN
-    IF p_password IS NOT NULL THEN
-        EXECUTE IMMEDIATE ('DROP ROLE ' || p_role_name || ' IDENTIFIED BY ' || p_password);
-    ELSE
         EXECUTE IMMEDIATE ('DROP ROLE ' || p_role_name);
-    END IF;
 EXCEPTION
     WHEN OTHERS THEN
         RAISE_APPLICATION_ERROR(-20001, 'Error deleting role: ' || SQLERRM);
