@@ -42,7 +42,7 @@ namespace QLDeAn
                     var cmd = new OracleCommand();
 
                     cmd.Connection = conNow;
-                    cmd.CommandText = "check_user_role_exist";
+                    cmd.CommandText = "QLDA.check_user_role_exist";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("user_role", roleuser.Text.ToString());
@@ -139,7 +139,7 @@ namespace QLDeAn
                 {
                     column.Items.RemoveAt(i);
                 }
-                string query = "SELECT column_name FROM USER_TAB_COLUMNS WHERE table_name = \'" + table.Text.ToString() + '\'';
+                string query = "select COLUMN_NAME from dba_tab_columns where table_name = \'" + table.Text.ToString() + '\'';
                 OracleDataAdapter adapter = new OracleDataAdapter(query, conNow);
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);
@@ -205,14 +205,21 @@ namespace QLDeAn
                     column_list = column_list.Substring(0, column_list.Length - 1);
                 }
 
+                //Lấy schema_name
+                OracleCommand get_schema_name = conNow.CreateCommand();
+                get_schema_name.CommandText = "select owner from dba_tables where table_name = \'" + table.Text.ToString() + '\'';
+                OracleDataReader reader = get_schema_name.ExecuteReader();
+                reader.Read();
+                string schema_name = reader.GetString(0);
+
                 //Các trường hợp cấp quyền
                 if (privil.Text.ToString() == "INSERT")
                 {
-                    cmd.CommandText = "grant_insert_privilege";
+                    cmd.CommandText = "QLDA.grant_insert_privilege";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("user_role", roleuser.Text.ToString());
-                    cmd.Parameters.Add("table_name", table.Text.ToString());
+                    cmd.Parameters.Add("table_name", schema_name + "." + table.Text.ToString());
                     cmd.Parameters.Add("withgrantoption", withgrantoption_);
                     cmd.ExecuteNonQuery();
 
@@ -227,11 +234,11 @@ namespace QLDeAn
                 }
                 else if (privil.Text.ToString() == "DELETE")
                 {
-                    cmd.CommandText = "grant_delete_privilege";
+                    cmd.CommandText = "QLDA.grant_delete_privilege";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("user_role", roleuser.Text.ToString());
-                    cmd.Parameters.Add("table_name", table.Text.ToString());
+                    cmd.Parameters.Add("table_name", schema_name + "." + table.Text.ToString());
                     cmd.Parameters.Add("withgrantoption", withgrantoption_);
                     cmd.ExecuteNonQuery();
 
@@ -245,11 +252,11 @@ namespace QLDeAn
                 }
                 else if (privil.Text.ToString() == "UPDATE")
                 {
-                    cmd.CommandText = "grant_update_privilege";
+                    cmd.CommandText = "QLDA.grant_update_privilege";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("user_role", roleuser.Text.ToString());
-                    cmd.Parameters.Add("table_name", table.Text.ToString());
+                    cmd.Parameters.Add("table_name", schema_name + "." + table.Text.ToString());
                     cmd.Parameters.Add("column_name", column_list);
                     cmd.Parameters.Add("withgrantoption", withgrantoption_);
                     cmd.ExecuteNonQuery();
@@ -264,10 +271,11 @@ namespace QLDeAn
                 }
                 else if (privil.Text.ToString() == "SELECT")
                 {
-                    cmd.CommandText = "grant_select_privilege";
+                    cmd.CommandText = "QLDA.grant_select_privilege";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("user_role", roleuser.Text.ToString());
+                    cmd.Parameters.Add("schema_name", schema_name);
                     cmd.Parameters.Add("table_name", table.Text.ToString());
                     cmd.Parameters.Add("column_name", column_list);
                     cmd.Parameters.Add("withgrantoption", withgrantoption_);

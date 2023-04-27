@@ -50,7 +50,7 @@ namespace QLDeAn
                 var cmd = new OracleCommand();
 
                 cmd.Connection = conNow;
-                cmd.CommandText = "revoke_role";
+                cmd.CommandText = "QLDA.revoke_role";
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add("user_name", user.Text.ToString());

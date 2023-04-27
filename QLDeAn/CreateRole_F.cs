@@ -39,7 +39,7 @@ namespace QLDeAn
                     var cmd = new OracleCommand();
 
                     cmd.Connection = conNow;
-                    cmd.CommandText = "check_user_role_exist";
+                    cmd.CommandText = "QLDA.check_user_role_exist";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("user_role", roleBox.Text.ToString());
@@ -61,7 +61,7 @@ namespace QLDeAn
                         var cmd1 = new OracleCommand();
 
                         cmd1.Connection = conNow;
-                        cmd1.CommandText = "create_role";
+                        cmd1.CommandText = "QLDA.create_role";
                         cmd1.CommandType = CommandType.StoredProcedure;
 
                         cmd1.Parameters.Add("p_role_name", roleBox.Text.ToString());

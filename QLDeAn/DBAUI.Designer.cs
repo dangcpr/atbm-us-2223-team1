@@ -39,6 +39,7 @@ namespace QLDeAn
             this.tabRole = new System.Windows.Forms.TabPage();
             this.roleUI1 = new QLDeAn.RoleUI();
             this.Reset = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabUserARole.SuspendLayout();
             this.tabPrivilege.SuspendLayout();
@@ -145,12 +146,24 @@ namespace QLDeAn
             this.Reset.UseVisualStyleBackColor = true;
             this.Reset.Click += new System.EventHandler(this.Reset_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(997, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(81, 17);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "XIN CHÀO";
+            this.label1.Click += new System.EventHandler(this.label1_Click_1);
+            // 
             // DBAUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1293, 712);
             this.ControlBox = false;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.Reset);
             this.Controls.Add(this.logout);
             this.Controls.Add(this.Close);
@@ -163,6 +176,7 @@ namespace QLDeAn
             this.tabPrivilege.ResumeLayout(false);
             this.tabRole.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -178,5 +192,6 @@ namespace QLDeAn
         private PrivilegeUI privilegeUI1;
         private RoleUI roleUI1;
         private System.Windows.Forms.Button Reset;
+        private System.Windows.Forms.Label label1;
     }
 }

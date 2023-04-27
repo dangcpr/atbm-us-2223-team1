@@ -81,7 +81,7 @@ namespace QLDeAn
                     OracleCommand cmd = new OracleCommand();
 
                     cmd.Connection = conNow;
-                    cmd.CommandText = "revoke_privil";
+                    cmd.CommandText = "QLDA.revoke_privil";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     OracleParameter inParam1 = cmd.Parameters.Add("username", OracleDbType.Varchar2);
@@ -89,9 +89,15 @@ namespace QLDeAn
                     inParam1.Value = userroleBox.Text;
                     string privil = "";
 
+                    OracleCommand get_schema_name = conNow.CreateCommand();
+                    get_schema_name.CommandText = "select owner from dba_tables where table_name = \'" + TVcomboBox.Text + '\'';
+                    OracleDataReader reader = get_schema_name.ExecuteReader();
+                    reader.Read();
+                    string schema_name = reader.GetString(0);
+
                     if (selectCheck.Checked == true)
                     {
-                        string view = "V_" + TVcomboBox.Text + "_" + userroleBox.Text;
+                        string view = schema_name + "." + "V_" + TVcomboBox.Text + "_" + userroleBox.Text;
                         OracleParameter inParam2 = cmd.Parameters.Add("table_view", OracleDbType.Varchar2);
                         inParam2.Direction = ParameterDirection.Input;
                         inParam2.Value = view;
@@ -102,7 +108,7 @@ namespace QLDeAn
                     {
                         OracleParameter inParam2 = cmd.Parameters.Add("table_view", OracleDbType.Varchar2);
                         inParam2.Direction = ParameterDirection.Input;
-                        inParam2.Value = TVcomboBox.Text;
+                        inParam2.Value = schema_name + "." + TVcomboBox.Text;
 
                         //privl = insert, update, delete nếu cả 4 ô được chọn (loại nếu không được chọn)
 

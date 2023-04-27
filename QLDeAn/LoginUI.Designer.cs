@@ -111,7 +111,8 @@ namespace QLDeAn
             this.role.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.role.FormattingEnabled = true;
             this.role.Items.AddRange(new object[] {
-            "DBA"});
+            "SYSDBA",
+            "ADMIN"});
             this.role.Location = new System.Drawing.Point(494, 349);
             this.role.Name = "role";
             this.role.Size = new System.Drawing.Size(308, 28);

@@ -52,7 +52,7 @@ namespace QLDeAn
             try
             {
                 string connectionString = "";
-                if (role.Text == "DBA")
+                if (role.Text == "SYSDBA")
                     connectionString = @"DATA SOURCE = localhost:1521/XE;DBA Privilege=SYSDBA; USER ID=" + username.Text +";PASSWORD=" + password.Text;
                 else
                     connectionString = @"DATA SOURCE = localhost:1521/XE; USER ID=" + username.Text + ";PASSWORD=" + password.Text;
@@ -63,7 +63,7 @@ namespace QLDeAn
 
                 MessageBox.Show("Connect với Oracle thành công");
 
-                if (role.Text == "DBA")
+                if (role.Text == "SYSDBA" || role.Text == "ADMIN")
                 {
                     OracleCommand command = new OracleCommand("alter session set \"_ORACLE_SCRIPT\"=true", con);
                     command.ExecuteNonQuery();

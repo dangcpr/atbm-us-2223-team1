@@ -46,7 +46,7 @@ namespace QLDeAn
                 string withadminoption_ = (withadminoption.Checked) ? "WITH ADMIN OPTION" : "";
 
                 cmd.Connection = conNow;
-                cmd.CommandText = "grant_role";
+                cmd.CommandText = "QLDA.grant_role";
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add("user_name", user.Text.ToString());
