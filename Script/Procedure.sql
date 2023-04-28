@@ -3,6 +3,7 @@ alter session set "_ORACLE_SCRIPT"=true;
 --REVOKE DBA FROM QLDA;
 
 -- Xo� user QLTT n?u t?n t?i
+/*
 BEGIN
   EXECUTE IMMEDIATE 'DROP USER QLDA CASCADE' ;
 EXCEPTION
@@ -11,6 +12,7 @@ EXCEPTION
       RAISE;
     END IF;
 END;
+*/
 /
 
 CREATE USER QLDA IDENTIFIED BY admin123
@@ -18,12 +20,14 @@ ENABLE EDITIONS;
 /
 
 GRANT DBA TO QLDA WITH ADMIN OPTION;
+GRANT CONNECT TO QLDA WITH ADMIN OPTION;
 GRANT SELECT ANY DICTIONARY TO QLDA;
 GRANT CREATE SESSION, CREATE VIEW, ALTER SESSION, CREATE SEQUENCE TO QLDA;
 GRANT CREATE SYNONYM, CREATE DATABASE LINK, RESOURCE , UNLIMITED TABLESPACE TO QLDA;
-GRANT CREATE USER, CREATE ANY ROLE, ALTER USER
+GRANT CREATE USER, CREATE ROLE, ALTER USER, ALTER ANY ROLE, DROP USER, DROP ANY ROLE TO QLDA;
 GRANT EXECUTE ON DBMS_CRYPTO TO QLDA; 
 CONNECT QLDA/admin123;
+alter session set "_ORACLE_SCRIPT"=true;
 --Xem các proc đã tạo
 SELECT * FROM ALL_OBJECTS WHERE OBJECT_TYPE = 'PROCEDURE';
 --Xem các user đã tạo và owner của user
@@ -72,7 +76,6 @@ EXCEPTION
         END IF;
 END;
 /
-drop view avc
 --Thủ tục drop 1 proc đã tồn tại
 create or replace procedure QLDA.drop_proc(
     proc_name in char
@@ -434,12 +437,13 @@ END;
 --select bảng role của user
 select * from dba_role_privs where grantee = 'NV001';
 
-
+--Xem các table đã tạo
+select * from dba_tables where owner = 'QLDA';
 
 
 
 open result_ for
-select COLUMN_NAME from dba_tab_columns where table_name = 'QLDA_PHONGBAN'
+select COLUMN_NAME from dba_tab_columns where table_name = 'QLDA_PHONGBAN';
 -- lấy user trong connection hiện tại
 select sys_context('userenv', 'current_user') from dual;
 -- Lấy owner của view
