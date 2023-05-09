@@ -447,7 +447,7 @@ select COLUMN_NAME from dba_tab_columns where table_name = 'QLDA_PHONGBAN';
 -- lấy user trong connection hiện tại
 select sys_context('userenv', 'current_user') from dual;
 -- Lấy owner của view
-select owner from dba_tables;
+select * from dba_tables where owner = 'QLDA';
 
 
 
