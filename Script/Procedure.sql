@@ -26,6 +26,7 @@ GRANT CREATE SESSION, CREATE VIEW, ALTER SESSION, CREATE SEQUENCE TO QLDA;
 GRANT CREATE SYNONYM, CREATE DATABASE LINK, RESOURCE , UNLIMITED TABLESPACE TO QLDA;
 GRANT CREATE USER, CREATE ROLE, ALTER USER, ALTER ANY ROLE, DROP USER, DROP ANY ROLE TO QLDA;
 GRANT EXECUTE ON DBMS_CRYPTO TO QLDA; 
+
 CONNECT QLDA/admin123;
 alter session set "_ORACLE_SCRIPT"=true;
 --Xem các proc đã tạo
@@ -439,6 +440,8 @@ select * from dba_role_privs where grantee = 'NV001';
 
 --Xem các table đã tạo
 select * from dba_tables where owner = 'QLDA';
+--xem các quyền đã tạo
+select * from dba_tab_privs where grantee = 'TP';
 
 
 

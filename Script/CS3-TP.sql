@@ -1,58 +1,150 @@
 --CONNECT QLDA/admin123;
 --alter session set "_ORACLE_SCRIPT"=true;
 CREATE USER TP001 IDENTIFIED BY TP001;
-create role TP;
+
+CREATE ROLE TP;
+
 GRANT CONNECT TO TP;
-grant TP to TP001;
-grant select on QLDA.QLDA_NHANVIEN TO TP;
+
+GRANT TP TO TP001;
+
+GRANT SELECT ON QLDA.QLDA_NHANVIEN TO TP;
+GRANT SELECT, UPDATE, INSERT, DELETE ON QLDA.QLDA_PHANCONG TO TP;
+--revoke SELECT, UPDATE, INSERT, DELETE ON QLDA.QLDA_PHANCONG FROM TP;
+
 --drop role TP;
 --drop user TP001;
+--Tạo view xem select quan hệ QLDA_NHANVIEN cho các trưởng phòng
 
--- Nhân viên ch? có th? xem, s?a thông tin c?a b?n thân 
+-- Nhân viên ch? có th? xem, s?a thông tin c?a b?n thân
+--DROP FUNCTION NV_XEM_SUA_TT_CA_NHAN;
+--Xuất user hiện tại bằng sys_context('userenv', 'SESSION_USER')
+--drop context NHANVIEN_ctx;
+--drop PACKAGE NHANVIEN_ctx_mgr
+--drop trigger set_mapb_ctx_trig
+/*
+CREATE CONTEXT NHANVIEN_ctx USING QLDA.NHANVIEN_ctx_mgr; 
+/
 
-CREATE OR REPLACE FUNCTION QLDA.TP_XEM_QH_NV(   
-   P_SCHEMA IN VARCHAR2 DEFAULT NULL,
-   P_OBJECT IN VARCHAR2 DEFAULT NULL
-) 
-RETURN VARCHAR2 
-AS
+CREATE OR REPLACE PACKAGE NHANVIEN_ctx_mgr 
+AS 
+PROCEDURE set_mapb; 
+END;
+/
+CREATE OR REPLACE PACKAGE BODY NHANVIEN_ctx_mgr
+AS 
+PROCEDURE set_mapb
+AS 
+l_mapb CHAR(7); 
+BEGIN
+    SELECT MAPB INTO l_mapb FROM QLDA.QLDA_NHANVIEN
+    WHERE MANV = SYS_CONTEXT('userenv', 'session_user'); 
+        DBMS_SESSION.set_context (namespace => 'NHANVIEN_ctx', 
+        ATTRIBUTE => 'MAPB', 
+        VALUE => l_mapb); 
+END set_mapb;
+END NHANVIEN_ctx_mgr;
+/
+CREATE TRIGGER set_mapb_ctx_trig AFTER LOGON ON DATABASE
+ BEGIN
+  QLDA.NHANVIEN_ctx_mgr.set_mapb;
+ END;
+ /
+*/
+
+CREATE TABLE LOOKUP_QLDA_NHANVIEN AS
+  SELECT MANV,
+    MAPB
+  FROM QLDA.QLDA_NHANVIEN;
+drop table QLDA.LOOKUP_QLDA_NHANVIEN;
+drop TRIGGER QLDA.UPDATE_LOOKUP_QLDA_NHANVIEN;
+
+CREATE OR REPLACE TRIGGER UPDATE_LOOKUP_QLDA_NHANVIEN AFTER
+  UPDATE ON QLDA_NHANVIEN FOR EACH ROW
+BEGIN
+  IF(:NEW.MAPB <> :OLD.MAPB) THEN
+    UPDATE LOOKUP_QLDA_NHANVIEN
+    SET
+      MAPB = :NEW.MAPB
+    WHERE
+      MANV = :NEW.MANV;
+  END IF;
+END;
+/
+
+--Viết trigger khi insert bảng NHANVIEN mà NHANVIEN là trưởng phòng thì insert vào bảng PHONGBAN, nếu đã tồn tại trưởng phòng thì báo lỗi
+--DROP TRIGGER QLDA.QLDA_NHANVIEN_INSERT_TRIG;
+CREATE OR REPLACE TRIGGER QLDA_NHANVIEN_INSERT_TRIG BEFORE
+  INSERT OR UPDATE ON QLDA_NHANVIEN FOR EACH ROW
+DECLARE
+  MAPB CHAR(7);
+BEGIN
+  SELECT MAPB INTO MAPB FROM QLDA_PHONGBAN WHERE MAPB = :NEW.MAPB;
+  EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+      MAPB := NULL;
+      
+  IF(:NEW.MAPB = MAPB AND :NEW.VAITRO = 'Trưởng phòng') THEN
+    RAISE_APPLICATION_ERROR(-20001, 'Phòng ban này đã có trưởng phòng');
+  ELSE
+    IF(:NEW.VAITRO = 'Trưởng phòng') THEN
+      INSERT INTO QLDA_PHONGBAN(MAPB, TRPHG) VALUES(:NEW.MAPB, :NEW.MANV);
+    END IF;
+  END IF;
+END;
+
+INSERT INTO QLDA.QLDA_NHANVIEN(MANV, VAITRO, MAPB) VALUES('TP010', 'Nhân viên', 'PB010');
+
+
+
+SET
+  MAPB = 'PB001'
+WHERE
+  MANV = 'TP001';
+
+CREATE OR REPLACE FUNCTION QLDA.TP_XEM_QH_NV(
+  P_SCHEMA IN VARCHAR2 DEFAULT NULL,
+  P_OBJECT IN VARCHAR2 DEFAULT NULL
+) RETURN VARCHAR2 AS
   USERNAME VARCHAR2(128);
   USERROLE VARCHAR2(128);
   PHONGBAN CHAR(7);
 BEGIN
-  -- L?y username c?a user hi?n t?i
+ -- L?y username c?a user hi?n t?i
   USERNAME := SYS_CONTEXT('userenv', 'SESSION_USER');
-  
-  IF USERNAME = 'QLDA' 
-    THEN RETURN '';
+  IF USERNAME = 'QLDA' THEN
+    RETURN '';
   END IF;
-  
-  SELECT GRANTED_ROLE INTO USERROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE = USERNAME;
-  --PB := 'PB001';
-
+  SELECT GRANTED_ROLE INTO USERROLE
+  FROM DBA_ROLE_PRIVS
+  WHERE GRANTEE = USERNAME;
+ --PB := 'PB001';
   IF 'TP' IN (USERROLE) THEN
-    --SELECT MAPB INTO PHONGBAN FROM QLDA_NHANVIEN WHERE MANV = USERNAME;
-    RETURN 'MAPB = ''' || 'PB001' || '''';
+    BEGIN
+      SELECT MAPB INTO PHONGBAN FROM QLDA_PHONGBAN WHERE TRPHG = ''|| USERNAME || '';
+      RETURN 'MAPB = ''' || PHONGBAN || '''';
+    END;
   ELSE
     RETURN '1=1';
   END IF;
 END;
-
-    
 /
-BEGIN dbms_rls.add_policy 
-(object_schema =>'QLDA',
-object_name => 'QLDA_NHANVIEN',
-policy_name => 'POLICY_TP_XEM_QH_NV',
-function_schema => 'QLDA',
-policy_function => 'TP_XEM_QH_NV',
-statement_types => 'SELECT',
-update_check => TRUE);
+
+BEGIN
+  DBMS_RLS.ADD_POLICY (
+    OBJECT_SCHEMA =>'QLDA',
+    OBJECT_NAME => 'QLDA_NHANVIEN',
+    POLICY_NAME => 'POLICY_TP_XEM_QH_NV',
+    FUNCTION_SCHEMA => 'QLDA',
+    POLICY_FUNCTION => 'TP_XEM_QH_NV',
+    STATEMENT_TYPES => 'SELECT',
+    UPDATE_CHECK => TRUE
+  );
 END;
---Xem danh sách chính sách VPD đã tạo
+ --Xem danh sách chính sách VPD đã tạo
 SELECT *
 FROM DBA_POLICIES
-/*
+ /*
 BEGIN
   dbms_rls.drop_policy (
     object_schema => 'QLDA',
@@ -61,37 +153,38 @@ BEGIN
 END;
 */
 /
-CREATE OR REPLACE FUNCTION QLDA.TP_XEM_TT_CUA_TP(   
-   P_SCHEMA IN VARCHAR2 DEFAULT NULL,
-   P_OBJECT IN VARCHAR2 DEFAULT NULL
-) 
-RETURN VARCHAR2 
-AS
+--Trưởng phòng và quản lý chỉ được xem LUONG, PHUCAP của mình (có 1 phần CS2 ở đây)
+CREATE OR REPLACE FUNCTION QLDA.TP_QL_XEM_TT_CUA_TP(
+  P_SCHEMA IN VARCHAR2 DEFAULT NULL,
+  P_OBJECT IN VARCHAR2 DEFAULT NULL
+) RETURN VARCHAR2 AS
   USERNAME VARCHAR2(128);
   USERROLE VARCHAR2(128);
 BEGIN
-  -- L?y username c?a user hi?n t?i
+ -- L?y username c?a user hi?n t?i
   USERNAME := SYS_CONTEXT('userenv', 'SESSION_USER');
-  
-  IF USERNAME = 'QLDA' 
-    THEN RETURN '';
+  IF USERNAME = 'QLDA' THEN
+    RETURN '';
   END IF;
-  
-  SELECT GRANTED_ROLE INTO USERROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE = USERNAME;
-
-  IF 'TP' IN (USERROLE) THEN
-    RETURN 'MANV = ''' || USERNAME || '''';
+  SELECT GRANTED_ROLE INTO USERROLE
+  FROM DBA_ROLE_PRIVS
+  WHERE GRANTEE = USERNAME;
+  IF 'TP' IN (USERROLE) OR 'QL' IN (USERROLE) THEN
+    RETURN 'MANV = ''' ||
+      USERNAME ||
+      '''';
   ELSE
     RETURN '1=1';
   END IF;
 END;
 /
+
 BEGIN dbms_rls.add_policy 
 (object_schema =>'QLDA',
 object_name => 'QLDA_NHANVIEN',
-policy_name => 'POLICY_TP_XEM_TT_CUA_TP',
+policy_name => 'POLICY_TP_QL_XEM_TT_CUA_TP',
 function_schema => 'QLDA',
-policy_function => 'TP_XEM_TT_CUA_TP',
+policy_function => 'TP_QL_XEM_TT_CUA_TP',
 statement_types => 'SELECT',
 sec_relevant_cols => 'LUONG, PHUCAP',
 sec_relevant_cols_opt => dbms_rls.ALL_ROWS,
@@ -104,7 +197,7 @@ BEGIN
   dbms_rls.drop_policy (
     object_schema => 'QLDA',
     object_name   => 'QLDA_NHANVIEN',
-    policy_name   => 'POLICY_TP_XEM_TT_CUA_TP');
+    policy_name   => 'POLICY_TP_QL_XEM_TT_CUA_TP');
 END;
 */
 
@@ -114,5 +207,52 @@ END;
     
 --drop user NV001 cascade;
 --SELECT GRANTED_ROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE = 'TP001';
+--DROP FUNCTION QLDA.TP_INSERT_DEL_UPDATE_PHANCONG;
+CREATE OR REPLACE FUNCTION QLDA.TP_INSERT_DEL_UPDATE_PHANCONG(
+  P_SCHEMA IN VARCHAR2 DEFAULT NULL,
+  P_OBJECT IN VARCHAR2 DEFAULT NULL
+) RETURN VARCHAR2 AS
+  USERNAME VARCHAR2(128);
+  USERROLE VARCHAR2(128);
+  PHONGBAN CHAR(7);
+BEGIN
+ -- L?y username c?a user hi?n t?i
+  USERNAME := SYS_CONTEXT('userenv', 'SESSION_USER');
+  IF USERNAME = 'QLDA' THEN
+    RETURN '';
+  END IF;
+  SELECT GRANTED_ROLE INTO USERROLE
+  FROM DBA_ROLE_PRIVS
+  WHERE GRANTEE = USERNAME;
+ --PB := 'PB001';
+  IF 'TP' IN (USERROLE) THEN
+    SELECT MAPB INTO PHONGBAN FROM QLDA_PHONGBAN WHERE TRPHG = ''|| USERNAME ||'';
+    RETURN 'MANV IN (SELECT MANV FROM QLDA_NHANVIEN WHERE MAPB = ''' || PHONGBAN || ''')';
+  ELSE
+    RETURN '1=1';
+  END IF;
+END;
+/
 
-
+BEGIN
+  DBMS_RLS.ADD_POLICY (
+    OBJECT_SCHEMA =>'QLDA',
+    OBJECT_NAME => 'QLDA_PHANCONG',
+    POLICY_NAME => 'POLICY_TP_INSERT_DEL_UPDATE_PHANCONG',
+    FUNCTION_SCHEMA => 'QLDA',
+    POLICY_FUNCTION => 'TP_INSERT_DEL_UPDATE_PHANCONG',
+    STATEMENT_TYPES => 'INSERT, DELETE, UPDATE',
+    UPDATE_CHECK => TRUE
+  );
+END;
+ --Xem danh sách chính sách VPD đã tạo
+SELECT *
+FROM DBA_POLICIES
+ /*
+BEGIN
+  dbms_rls.drop_policy (
+    object_schema => 'QLDA',
+    object_name   => 'QLDA_PHANCONG',
+    policy_name   => 'POLICY_TP_INSERT_DEL_UPDATE_PHANCONG');
+END;
+*/
