@@ -45,7 +45,7 @@ namespace QLDeAn
         public void view_col_privil()
         {
 
-            string sql = "select * from DBA_COL_PRIVS where TABLE_NAME LIKE 'QLDA_%' OR TABLE_NAME LIKE 'V_QLDA_%' ";
+            string sql = "select * from DBA_COL_PRIVS where TABLE_NAME LIKE 'QLDA_%' ";
 
             OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
             DataTable dt2 = new DataTable();

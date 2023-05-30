@@ -1,16 +1,16 @@
-ALTER SYSTEM SET db_create_file_dest = 'E:\atbm-us-2223-team1\Script';
+ALTER SYSTEM SET db_create_file_dest = 'E:\';
 create pluggable database PDB1 admin user QLDA_OLS identified by admin123;
 ALTER PLUGGABLE DATABASE PDB1 OPEN;
 --ALTER PLUGGABLE DATABASE CLOSE IMMEDIATE;
 ALTER SESSION SET CONTAINER = PDB1;
+--alter session set "_ORACLE_SCRIPT"=true;
 --ALTER SESSION SET CONTAINER = CDB$ROOT;
 --SHOW CON_NAME;
+EXEC LBACSYS.CONFIGURE_OLS;
+EXEC LBACSYS.OLS_ENFORCEMENT.ENABLE_OLS;
 GRANT INHERIT PRIVILEGES ON USER QLDA_OLS TO LBACSYS;
 GRANT INHERIT PRIVILEGES ON USER SYS TO LBACSYS;
 select name, status, description from dba_ols_status;
-EXEC LBACSYS.CONFIGURE_OLS;
-EXEC LBACSYS.OLS_ENFORCEMENT.ENABLE_OLS;
-
 
 --Sau đó phải tắt đi, bật lại SQL Dev, và chạy câu lệnh alter session ... trên
 --create public database link PDB01 using 'PDB01';
@@ -25,6 +25,14 @@ CREATE USER TP002 IDENTIFIED BY TP002; --Trưởng phòng phụ trách tất c�
 CREATE USER TP003 IDENTIFIED BY TP003; --Trưởng phòng phụ trách lĩnh vực sản xuất ở miền Trung (câu c).
 CREATE USER GD001 IDENTIFIED BY GD001; --Giám đốc có thể xem toàn bộ dữ liệu (câu a)
 CREATE USER GD002 IDENTIFIED BY GD002; --Giám đốc phụ trách bất kỳ lĩnh vực nào ở chi nhánh miền Bắc (câu a)
+/*
+DROP USER TP001;
+DROP USER TP002;
+DROP USER TP003;
+DROP USER GD001;
+DROP USER GD002;
+*/
+
 
 GRANT CREATE SESSION TO TP001;
 GRANT CREATE SESSION TO TP002;
@@ -51,7 +59,6 @@ GRANT EXECUTE ON CHAR_TO_LABEL TO QLDA_PDB1;
 
 --EXECUTE SA_SYSDBA.DROP_POLICY('OLS_QLDA');
 --Từ bước này đăng nhập user QLDA_PDB1/admin123;
-
 CREATE TABLE THONGBAO(
     MaTB INT,
     NoiDung NVARCHAR2(100),
