@@ -451,6 +451,8 @@ select COLUMN_NAME from dba_tab_columns where table_name = 'QLDA_PHONGBAN';
 select sys_context('userenv', 'current_user') from dual;
 -- Lấy owner của view
 select * from dba_tables where owner = 'QLDA';
+--Lấy role của user
+select * from dba_role_privs where grantee = 'NV001';
 
 
 

@@ -1,6 +1,7 @@
 CONNECT QLDA/admin123;
 alter session set "_ORACLE_SCRIPT"=true;
 CREATE USER QL001 IDENTIFIED BY QL001;
+--drop user QL001
 create role QL;
 GRANT CONNECT TO QL;
 grant QL to QL001;

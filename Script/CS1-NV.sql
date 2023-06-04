@@ -9,9 +9,9 @@ grant select,update on QLDA.QLDA_NHANVIEN to NV;
 --CREATE OR REPLACE VIEW V_NV_QLDA_NHANVIEN AS
 --select * from QLDA.QLDA_NHANVIEN;
 --grant select on QLDA.V_NV_QLDA_NHANVIEN TO NV;
-
+SELECT *  FROM DBA_ROLE_PRIVS;
 -- Nhân viên ch? có th? xem thông tin c?a b?n thân (TA cũng vậy, các role khác có chính sách riêng)
---DROP FUNCTION NV_XEM_SUA_TT_CA_NHAN;
+--DROP FUNCTION QLDA.NV_XEM_TT_CA_NHAN;
 CREATE OR REPLACE FUNCTION QLDA.NV_XEM_TT_CA_NHAN (
    P_SCHEMA IN VARCHAR2 DEFAULT NULL,
    P_OBJECT IN VARCHAR2 DEFAULT NULL
@@ -24,16 +24,18 @@ BEGIN
   -- L?y username c?a user hi?n t?i
   USERNAME := SYS_CONTEXT('userenv', 'SESSION_USER');
   
+  -- Qu?n lý d? án có th? xem t?t c? thông tin
   IF USERNAME = 'QLDA' THEN 
-    RETURN '1=1'; -- Qu?n lý d? án có th? xem t?t c? thông tin
+    RETURN ''; 
   END IF;
   
-  SELECT GRANTED_ROLE INTO USERROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE = ''||UPPER(USERNAME)||'';
+  SELECT GRANTED_ROLE INTO USERROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE = ''|| USERNAME || '';
   
+  -- Ng??i dùng khác không có quy?n xem
   IF 'NV' IN (USERROLE) OR  'TA' IN (USERROLE) THEN
     RETURN 'MANV = '''||USERNAME||'''';
   ELSE
-    RETURN '1=1'; -- Ng??i dùng khác không có quy?n xem
+    RETURN '1=1'; 
   END IF;
 END;
 /
@@ -53,7 +55,7 @@ BEGIN
   dbms_rls.drop_policy (
     object_schema => 'QLDA',
     object_name   => 'QLDA_NHANVIEN',
-    policy_name   => 'POLICY_NV_XEM_SUA_TT_CA_NHAN');
+    policy_name   => 'POLICY_NV_XEM_TT_CA_NHAN');
 END;
 */
 /

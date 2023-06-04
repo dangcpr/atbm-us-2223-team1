@@ -45,9 +45,10 @@ namespace QLDeAn
             this.title.AutoSize = true;
             this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 28.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.title.Location = new System.Drawing.Point(209, 108);
+            this.title.Location = new System.Drawing.Point(157, 88);
+            this.title.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(683, 55);
+            this.title.Size = new System.Drawing.Size(539, 44);
             this.title.TabIndex = 0;
             this.title.Text = "HỆ THỐNG QUẢN LÝ ĐỀ ÁN";
             this.title.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -57,9 +58,10 @@ namespace QLDeAn
             // 
             this.label_user.AutoSize = true;
             this.label_user.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_user.Location = new System.Drawing.Point(275, 245);
+            this.label_user.Location = new System.Drawing.Point(206, 199);
+            this.label_user.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_user.Name = "label_user";
-            this.label_user.Size = new System.Drawing.Size(187, 25);
+            this.label_user.Size = new System.Drawing.Size(152, 20);
             this.label_user.TabIndex = 1;
             this.label_user.Text = "TÊN ĐĂNG NHẬP";
             this.label_user.Click += new System.EventHandler(this.label_user_Click);
@@ -68,9 +70,10 @@ namespace QLDeAn
             // 
             this.label_password.AutoSize = true;
             this.label_password.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_password.Location = new System.Drawing.Point(275, 297);
+            this.label_password.Location = new System.Drawing.Point(206, 241);
+            this.label_password.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_password.Name = "label_password";
-            this.label_password.Size = new System.Drawing.Size(125, 25);
+            this.label_password.Size = new System.Drawing.Size(99, 20);
             this.label_password.TabIndex = 2;
             this.label_password.Text = "MẬT KHẨU";
             this.label_password.Click += new System.EventHandler(this.label_password_Click);
@@ -78,18 +81,20 @@ namespace QLDeAn
             // username
             // 
             this.username.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.username.Location = new System.Drawing.Point(494, 245);
+            this.username.Location = new System.Drawing.Point(370, 199);
+            this.username.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.username.Name = "username";
-            this.username.Size = new System.Drawing.Size(308, 27);
+            this.username.Size = new System.Drawing.Size(232, 23);
             this.username.TabIndex = 3;
             this.username.TextChanged += new System.EventHandler(this.username_TextChanged);
             // 
             // password
             // 
             this.password.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.password.Location = new System.Drawing.Point(494, 297);
+            this.password.Location = new System.Drawing.Point(370, 241);
+            this.password.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.password.Name = "password";
-            this.password.Size = new System.Drawing.Size(308, 27);
+            this.password.Size = new System.Drawing.Size(232, 23);
             this.password.TabIndex = 4;
             this.password.UseSystemPasswordChar = true;
             this.password.TextChanged += new System.EventHandler(this.password_TextChanged);
@@ -97,9 +102,10 @@ namespace QLDeAn
             // login
             // 
             this.login.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.login.Location = new System.Drawing.Point(449, 413);
+            this.login.Location = new System.Drawing.Point(337, 336);
+            this.login.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.login.Name = "login";
-            this.login.Size = new System.Drawing.Size(206, 54);
+            this.login.Size = new System.Drawing.Size(154, 44);
             this.login.TabIndex = 8;
             this.login.Text = "ĐĂNG NHẬP";
             this.login.UseVisualStyleBackColor = true;
@@ -112,10 +118,18 @@ namespace QLDeAn
             this.role.FormattingEnabled = true;
             this.role.Items.AddRange(new object[] {
             "SYSDBA",
-            "ADMIN"});
-            this.role.Location = new System.Drawing.Point(494, 349);
+            "ADMIN",
+            "Nhân viên",
+            "Quản lý",
+            "Trưởng phòng",
+            "Tài chính",
+            "Nhân sự",
+            "Trưởng dự án",
+            "Giám đốc"});
+            this.role.Location = new System.Drawing.Point(370, 284);
+            this.role.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.role.Name = "role";
-            this.role.Size = new System.Drawing.Size(308, 28);
+            this.role.Size = new System.Drawing.Size(232, 25);
             this.role.TabIndex = 9;
             this.role.SelectedIndexChanged += new System.EventHandler(this.role_SelectedIndexChanged);
             // 
@@ -123,18 +137,20 @@ namespace QLDeAn
             // 
             this.label_role.AutoSize = true;
             this.label_role.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_role.Location = new System.Drawing.Point(275, 352);
+            this.label_role.Location = new System.Drawing.Point(206, 286);
+            this.label_role.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_role.Name = "label_role";
-            this.label_role.Size = new System.Drawing.Size(99, 25);
+            this.label_role.Size = new System.Drawing.Size(80, 20);
             this.label_role.TabIndex = 5;
             this.label_role.Text = "VAI TRÒ";
             this.label_role.Click += new System.EventHandler(this.label_role_Click);
             // 
             // Close
             // 
-            this.Close.Location = new System.Drawing.Point(1009, 577);
+            this.Close.Location = new System.Drawing.Point(757, 469);
+            this.Close.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Close.Name = "Close";
-            this.Close.Size = new System.Drawing.Size(75, 33);
+            this.Close.Size = new System.Drawing.Size(56, 27);
             this.Close.TabIndex = 10;
             this.Close.Text = "Close";
             this.Close.UseVisualStyleBackColor = true;
@@ -142,9 +158,9 @@ namespace QLDeAn
             // 
             // LoginUI
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1096, 622);
+            this.ClientSize = new System.Drawing.Size(822, 505);
             this.ControlBox = false;
             this.Controls.Add(this.Close);
             this.Controls.Add(this.role);
@@ -155,7 +171,6 @@ namespace QLDeAn
             this.Controls.Add(this.label_password);
             this.Controls.Add(this.label_user);
             this.Controls.Add(this.title);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "LoginUI";
             this.Text = "ĐĂNG NHẬP HỆ THỐNG";
             this.Load += new System.EventHandler(this.LoginUI_Load);

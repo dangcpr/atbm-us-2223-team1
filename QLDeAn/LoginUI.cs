@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace QLDeAn
             InitializeComponent();
         }
         public static OracleConnection con;
+        public static String roleUser;
         private void LoginUI_Load(object sender, EventArgs e) 
         {
             
@@ -61,7 +63,6 @@ namespace QLDeAn
                 con.ConnectionString = connectionString;
                 con.Open();
 
-                MessageBox.Show("Connect với Oracle thành công");
 
                 if (role.Text == "SYSDBA" || role.Text == "ADMIN")
                 {
@@ -70,6 +71,66 @@ namespace QLDeAn
                     DBAUI dba = new DBAUI();
                     dba.Show();
                 }
+                else
+                {
+                    OracleCommand command = new OracleCommand("alter session set \"_ORACLE_SCRIPT\"=true", con);
+                    command.ExecuteNonQuery();
+                    string sqlRole = "";
+                    if(role.Text != "Nhân sự")
+                    {
+                        sqlRole = "SELECT VAITRO FROM QLDA.QLDA_NHANVIEN WHERE MANV = :manv";
+                    }
+                    else
+                    {
+                        sqlRole = "SELECT VAITRO FROM QLDA.V_QLDA_NHANVIEN_NS WHERE MANV = :manv";
+                    }
+                    OracleCommand command_role = new OracleCommand(sqlRole, con);
+                    command_role.Parameters.Add(new OracleParameter("manv", username.Text));
+                    OracleDataReader dr = command_role.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        roleUser = dr.GetString(0);
+                        if (role.Text != roleUser)
+                        {
+                            MessageBox.Show("Role không khớp với User");
+                            con.Dispose();
+                            con.Close();
+                            OracleConnection.ClearPool(con);
+                            return;
+                        }
+                    }
+                    //this.Hide();
+
+                    MessageBox.Show("Connect với Oracle thành công");
+                    NhanVienUI NVUI = new NhanVienUI();
+                    switch (roleUser)
+                    {
+                        case "Nhân viên":
+                            NVUI.Text = "NHÂN VIÊN";
+                            break;
+                        case "Quản lý":
+                            NVUI.Text = "QUẢN LÝ";
+                            break;
+                        case "Trưởng phòng":
+                            NVUI.Text = "TRƯỞNG PHÒNG";
+                            break;
+                        case "Tài chính":
+                            NVUI.Text = "TÀI CHÍNH";
+                            break;
+                        case "Nhân sự":
+                            NVUI.Text = "NHÂN SỰ";
+                            break;
+                        case "Trưởng dự án":
+                            NVUI.Text = "TRƯỞNG DỰ ÁN";
+                            break;
+                        case "Giám đốc":
+                            NVUI.Text = "GIÁM ĐỐC";
+                            break;
+                    }
+                    NVUI.Show();
+                    dr.Close();
+                }
+                //MessageBox.Show("Connect với Oracle thành công");
 
                 this.Hide();
             }

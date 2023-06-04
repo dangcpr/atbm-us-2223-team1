@@ -145,6 +145,18 @@
     <Compile Include="LoginUI.Designer.cs">
       <DependentUpon>LoginUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanVienUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NhanVienUI.Designer.cs">
+      <DependentUpon>NhanVienUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanVienUI_NVTable.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NhanVienUI_NVTable.Designer.cs">
+      <DependentUpon>NhanVienUI_NVTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrivilegeUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -216,6 +228,12 @@
     <EmbeddedResource Include="LoginUI.resx">
       <DependentUpon>LoginUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NhanVienUI.resx">
+      <DependentUpon>NhanVienUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanVienUI_NVTable.resx">
+      <DependentUpon>NhanVienUI_NVTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PrivilegeUI.resx">
       <DependentUpon>PrivilegeUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -269,6 +287,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\System.Text.Json.6.0.0\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.0\build\System.Text.Json.targets')" />
