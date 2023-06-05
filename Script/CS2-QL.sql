@@ -125,9 +125,9 @@ END;
 BEGIN dbms_rls.add_policy 
 (object_schema =>'QLDA',
 object_name => 'V_QLDA_NHANVIEN_NS',
-policy_name => 'TP_QL_SUA_TT_CA_NHAN',
+policy_name => 'POLICY_TP_QL_SUA_TT_CA_NHAN',
 function_schema => 'QLDA',
-policy_function => 'NV_SUA_TT_CA_NHAN',
+policy_function => 'TP_QL_SUA_TT_CA_NHAN',
 statement_types => 'UPDATE',
 update_check => TRUE);
 END;
@@ -137,7 +137,7 @@ BEGIN
   dbms_rls.drop_policy (
     object_schema => 'QLDA',
     object_name   => 'V_QLDA_NHANVIEN_NS',
-    policy_name   => 'TP_QL_SUA_TT_CA_NHAN');
+    policy_name   => 'POLICY_TP_QL_SUA_TT_CA_NHAN');
 END;
 */
 

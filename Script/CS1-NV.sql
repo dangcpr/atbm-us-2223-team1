@@ -1,11 +1,13 @@
 --CONNECT QLDA/admin123;
 --alter session set "_ORACLE_SCRIPT"=true;
+--ALTER SESSION SET CONTAINER = CDB$ROOT;
 CREATE USER NV001 IDENTIFIED BY NV001;
 create role NV;
 GRANT CONNECT TO NV;
 grant NV to NV001;
 
 grant select,update on QLDA.QLDA_NHANVIEN to NV;
+grant select on QLDA.QLDA_PHANCONG to NV;
 --CREATE OR REPLACE VIEW V_NV_QLDA_NHANVIEN AS
 --select * from QLDA.QLDA_NHANVIEN;
 --grant select on QLDA.V_NV_QLDA_NHANVIEN TO NV;
@@ -149,20 +151,57 @@ CREATE USER NV002 IDENTIFIED BY NV002;
 --create role NV;
 --GRANT CONNECT TO NV;
 grant NV to NV002;
+--drop user NV002;
 
 --REVOKE SELECT, update ON QLDA.QLDA_NHANVIEN FROM NV;
 /
 select * from QLDA.QLDA_NHANVIEN;
-
-
-
-
-
---REVOKE SELECT, update ON QLDA.QLDA_NHANVIEN FROM NV001;
---select * from QLDA.QLDA_NHANVIEN;
 /
-    
---drop user NV001 cascade;
+CREATE OR REPLACE FUNCTION QLDA.NV_NS_TA_XEM_QH_PC (
+   P_SCHEMA IN VARCHAR2 DEFAULT NULL,
+   P_OBJECT IN VARCHAR2 DEFAULT NULL
+) 
+RETURN VARCHAR2 
+AS
+  USERNAME VARCHAR2(128);
+  USERROLE VARCHAR2(128);
+BEGIN
+  -- L?y username c?a user hi?n t?i
+  USERNAME := SYS_CONTEXT('userenv', 'SESSION_USER');
+  
+  IF USERNAME = 'QLDA' THEN 
+    RETURN '1=1'; -- Qu?n lý d? án có th? xem t?t c? thông tin
+  END IF;
+  
+  SELECT GRANTED_ROLE INTO USERROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE = ''||UPPER(USERNAME)||'';
+  
+  IF 'NV' IN (USERROLE) OR 'NS' IN (USERROLE) OR 'TA' IN (USERROLE) THEN
+    RETURN 'MANV = '''||USERNAME||'''';
+  ELSE
+    RETURN '1=1'; -- Ng??i dùng khác không có quy?n xem
+  END IF;
+END;
+/
+
+
+BEGIN dbms_rls.add_policy 
+(object_schema =>'QLDA',
+object_name => 'QLDA_PHANCONG',
+policy_name => 'POLICY_NV_NS_TA_XEM_QH_PC',
+function_schema => 'QLDA',
+policy_function => 'NV_NS_TA_XEM_QH_PC',
+statement_types => 'SELECT',
+update_check => TRUE);
+END;
+--Xóa
+/*
+BEGIN
+  dbms_rls.drop_policy (
+    object_schema => 'QLDA',
+    object_name   => 'QLDA_PHANCONG',
+    policy_name   => 'POLICY_NV_NS_TA_XEM_QH_PC');
+END;
+*/
 
 
 

@@ -151,6 +151,24 @@
     <Compile Include="NhanVienUI.Designer.cs">
       <DependentUpon>NhanVienUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanVienUI_PCTable .cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NhanVienUI_PCTable .Designer.cs">
+      <DependentUpon>NhanVienUI_PCTable .cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanVienUI_DATable.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NhanVienUI_DATable.Designer.cs">
+      <DependentUpon>NhanVienUI_DATable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanVienUI_PBTable.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NhanVienUI_PBTable.Designer.cs">
+      <DependentUpon>NhanVienUI_PBTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanVienUI_NVTable.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -188,6 +206,12 @@
     </Compile>
     <Compile Include="RoleUI.Designer.cs">
       <DependentUpon>RoleUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThongBaoUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThongBaoUI.Designer.cs">
+      <DependentUpon>ThongBaoUI.cs</DependentUpon>
     </Compile>
     <Compile Include="UpdateRole_F.cs">
       <SubType>Form</SubType>
@@ -231,6 +255,15 @@
     <EmbeddedResource Include="NhanVienUI.resx">
       <DependentUpon>NhanVienUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NhanVienUI_PCTable .resx">
+      <DependentUpon>NhanVienUI_PCTable .cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanVienUI_DATable.resx">
+      <DependentUpon>NhanVienUI_DATable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanVienUI_PBTable.resx">
+      <DependentUpon>NhanVienUI_PBTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NhanVienUI_NVTable.resx">
       <DependentUpon>NhanVienUI_NVTable.cs</DependentUpon>
     </EmbeddedResource>
@@ -257,6 +290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RoleUI.resx">
       <DependentUpon>RoleUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThongBaoUI.resx">
+      <DependentUpon>ThongBaoUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UpdateRole_F.resx">
       <DependentUpon>UpdateRole_F.cs</DependentUpon>

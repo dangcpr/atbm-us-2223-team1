@@ -14,6 +14,7 @@ namespace QLDeAn
     public partial class NhanVienUI : Form
     {
         public static OracleConnection conNow;
+        public static OracleConnection conPDB;
         public NhanVienUI()
         {
 
@@ -96,6 +97,17 @@ namespace QLDeAn
             conNow.Close();
             OracleConnection.ClearPool(conNow);
             Application.Exit();
+        }
+
+        private void ThongBaoButton_Click(object sender, EventArgs e)
+        {
+            string connectionString = @"DATA SOURCE = localhost:1521/PDB1;USER ID=" + LoginUI.userUser + ";PASSWORD=" + LoginUI.passUser;
+            conPDB = new OracleConnection();
+            conPDB.ConnectionString = connectionString;
+            conPDB.Open();
+
+            ThongBaoUI TBUI = new ThongBaoUI();
+            TBUI.Show();
         }
     }
 }

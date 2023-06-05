@@ -95,11 +95,11 @@ DECLARE BEGIN
       :new.phucap := encrypt_decrypt.encrypt_nhanvien_phucap(:new.phucap, '3F569C3F19E25B18B2C12B975F9BC5BB');
     end if;
 
-    if (:new.luong is not null and UPDATING and :new.luong <> :old.luong) then
+    if (:new.luong is not null and UPDATING and ((:new.luong <> :old.luong) or (:old.luong is null))) then
       :new.luong := encrypt_decrypt.encrypt_nhanvien_luong(:new.luong, '3F569C3F19E25B18B2C12B975F9BC5BB');
     end if;
 
-    if (:new.phucap is not null and UPDATING and :new.phucap <> :old.phucap) then
+    if (:new.phucap is not null and UPDATING and ((:new.phucap <> :old.phucap) or (:old.phucap is null))) then
       :new.phucap := encrypt_decrypt.encrypt_nhanvien_phucap(:new.phucap, '3F569C3F19E25B18B2C12B975F9BC5BB');
     end if;
 END;
@@ -111,13 +111,14 @@ INSERT INTO QLDA_NHANVIEN (MANV,TENNV, PHAI, NGAYSINH, DIACHI, SODT, LUONG, PHUC
          TO_DATE('01-JAN-1970', 'DD-MON-YYYY'),
          'HCM',
          '0123456789',
-         '2000',
-         '2000',
+         NULL,
+         NULL,
          'Nhân viên',
          'QL001',
          'PB001'
       );
---/
+    UPDATE QLDA_NHANVIEN SET LUONG = 10000000, PHUCAP = 1000000 WHERE MANV = 'NV400';
+    SELECT * FROM QLDA_NHANVIEN WHERE MANV='NV400';
 --select LUONG, phucap FROM QLDA_NHANVIEN WHERE MANV='NV400';
 --Xóa hàm
 --DROP TRIGGER auto_encrypted_nhanvien;
@@ -138,4 +139,6 @@ SELECT
     phucap,
     encrypt_decrypt.decrypt_nhanvien_phucap(phucap, '3F569C3F19E25B18B2C12B975F9BC5BB') AS phucap_giaima
 FROM
-    qlda_nhanvien;
+    QLDA.qlda_nhanvien;
+
+--DELETE FROM QLDA_NHANVIEN WHERE MANV='NV400';

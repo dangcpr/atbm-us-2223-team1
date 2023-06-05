@@ -20,6 +20,8 @@ namespace QLDeAn
             InitializeComponent();
         }
         public static OracleConnection con;
+        public static String userUser;
+        public static String passUser;
         public static String roleUser;
         private void LoginUI_Load(object sender, EventArgs e) 
         {
@@ -63,9 +65,12 @@ namespace QLDeAn
                 con.ConnectionString = connectionString;
                 con.Open();
 
+                userUser = username.Text;
+                passUser = password.Text;
 
                 if (role.Text == "SYSDBA" || role.Text == "ADMIN")
                 {
+
                     OracleCommand command = new OracleCommand("alter session set \"_ORACLE_SCRIPT\"=true", con);
                     command.ExecuteNonQuery();
                     DBAUI dba = new DBAUI();
@@ -127,6 +132,7 @@ namespace QLDeAn
                             NVUI.Text = "GIÁM ĐỐC";
                             break;
                     }
+
                     NVUI.Show();
                     dr.Close();
                 }

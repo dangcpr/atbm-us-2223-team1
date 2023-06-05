@@ -52,12 +52,16 @@ namespace QLDeAn
                     case "Nhân viên":
                     case "Trưởng dự án":
                     case "Tài chính":
+
                         selectNVsql = "SELECT QLDA.QLDA_NHANVIEN.*, QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, '3F569C3F19E25B18B2C12B975F9BC5BB') AS luong_giaima, QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, '3F569C3F19E25B18B2C12B975F9BC5BB') AS phucap_giaima FROM QLDA.QLDA_NHANVIEN";
                         break;
                     case "Quản lý":
                     case "Trưởng phòng":
                     case "Nhân sự":
                         selectNVsql = "SELECT QLDA.V_QLDA_NHANVIEN_NS.*, QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, '3F569C3F19E25B18B2C12B975F9BC5BB') AS luong_giaima, QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, '3F569C3F19E25B18B2C12B975F9BC5BB') AS phucap_giaima FROM QLDA.V_QLDA_NHANVIEN_NS";
+                        break;
+                    case "Giám đốc":
+                        selectNVsql = "SELECT QLDA.QLDA_NHANVIEN.* FROM QLDA.QLDA_NHANVIEN";
                         break;
 
                 }
@@ -154,6 +158,10 @@ namespace QLDeAn
                     cmd.Parameters.Add(new OracleParameter("SDT", SDTTextBox.Text));
                     cmd.Parameters.Add(new OracleParameter("MaNV", MaNVTextBox.Text));
                     int count_update = cmd.ExecuteNonQuery();
+
+                    OracleCommand cmdCommit = new OracleCommand("COMMIT", conNow);
+                    cmdCommit.ExecuteNonQuery();
+
                     MessageBox.Show(count_update + " rows update success!");
                     return;
                 }
@@ -182,6 +190,10 @@ namespace QLDeAn
                     cmd.Parameters.Add(new OracleParameter("PhuCap", PhuCapTextBox.Text));                    
                     cmd.Parameters.Add(new OracleParameter("MaNV", MaNVTextBox.Text));
                     int count_update = cmd.ExecuteNonQuery();
+
+                    OracleCommand cmdCommit = new OracleCommand("COMMIT", conNow);
+                    cmdCommit.ExecuteNonQuery();
+
                     MessageBox.Show(count_update + " rows update success!");
                     return;
                 }
@@ -309,6 +321,9 @@ namespace QLDeAn
                     case "Trưởng phòng":
                     case "Nhân sự":
                         selectNVsql = "SELECT QLDA.V_QLDA_NHANVIEN_NS.*, QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, '3F569C3F19E25B18B2C12B975F9BC5BB') AS luong_giaima, QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, '3F569C3F19E25B18B2C12B975F9BC5BB') AS phucap_giaima FROM QLDA.V_QLDA_NHANVIEN_NS WHERE MANV = :manv";
+                        break;
+                    case "Giám đốc":
+                        selectNVsql = "SELECT QLDA.QLDA_NHANVIEN.* WHERE MANV = :manv";
                         break;
 
                 }
