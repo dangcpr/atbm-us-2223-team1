@@ -76,7 +76,7 @@ namespace QLDeAn
                     OracleCommand command = new OracleCommand("alter session set \"_ORACLE_SCRIPT\"=true", con);
                     command.ExecuteNonQuery();
                     string sqlRole = "";
-                    if(role.Text != "Nhân sự")
+                    if(role.Text != "Nhân sự" && role.Text != "Trưởng phòng" && role.Text != "Quản lý")
                     {
                         sqlRole = "SELECT VAITRO FROM QLDA.QLDA_NHANVIEN WHERE MANV = :manv";
                     }

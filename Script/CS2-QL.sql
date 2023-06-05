@@ -5,8 +5,9 @@ CREATE USER QL001 IDENTIFIED BY QL001;
 create role QL;
 GRANT CONNECT TO QL;
 grant QL to QL001;
-GRANT SELECT ON QLDA.QLDA_NHANVIEN TO QL;
-
+--GRANT SELECT ON QLDA.QLDA_NHANVIEN TO QL;
+--REVOKE SELECT ON QLDA.QLDA_NHANVIEN FROM QL;
+GRANT SELECT ON QLDA.V_QLDA_NHANVIEN_NS TO QL ; --View đã tạo bên CS3
 select * from QLDA_NHANVIEN;
 
 --drop table LOOKUP_QLDA_NHANVIEN;
@@ -39,7 +40,7 @@ END;
 BEGIN
   DBMS_RLS.ADD_POLICY (
     OBJECT_SCHEMA =>'QLDA',
-    OBJECT_NAME => 'QLDA_NHANVIEN',
+    OBJECT_NAME => 'V_QLDA_NHANVIEN_NS',
     POLICY_NAME => 'POLICY_QL_XEM_QH_NV',
     FUNCTION_SCHEMA => 'QLDA',
     POLICY_FUNCTION => 'QL_XEM_QH_NV',
@@ -92,4 +93,52 @@ SELECT PC.*
 FROM QLDA.QLDA_NHANVIEN NV, QLDA.QLDA_PHANCONG PC
 WHERE NV.MANV = PC.MANV AND (NV.MANQL = USER OR NV.MANV = USER);
 
-GRANT SELECT ON QLDA.V_QLDA_PHANCONG_QL TO QL;
+
+--TP, QL chỉ sửa thông tin của chính mình
+CREATE OR REPLACE FUNCTION QLDA.TP_QL_SUA_TT_CA_NHAN (
+   P_SCHEMA IN VARCHAR2 DEFAULT NULL,
+   P_OBJECT IN VARCHAR2 DEFAULT NULL
+) 
+RETURN VARCHAR2 
+AS
+  USERNAME VARCHAR2(128);
+  USERROLE VARCHAR2(128);
+BEGIN
+  -- L?y username c?a user hi?n t?i
+  USERNAME := SYS_CONTEXT('userenv', 'SESSION_USER');
+  
+  IF USERNAME = 'QLDA' THEN 
+    RETURN '1=1'; -- Qu?n lý d? án có th? xem t?t c? thông tin
+  END IF;
+  
+  SELECT GRANTED_ROLE INTO USERROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE = ''||UPPER(USERNAME)||'';
+  
+  IF 'QL' IN (USERROLE) OR 'TP' IN (USERROLE) THEN
+    RETURN 'MANV = '''||USERNAME||'''';
+  ELSE
+    RETURN '1=1'; -- Ng??i dùng khác không có quy?n xem
+  END IF;
+END;
+/
+
+
+BEGIN dbms_rls.add_policy 
+(object_schema =>'QLDA',
+object_name => 'V_QLDA_NHANVIEN_NS',
+policy_name => 'TP_QL_SUA_TT_CA_NHAN',
+function_schema => 'QLDA',
+policy_function => 'NV_SUA_TT_CA_NHAN',
+statement_types => 'UPDATE',
+update_check => TRUE);
+END;
+/
+/*
+BEGIN
+  dbms_rls.drop_policy (
+    object_schema => 'QLDA',
+    object_name   => 'V_QLDA_NHANVIEN_NS',
+    policy_name   => 'TP_QL_SUA_TT_CA_NHAN');
+END;
+*/
+
+SELECT * FROM DBA_POLICIES;

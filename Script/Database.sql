@@ -44,10 +44,14 @@ ALTER TABLE QLDA_PHONGBAN MODIFY TRPHG VARCHAR2(128);
 ALTER TABLE QLDA_NHANVIEN MODIFY MANV VARCHAR2(128);
 ALTER TABLE QLDA_NHANVIEN MODIFY MANQL VARCHAR2(128);
 ALTER TABLE QLDA_PHANCONG MODIFY MANV VARCHAR2(128);
+ALTER TABLE QLDA_NHANVIEN MODIFY LUONG NVARCHAR2(176);
+ALTER TABLE QLDA_NHANVIEN MODIFY PHUCAP NVARCHAR2(176);
 
 
 --Kiểm tra table đã tạo và owner
 select table_name, owner from all_tables where owner = 'QLDA';
+--Kiểm tra thuộc tinh các bảng
+select * from all_tab_columns where table_name = 'QLDA_NHANVIEN';
 
 select role from dba_roles;
 

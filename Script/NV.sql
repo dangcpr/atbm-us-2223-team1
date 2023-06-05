@@ -7,3 +7,11 @@ SELECT * FROM QLDA.QLDA_DEAN;
 
 SELECT VaiTro FROM QLDA.QLDA_NHANVIEN WHERE MANV = 'NV001'
 select sys_context('userenv', 'current_user') from dual;
+
+SELECT
+    luong,
+    QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, '3F569C3F19E25B18B2C12B975F9BC5BB') AS luong_giaima,
+    phucap,
+    QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, '3F569C3F19E25B18B2C12B975F9BC5BB') AS phucap_giaima
+FROM
+    QLDA.qlda_nhanvien;

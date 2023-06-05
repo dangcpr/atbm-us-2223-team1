@@ -50,14 +50,14 @@ namespace QLDeAn
                 switch(LoginUI.roleUser)
                 {
                     case "Nhân viên":
+                    case "Trưởng dự án":
+                    case "Tài chính":
+                        selectNVsql = "SELECT QLDA.QLDA_NHANVIEN.*, QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, '3F569C3F19E25B18B2C12B975F9BC5BB') AS luong_giaima, QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, '3F569C3F19E25B18B2C12B975F9BC5BB') AS phucap_giaima FROM QLDA.QLDA_NHANVIEN";
+                        break;
                     case "Quản lý":
                     case "Trưởng phòng":
-                    case "Tài chính":
-                    case "Trưởng dự án":
-                        selectNVsql = "SELECT * FROM QLDA.QLDA_NHANVIEN";
-                        break;
                     case "Nhân sự":
-                        selectNVsql = "SELECT * FROM QLDA.V_QLDA_NHANVIEN_NS";
+                        selectNVsql = "SELECT QLDA.V_QLDA_NHANVIEN_NS.*, QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, '3F569C3F19E25B18B2C12B975F9BC5BB') AS luong_giaima, QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, '3F569C3F19E25B18B2C12B975F9BC5BB') AS phucap_giaima FROM QLDA.V_QLDA_NHANVIEN_NS";
                         break;
 
                 }
@@ -79,7 +79,7 @@ namespace QLDeAn
             try
             {
                 conNow = LoginUI.con;
-                if (LoginUI.roleUser != "Nhân sự")
+                if (LoginUI.roleUser != "Nhân sự" && LoginUI.roleUser != "Trưởng phòng" && LoginUI.roleUser != "Nhân sự")
                 {
                     string insertNVsql = "INSERT INTO QLDA.QLDA_NHANVIEN VALUES (:MaNV, :HoTen, :GioiTinh, :NgaySinh, :DiaChi, :SDT, :Luong, :PhuCap, :VaiTro, :MaNQL, :MaPB)";
                     OracleCommand cmd = new OracleCommand(insertNVsql, conNow);
@@ -133,9 +133,21 @@ namespace QLDeAn
             try
             {
                 conNow = LoginUI.con;
-                if (LoginUI.roleUser != "Tài chính" && LoginUI.roleUser != "Nhân sự")
+                if (LoginUI.roleUser != "Tài chính" && LoginUI.roleUser != "Nhân sự" && LoginUI.roleUser != "Trưởng phòng" && LoginUI.roleUser != "Quản lý")
                 {
                     string updateNVsql = "UPDATE QLDA.QLDA_NHANVIEN SET NgaySinh = TO_DATE(:NgaySinh, 'DD/MM/YYYY'), DiaChi = :DiaChi, SODT = :SDT WHERE MaNV = :MaNV";
+                    OracleCommand cmd = new OracleCommand(updateNVsql, conNow);
+                    cmd.Parameters.Add(new OracleParameter("NgaySinh", NgaySinhTextBox.Text));
+                    cmd.Parameters.Add(new OracleParameter("DiaChi", DiaChiTextBox.Text));
+                    cmd.Parameters.Add(new OracleParameter("SDT", SDTTextBox.Text));
+                    cmd.Parameters.Add(new OracleParameter("MaNV", MaNVTextBox.Text));
+                    int count_update = cmd.ExecuteNonQuery();
+                    MessageBox.Show(count_update + " rows update success!");
+                    return;
+                }
+                if (LoginUI.roleUser == "Trưởng phòng" || LoginUI.roleUser == "Quản lý")
+                {
+                    string updateNVsql = "UPDATE QLDA.V_QLDA_NHANVIEN_NS SET NgaySinh = TO_DATE(:NgaySinh, 'DD/MM/YYYY'), DiaChi = :DiaChi, SODT = :SDT WHERE MaNV = :MaNV";
                     OracleCommand cmd = new OracleCommand(updateNVsql, conNow);
                     cmd.Parameters.Add(new OracleParameter("NgaySinh", NgaySinhTextBox.Text));
                     cmd.Parameters.Add(new OracleParameter("DiaChi", DiaChiTextBox.Text));
@@ -166,8 +178,8 @@ namespace QLDeAn
                     }
                     cmd.CommandText += "Luong = :Luong, PHUCAP = :PhuCap WHERE MaNV = :MaNV";
 
-                    cmd.Parameters.Add(new OracleParameter("Luong", OracleDbType.BinaryFloat, LuongTextBox.Text, System.Data.ParameterDirection.Input));
-                    cmd.Parameters.Add(new OracleParameter("PhuCap", OracleDbType.BinaryFloat, PhuCapTextBox.Text, System.Data.ParameterDirection.Input));                    
+                    cmd.Parameters.Add(new OracleParameter("Luong", LuongTextBox.Text));
+                    cmd.Parameters.Add(new OracleParameter("PhuCap", PhuCapTextBox.Text));                    
                     cmd.Parameters.Add(new OracleParameter("MaNV", MaNVTextBox.Text));
                     int count_update = cmd.ExecuteNonQuery();
                     MessageBox.Show(count_update + " rows update success!");
@@ -221,7 +233,7 @@ namespace QLDeAn
             conNow = LoginUI.con;
             try
             {
-                if (LoginUI.roleUser != "Nhân sự")
+                if (LoginUI.roleUser != "Nhân sự" && LoginUI.roleUser != "Trưởng phòng" && LoginUI.roleUser != "Quản lý") 
                 {
                     string deleteNVsql = "DELETE FROM QLDA.QLDA_NHANVIEN WHERE MaNV = :MaNV";
                     OracleCommand cmd = new OracleCommand(deleteNVsql, conNow);
@@ -270,8 +282,8 @@ namespace QLDeAn
                 NgaySinhTextBox.Text = DateTime.ParseExact(row.Cells[3].Value.ToString(), "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture).ToString("dd/MM/yyyy");
                 DiaChiTextBox.Text = row.Cells[4].Value.ToString();
                 SDTTextBox.Text = row.Cells[5].Value.ToString();
-                LuongTextBox.Text = row.Cells[6].Value.ToString();
-                PhuCapTextBox.Text = row.Cells[7].Value.ToString();
+                LuongTextBox.Text = row.Cells[11].Value.ToString();
+                PhuCapTextBox.Text = row.Cells[12].Value.ToString();
                 VaiTroTextBox.Text = row.Cells[8].Value.ToString();
                 MaNQLTextBox.Text = row.Cells[9].Value.ToString();
                 MaPBTextBox.Text = row.Cells[10].Value.ToString();
@@ -279,8 +291,40 @@ namespace QLDeAn
 
         }
 
-        private void nullButton_Click(object sender, EventArgs e)
+
+        private void searchButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                conNow = LoginUI.con;
+                string selectNVsql = "";
+                switch (LoginUI.roleUser)
+                {
+                    case "Nhân viên":
+                    case "Trưởng dự án":
+                    case "Tài chính":
+                        selectNVsql = "SELECT QLDA.QLDA_NHANVIEN.*, QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, '3F569C3F19E25B18B2C12B975F9BC5BB') AS luong_giaima, QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, '3F569C3F19E25B18B2C12B975F9BC5BB') AS phucap_giaima FROM QLDA.QLDA_NHANVIEN WHERE MANV = :manv";
+                        break;
+                    case "Quản lý":
+                    case "Trưởng phòng":
+                    case "Nhân sự":
+                        selectNVsql = "SELECT QLDA.V_QLDA_NHANVIEN_NS.*, QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, '3F569C3F19E25B18B2C12B975F9BC5BB') AS luong_giaima, QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, '3F569C3F19E25B18B2C12B975F9BC5BB') AS phucap_giaima FROM QLDA.V_QLDA_NHANVIEN_NS WHERE MANV = :manv";
+                        break;
+
+                }
+                OracleCommand cmd = new OracleCommand(selectNVsql, conNow);
+                cmd.BindByName = true;
+                cmd.Parameters.Add(new OracleParameter("manv", searchUser.Text));
+                OracleDataAdapter adapter = new OracleDataAdapter(cmd) { SuppressGetDecimalInvalidCastException = true };
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                NhanVienTableView.DataSource = dataTable;
+            }
+            catch (System.Data.OracleClient.OracleException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
         }
     }
 }
