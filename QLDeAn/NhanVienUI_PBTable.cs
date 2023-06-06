@@ -71,12 +71,12 @@ namespace QLDeAn
                     //cmd.Parameters.Add(new OracleParameter("MaNV", OracleDbType.Varchar2, MaNVTextBox.Text));
                 cmd.Parameters.Add(new OracleParameter("TenPB", OracleDbType.Varchar2, TenPBTextBox.Text, System.Data.ParameterDirection.Input));
                 cmd.Parameters.Add(new OracleParameter("TRPHG", OracleDbType.Varchar2, TrPhgTextBox.Text, System.Data.ParameterDirection.Input));
-                cmd.ExecuteNonQuery();
+                int count_delete =  cmd.ExecuteNonQuery();
 
                 OracleCommand cmdCommit = new OracleCommand("COMMIT", conNow);
                 cmdCommit.ExecuteNonQuery();
-                
-                MessageBox.Show("Insert success!");
+
+                MessageBox.Show(count_delete + " rows delete success!");
             }
             catch (System.Data.OracleClient.OracleException ex)
             {
@@ -167,7 +167,7 @@ namespace QLDeAn
                     case "Trưởng phòng":
                     case "Nhân sự":
                     case "Giám đốc":
-                        selectPBsql = "SELECT QLDA.QLDA_PHONGBAN WHERE MAPB = :MaPB";
+                        selectPBsql = "SELECT * FROM QLDA.QLDA_PHONGBAN WHERE MAPB = :MaPB";
                         break;
 
                 }

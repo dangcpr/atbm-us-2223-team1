@@ -7,7 +7,7 @@ GRANT CONNECT TO QL;
 grant QL to QL001;
 --GRANT SELECT ON QLDA.QLDA_NHANVIEN TO QL;
 --REVOKE SELECT ON QLDA.QLDA_NHANVIEN FROM QL;
-GRANT SELECT ON QLDA.V_QLDA_NHANVIEN_NS TO QL ; --View đã tạo bên CS3
+GRANT SELECT ON QLDA.V_QLDA_NHANVIEN_NS TO QL ; --View đã tạo bên CS5
 select * from QLDA_NHANVIEN;
 
 --drop table LOOKUP_QLDA_NHANVIEN;
@@ -87,11 +87,14 @@ END;
 */
 
 --Yêu cầu 2 của cs2. Khi làm giao diện thì cho select thẳng cái view này luôn.
+--Quản lý chỉ được xem phân công nhân viên thuộc phòng ban của mình (đã cài VPD ở cs3)
 CREATE OR REPLACE VIEW V_QLDA_PHANCONG_QL
 AS
 SELECT PC.*
 FROM QLDA.QLDA_NHANVIEN NV, QLDA.QLDA_PHANCONG PC
 WHERE NV.MANV = PC.MANV AND (NV.MANQL = USER OR NV.MANV = USER);
+
+GRANT SELECT ON QLDA.V_QLDA_PHANCONG_QL TO QL;
 
 
 --TP, QL chỉ sửa thông tin của chính mình
@@ -140,5 +143,6 @@ BEGIN
     policy_name   => 'POLICY_TP_QL_SUA_TT_CA_NHAN');
 END;
 */
+
 
 SELECT * FROM DBA_POLICIES;

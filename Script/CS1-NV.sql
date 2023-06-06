@@ -157,6 +157,7 @@ grant NV to NV002;
 /
 select * from QLDA.QLDA_NHANVIEN;
 /
+--Nhân sự, nhân viên, trưởng dự án được xem các dòng phân công liên quan đến chính mình (cs1, cs5, cs6)
 CREATE OR REPLACE FUNCTION QLDA.NV_NS_TA_XEM_QH_PC (
    P_SCHEMA IN VARCHAR2 DEFAULT NULL,
    P_OBJECT IN VARCHAR2 DEFAULT NULL

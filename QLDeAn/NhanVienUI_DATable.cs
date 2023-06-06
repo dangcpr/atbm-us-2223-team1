@@ -120,13 +120,13 @@ namespace QLDeAn
                string deleteNVsql = "DELETE FROM QLDA.QLDA_DEAN WHERE MaDA = :MaDA";
                OracleCommand cmd = new OracleCommand(deleteNVsql, conNow);
                cmd.Parameters.Add(new OracleParameter("MaDA", MaDATextBox.Text));
-               cmd.ExecuteNonQuery();
+               int count_delete =  cmd.ExecuteNonQuery();
 
                OracleCommand cmdCommit = new OracleCommand("COMMIT", conNow);
                cmdCommit.ExecuteNonQuery();
 
-               MessageBox.Show("Delete success!");
-                
+               MessageBox.Show(count_delete + " rows delete success!");
+
             }
             catch (System.Data.OracleClient.OracleException ex)
             {
@@ -170,7 +170,7 @@ namespace QLDeAn
                     case "Trưởng phòng":
                     case "Nhân sự":
                     case "Giám đốc":
-                        selectPBsql = "SELECT QLDA.QLDA_DEAN WHERE MADA = :MaDA";
+                        selectPBsql = "SELECT * FROM QLDA.QLDA_DEAN WHERE MADA = :MaDA";
                         break;
 
                 }

@@ -83,7 +83,7 @@ namespace QLDeAn
             try
             {
                 conNow = LoginUI.con;
-                if (LoginUI.roleUser != "Nhân sự" && LoginUI.roleUser != "Trưởng phòng" && LoginUI.roleUser != "Nhân sự")
+                if (LoginUI.roleUser != "Quản lý" && LoginUI.roleUser != "Trưởng phòng" && LoginUI.roleUser != "Nhân sự")
                 {
                     string insertNVsql = "INSERT INTO QLDA.QLDA_NHANVIEN VALUES (:MaNV, :HoTen, :GioiTinh, :NgaySinh, :DiaChi, :SDT, :Luong, :PhuCap, :VaiTro, :MaNQL, :MaPB)";
                     OracleCommand cmd = new OracleCommand(insertNVsql, conNow);
@@ -250,24 +250,24 @@ namespace QLDeAn
                     string deleteNVsql = "DELETE FROM QLDA.QLDA_NHANVIEN WHERE MaNV = :MaNV";
                     OracleCommand cmd = new OracleCommand(deleteNVsql, conNow);
                     cmd.Parameters.Add(new OracleParameter("MaNV", MaNVTextBox.Text));
-                    cmd.ExecuteNonQuery();
+                    int count_delete =  cmd.ExecuteNonQuery();
 
                     OracleCommand cmdCommit = new OracleCommand("COMMIT", conNow);
                     cmdCommit.ExecuteNonQuery();
 
-                    MessageBox.Show("Delete success!");
+                    MessageBox.Show(count_delete + " rows delete success!");
                 }
                 else
                 {
                     string deleteNVsql = "DELETE FROM QLDA.V_QLDA_NHANVIEN_NS WHERE MaNV = :MaNV";
                     OracleCommand cmd = new OracleCommand(deleteNVsql, conNow);
                     cmd.Parameters.Add(new OracleParameter("MaNV", MaNVTextBox.Text));
-                    cmd.ExecuteNonQuery();
+                    int count_delete = cmd.ExecuteNonQuery();
 
                     OracleCommand cmdCommit = new OracleCommand("COMMIT", conNow);
                     cmdCommit.ExecuteNonQuery();
 
-                    MessageBox.Show("Delete success!");
+                    MessageBox.Show(count_delete + " rows delete success!");
                 }
             }
             catch (System.Data.OracleClient.OracleException ex)

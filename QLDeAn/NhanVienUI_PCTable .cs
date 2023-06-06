@@ -158,12 +158,12 @@ namespace QLDeAn
                     OracleCommand cmd = new OracleCommand(deleteNVsql, conNow);
                     cmd.Parameters.Add(new OracleParameter("MaNV", MaNVTextBox.Text));
                     cmd.Parameters.Add(new OracleParameter("MaDA", MaDATextBox.Text));
-                    cmd.ExecuteNonQuery();
+                    int count_delete = cmd.ExecuteNonQuery();
 
                     OracleCommand cmdCommit = new OracleCommand("COMMIT", conNow);
                     cmdCommit.ExecuteNonQuery();
 
-                    MessageBox.Show("Delete success!");
+                    MessageBox.Show(count_delete + " rows delete success!");
                 }
                 else
                 {
@@ -171,12 +171,12 @@ namespace QLDeAn
                     OracleCommand cmd = new OracleCommand(deleteNVsql, conNow);
                     cmd.Parameters.Add(new OracleParameter("MaNV", MaNVTextBox.Text));
                     cmd.Parameters.Add(new OracleParameter("MaDA", MaDATextBox.Text));
-                    cmd.ExecuteNonQuery();
+                    int count_delete = cmd.ExecuteNonQuery();
 
                     OracleCommand cmdCommit = new OracleCommand("COMMIT", conNow);
                     cmdCommit.ExecuteNonQuery();
 
-                    MessageBox.Show("Delete success!");
+                    MessageBox.Show(count_delete + " rows delete success!");
                 }
                 
             }
