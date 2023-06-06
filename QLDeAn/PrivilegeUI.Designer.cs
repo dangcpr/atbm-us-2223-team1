@@ -35,6 +35,7 @@ namespace QLDeAn
             this.tableLabel = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.colLabel = new System.Windows.Forms.Label();
+            this.select = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -109,10 +110,23 @@ namespace QLDeAn
             this.colLabel.Text = "COLUMN";
             this.colLabel.Click += new System.EventHandler(this.colLabel_Click);
             // 
+            // select
+            // 
+            this.select.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.select.Location = new System.Drawing.Point(1140, 12);
+            this.select.Name = "select";
+            this.select.Size = new System.Drawing.Size(91, 42);
+            this.select.TabIndex = 9;
+            this.select.Text = "SELECT";
+            this.select.UseCompatibleTextRendering = true;
+            this.select.UseVisualStyleBackColor = true;
+            this.select.Click += new System.EventHandler(this.select_Click);
+            // 
             // PrivilegeUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.select);
             this.Controls.Add(this.colLabel);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.tableLabel);
@@ -137,5 +151,6 @@ namespace QLDeAn
         private System.Windows.Forms.Label tableLabel;
         public System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label colLabel;
+        private System.Windows.Forms.Button select;
     }
 }

@@ -73,6 +73,7 @@ namespace QLDeAn
 
                     OracleCommand command = new OracleCommand("alter session set \"_ORACLE_SCRIPT\"=true", con);
                     command.ExecuteNonQuery();
+                    MessageBox.Show("Connect với Oracle thành công");
                     DBAUI dba = new DBAUI();
                     dba.Show();
                 }
@@ -136,11 +137,11 @@ namespace QLDeAn
                     NVUI.Show();
                     dr.Close();
                 }
-                //MessageBox.Show("Connect với Oracle thành công");
+                
 
                 this.Hide();
             }
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;

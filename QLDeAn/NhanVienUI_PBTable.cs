@@ -51,7 +51,7 @@ namespace QLDeAn
                 adapter.Fill(dataTable);
                 NhanVienTableView.DataSource = dataTable;
             }
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;
@@ -78,7 +78,7 @@ namespace QLDeAn
 
                 MessageBox.Show(count_delete + " rows delete success!");
             }
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;
@@ -101,7 +101,7 @@ namespace QLDeAn
                 MessageBox.Show(count_update + " rows update success!");
                 return;                            
             }
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;
@@ -126,7 +126,7 @@ namespace QLDeAn
                MessageBox.Show("Delete success!");
                 
             }
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;
@@ -179,7 +179,7 @@ namespace QLDeAn
                 adapter.Fill(dataTable);
                 NhanVienTableView.DataSource = dataTable;
             }
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;

@@ -78,7 +78,7 @@ namespace QLDeAn
                     }
                 }
             }
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;
@@ -295,7 +295,7 @@ namespace QLDeAn
 
                 
             }
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;

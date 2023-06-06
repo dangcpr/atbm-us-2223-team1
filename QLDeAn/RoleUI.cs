@@ -20,11 +20,10 @@ namespace QLDeAn
 
         private void RoleUI_Load(object sender, EventArgs e)
         {
-            conNow = LoginUI.con;
-            view_user_role();
+
 
         }
-        public static OracleConnection conNow;
+        public static OracleConnection conNow = LoginUI.con;
         public static DataGridView data_grid_view1;
         private void view_user_role()
         {
@@ -97,6 +96,11 @@ namespace QLDeAn
         private void textFR_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void select_Click(object sender, EventArgs e)
+        {
+            view_user_role();
         }
     }
 }

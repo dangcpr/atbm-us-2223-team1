@@ -17,15 +17,13 @@ namespace QLDeAn
         {
             InitializeComponent();
         }
-        public static OracleConnection conNow;
+        public static OracleConnection conNow = LoginUI.con;
         public static DataGridView data_grid_view1;
         public static DataGridView data_grid_view2;
 
         private void UserAndRole_Load(object sender, EventArgs e)
         {
-            conNow = LoginUI.con;
-            view_users();
-            view_roles();
+
         }
 
         private void view_users()
@@ -136,6 +134,12 @@ namespace QLDeAn
             da.Fill(dt);
             dataGridView2.DataSource = dt;
             data_grid_view2 = dataGridView2;
+        }
+
+        private void select_Click(object sender, EventArgs e)
+        {
+            view_users();
+            view_roles();
         }
     }
 }

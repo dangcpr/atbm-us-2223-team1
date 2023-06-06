@@ -19,15 +19,13 @@ namespace QLDeAn
 
         }
 
-        public static OracleConnection conNow;
+        public static OracleConnection conNow = LoginUI.con;
         public static DataGridView data_grid_view1;
         public static DataGridView data_grid_view2;
 
         private void UserAndRole_Load(object sender, EventArgs e)
         {
-            conNow = LoginUI.con;
-            view_table_privil();
-            view_col_privil();
+
         }
 
 
@@ -79,6 +77,12 @@ namespace QLDeAn
         private void colLabel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void select_Click(object sender, EventArgs e)
+        {
+            view_table_privil();
+            view_col_privil();
         }
     }
 }

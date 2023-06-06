@@ -82,7 +82,7 @@ namespace QLDeAn
                 }
                 MessageBox.Show("Sửa role thành công.");
             }
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;

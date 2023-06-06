@@ -31,19 +31,24 @@ namespace QLDeAn
         {
             this.logout = new System.Windows.Forms.Button();
             this.Close = new System.Windows.Forms.Button();
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabUserARole = new System.Windows.Forms.TabPage();
-            this.userAndRoleUI1 = new QLDeAn.UserAndRoleUI();
-            this.tabPrivilege = new System.Windows.Forms.TabPage();
-            this.privilegeUI1 = new QLDeAn.PrivilegeUI();
-            this.tabRole = new System.Windows.Forms.TabPage();
-            this.roleUI1 = new QLDeAn.RoleUI();
-            this.Reset = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.tabControl.SuspendLayout();
-            this.tabUserARole.SuspendLayout();
-            this.tabPrivilege.SuspendLayout();
+            this.tabRole = new System.Windows.Forms.TabPage();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabUserRole = new System.Windows.Forms.TabPage();
+            this.tabPrivilege = new System.Windows.Forms.TabPage();
+            this.tabTableView = new System.Windows.Forms.TabPage();
+            this.tabSystemPrivilege = new System.Windows.Forms.TabPage();
+            this.userAndRoleUI1 = new QLDeAn.UserAndRoleUI();
+            this.privilegeUI1 = new QLDeAn.PrivilegeUI();
+            this.roleUI1 = new QLDeAn.RoleUI();
+            this.dbauI_TableView1 = new QLDeAn.DBAUI_TableView();
+            this.dbA_SP1 = new QLDeAn.DBAUI_SP();
             this.tabRole.SuspendLayout();
+            this.tabControl.SuspendLayout();
+            this.tabUserRole.SuspendLayout();
+            this.tabPrivilege.SuspendLayout();
+            this.tabTableView.SuspendLayout();
+            this.tabSystemPrivilege.SuspendLayout();
             this.SuspendLayout();
             // 
             // logout
@@ -60,44 +65,58 @@ namespace QLDeAn
             // 
             // Close
             // 
+            this.Close.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Close.Location = new System.Drawing.Point(1206, 667);
             this.Close.Name = "Close";
             this.Close.Size = new System.Drawing.Size(75, 33);
             this.Close.TabIndex = 1;
-            this.Close.Text = "Close";
+            this.Close.Text = "ĐÓNG";
             this.Close.UseVisualStyleBackColor = true;
             this.Close.Click += new System.EventHandler(this.Close_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(997, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(81, 17);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "XIN CHÀO";
+            this.label1.Click += new System.EventHandler(this.label1_Click_1);
+            // 
+            // tabRole
+            // 
+            this.tabRole.Controls.Add(this.roleUI1);
+            this.tabRole.Location = new System.Drawing.Point(4, 25);
+            this.tabRole.Name = "tabRole";
+            this.tabRole.Size = new System.Drawing.Size(1261, 620);
+            this.tabRole.TabIndex = 2;
+            this.tabRole.Text = "Role";
+            this.tabRole.UseVisualStyleBackColor = true;
+            // 
             // tabControl
             // 
-            this.tabControl.Controls.Add(this.tabUserARole);
+            this.tabControl.Controls.Add(this.tabUserRole);
             this.tabControl.Controls.Add(this.tabPrivilege);
             this.tabControl.Controls.Add(this.tabRole);
+            this.tabControl.Controls.Add(this.tabTableView);
+            this.tabControl.Controls.Add(this.tabSystemPrivilege);
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(1269, 649);
             this.tabControl.TabIndex = 2;
             // 
-            // tabUserARole
+            // tabUserRole
             // 
-            this.tabUserARole.Controls.Add(this.userAndRoleUI1);
-            this.tabUserARole.Location = new System.Drawing.Point(4, 25);
-            this.tabUserARole.Name = "tabUserARole";
-            this.tabUserARole.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUserARole.Size = new System.Drawing.Size(1261, 620);
-            this.tabUserARole.TabIndex = 0;
-            this.tabUserARole.Text = "User & Roles";
-            this.tabUserARole.UseVisualStyleBackColor = true;
-            this.tabUserARole.Click += new System.EventHandler(this.tabUserARole_Click);
-            // 
-            // userAndRoleUI1
-            // 
-            this.userAndRoleUI1.Location = new System.Drawing.Point(0, 0);
-            this.userAndRoleUI1.Name = "userAndRoleUI1";
-            this.userAndRoleUI1.Size = new System.Drawing.Size(1261, 620);
-            this.userAndRoleUI1.TabIndex = 2;
-            this.userAndRoleUI1.Load += new System.EventHandler(this.userAndRoleUI1_Load);
+            this.tabUserRole.Controls.Add(this.userAndRoleUI1);
+            this.tabUserRole.Location = new System.Drawing.Point(4, 25);
+            this.tabUserRole.Name = "tabUserRole";
+            this.tabUserRole.Size = new System.Drawing.Size(1261, 620);
+            this.tabUserRole.TabIndex = 4;
+            this.tabUserRole.Text = "User & Role";
+            this.tabUserRole.UseVisualStyleBackColor = true;
             // 
             // tabPrivilege
             // 
@@ -111,51 +130,62 @@ namespace QLDeAn
             this.tabPrivilege.UseVisualStyleBackColor = true;
             this.tabPrivilege.Click += new System.EventHandler(this.tabPrivilege_Click);
             // 
+            // tabTableView
+            // 
+            this.tabTableView.Controls.Add(this.dbauI_TableView1);
+            this.tabTableView.Location = new System.Drawing.Point(4, 25);
+            this.tabTableView.Name = "tabTableView";
+            this.tabTableView.Padding = new System.Windows.Forms.Padding(3);
+            this.tabTableView.Size = new System.Drawing.Size(1261, 620);
+            this.tabTableView.TabIndex = 3;
+            this.tabTableView.Text = "Table & View";
+            this.tabTableView.UseVisualStyleBackColor = true;
+            // 
+            // tabSystemPrivilege
+            // 
+            this.tabSystemPrivilege.Controls.Add(this.dbA_SP1);
+            this.tabSystemPrivilege.Location = new System.Drawing.Point(4, 25);
+            this.tabSystemPrivilege.Name = "tabSystemPrivilege";
+            this.tabSystemPrivilege.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSystemPrivilege.Size = new System.Drawing.Size(1261, 620);
+            this.tabSystemPrivilege.TabIndex = 5;
+            this.tabSystemPrivilege.Text = "System Privilege";
+            this.tabSystemPrivilege.UseVisualStyleBackColor = true;
+            // 
+            // userAndRoleUI1
+            // 
+            this.userAndRoleUI1.Location = new System.Drawing.Point(4, 4);
+            this.userAndRoleUI1.Name = "userAndRoleUI1";
+            this.userAndRoleUI1.Size = new System.Drawing.Size(1261, 620);
+            this.userAndRoleUI1.TabIndex = 0;
+            // 
             // privilegeUI1
             // 
-            this.privilegeUI1.Location = new System.Drawing.Point(0, 0);
+            this.privilegeUI1.Location = new System.Drawing.Point(-3, 0);
             this.privilegeUI1.Name = "privilegeUI1";
             this.privilegeUI1.Size = new System.Drawing.Size(1261, 620);
             this.privilegeUI1.TabIndex = 0;
             // 
-            // tabRole
-            // 
-            this.tabRole.Controls.Add(this.roleUI1);
-            this.tabRole.Location = new System.Drawing.Point(4, 25);
-            this.tabRole.Name = "tabRole";
-            this.tabRole.Size = new System.Drawing.Size(1261, 620);
-            this.tabRole.TabIndex = 2;
-            this.tabRole.Text = "Role";
-            this.tabRole.UseVisualStyleBackColor = true;
-            // 
             // roleUI1
             // 
-            this.roleUI1.Location = new System.Drawing.Point(0, 0);
+            this.roleUI1.Location = new System.Drawing.Point(-3, 0);
             this.roleUI1.Name = "roleUI1";
             this.roleUI1.Size = new System.Drawing.Size(1261, 620);
             this.roleUI1.TabIndex = 0;
-            this.roleUI1.Load += new System.EventHandler(this.roleUI1_Load);
             // 
-            // Reset
+            // dbauI_TableView1
             // 
-            this.Reset.Location = new System.Drawing.Point(1112, 667);
-            this.Reset.Name = "Reset";
-            this.Reset.Size = new System.Drawing.Size(75, 33);
-            this.Reset.TabIndex = 3;
-            this.Reset.Text = "Reset";
-            this.Reset.UseVisualStyleBackColor = true;
-            this.Reset.Click += new System.EventHandler(this.Reset_Click);
+            this.dbauI_TableView1.Location = new System.Drawing.Point(-4, 0);
+            this.dbauI_TableView1.Name = "dbauI_TableView1";
+            this.dbauI_TableView1.Size = new System.Drawing.Size(1261, 620);
+            this.dbauI_TableView1.TabIndex = 0;
             // 
-            // label1
+            // dbA_SP1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(997, 11);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 17);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "XIN CHÀO";
-            this.label1.Click += new System.EventHandler(this.label1_Click_1);
+            this.dbA_SP1.Location = new System.Drawing.Point(0, 0);
+            this.dbA_SP1.Name = "dbA_SP1";
+            this.dbA_SP1.Size = new System.Drawing.Size(1261, 620);
+            this.dbA_SP1.TabIndex = 0;
             // 
             // DBAUI
             // 
@@ -164,17 +194,18 @@ namespace QLDeAn
             this.ClientSize = new System.Drawing.Size(1293, 712);
             this.ControlBox = false;
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.Reset);
             this.Controls.Add(this.logout);
             this.Controls.Add(this.Close);
             this.Controls.Add(this.tabControl);
             this.Name = "DBAUI";
             this.Text = "QUẢN TRỊ VIÊN";
             this.Load += new System.EventHandler(this.DBAUI_Load);
-            this.tabControl.ResumeLayout(false);
-            this.tabUserARole.ResumeLayout(false);
-            this.tabPrivilege.ResumeLayout(false);
             this.tabRole.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
+            this.tabUserRole.ResumeLayout(false);
+            this.tabPrivilege.ResumeLayout(false);
+            this.tabTableView.ResumeLayout(false);
+            this.tabSystemPrivilege.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -184,14 +215,17 @@ namespace QLDeAn
 
         private System.Windows.Forms.Button logout;
         private System.Windows.Forms.Button Close;
-        private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tabUserARole;
-        private System.Windows.Forms.TabPage tabPrivilege;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabRole;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage tabPrivilege;
+        private System.Windows.Forms.TabPage tabTableView;
+        private System.Windows.Forms.TabPage tabUserRole;
         private UserAndRoleUI userAndRoleUI1;
         private PrivilegeUI privilegeUI1;
         private RoleUI roleUI1;
-        private System.Windows.Forms.Button Reset;
-        private System.Windows.Forms.Label label1;
+        private DBAUI_TableView dbauI_TableView1;
+        private System.Windows.Forms.TabPage tabSystemPrivilege;
+        private DBAUI_SP dbA_SP1;
     }
 }

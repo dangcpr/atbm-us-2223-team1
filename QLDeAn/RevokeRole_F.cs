@@ -85,7 +85,7 @@ namespace QLDeAn
                     RoleUI.data_grid_view1.DataSource = dt;
                 }
             }
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;

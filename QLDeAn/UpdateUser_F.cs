@@ -81,7 +81,7 @@ namespace QLDeAn
                 }
                 MessageBox.Show("Đổi mật khẩu thành công!");
             }
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;

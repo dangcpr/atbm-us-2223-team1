@@ -50,9 +50,7 @@ ALTER TABLE QLDA_NHANVIEN MODIFY PHUCAP NVARCHAR2(176);
 
 --Kiểm tra table đã tạo và owner
 select table_name, owner from all_tables where owner = 'QLDA';
---Kiểm tra thuộc tinh các bảng
-select * from all_tab_columns where table_name = 'QLDA_NHANVIEN';
-
+--xem tất cả data_type
 select role from dba_roles;
 
 select * from tabs;

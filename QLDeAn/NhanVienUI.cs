@@ -57,7 +57,7 @@ namespace QLDeAn
                 reader.Read();
                 label1.Text = "XIN CHÀO " + reader.GetString(0).ToUpper() + "!";
             } 
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;
@@ -85,7 +85,7 @@ namespace QLDeAn
                 this.Hide();
 
             }
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;

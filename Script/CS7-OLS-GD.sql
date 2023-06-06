@@ -235,7 +235,7 @@ SA_USER_ADMIN.SET_USER_LABELS(
 );
 END;
 /
---TP001: Trưởng phòng phụ trách lĩnh vực sản xuất miền Nam (câu c)
+--TP001: Trưởng phòng phụ trách lĩnh vực sản xuất miền Nam (câu a)
 BEGIN
 SA_USER_ADMIN.SET_USER_LABELS(
     POLICY_NAME  =>'OLS_QLDA',
@@ -245,7 +245,7 @@ SA_USER_ADMIN.SET_USER_LABELS(
 );
 END;
 /
---TP002: trưởng phòng phụ trách tất cả các lĩnh vực không phân biệt chi nhánh.
+--TP002: trưởng phòng phụ trách tất cả các lĩnh vực không phân biệt chi nhánh (câu b).
 BEGIN
 SA_USER_ADMIN.SET_USER_LABELS(
     POLICY_NAME  =>'OLS_QLDA',
@@ -255,7 +255,7 @@ SA_USER_ADMIN.SET_USER_LABELS(
 );
 END;
 /
---TP003: trưởng phòng phụ trách lĩnh vực sản xuất ở miền Trung.
+--TP003: trưởng phòng phụ trách lĩnh vực sản xuất ở miền Trung (câu c).
 BEGIN
 SA_USER_ADMIN.SET_USER_LABELS(
     POLICY_NAME  =>'OLS_QLDA',

@@ -51,7 +51,7 @@ namespace QLDeAn
                 adapter.Fill(dataTable);
                 NhanVienTableView.DataSource = dataTable;
             }
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;

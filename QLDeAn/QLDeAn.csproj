@@ -121,6 +121,30 @@
     <Compile Include="DBAUI.Designer.cs">
       <DependentUpon>DBAUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="DBAUI_TableView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DBAUI_TableView.Designer.cs">
+      <DependentUpon>DBAUI_TableView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DBAUI_TableView_CreateTable_F.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DBAUI_TableView_CreateTable_F.Designer.cs">
+      <DependentUpon>DBAUI_TableView_CreateTable_F.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DBAUI_SP.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DBAUI_SP.Designer.cs">
+      <DependentUpon>DBAUI_SP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DBAUI_SP_GrantF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DBAUI_SP_GrantF.Designer.cs">
+      <DependentUpon>DBAUI_SP_GrantF.cs</DependentUpon>
+    </Compile>
     <Compile Include="DeleteRole_F.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -239,6 +263,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DBAUI.resx">
       <DependentUpon>DBAUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DBAUI_TableView.resx">
+      <DependentUpon>DBAUI_TableView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DBAUI_TableView_CreateTable_F.resx">
+      <DependentUpon>DBAUI_TableView_CreateTable_F.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DBAUI_SP.resx">
+      <DependentUpon>DBAUI_SP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DBAUI_SP_GrantF.resx">
+      <DependentUpon>DBAUI_SP_GrantF.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DeleteRole_F.resx">
       <DependentUpon>DeleteRole_F.cs</DependentUpon>

@@ -15,6 +15,12 @@ END;
 */
 /
 
+--Xem các view và table đã tạo
+SELECT * FROM ALL_OBJECTS WHERE (OBJECT_TYPE = 'VIEW' OR OBJECT_TYPE = 'TABLE') AND OWNER = 'QLDA';
+--Xem các thuộc tính của 1 bảng và 1 view
+SELECT * FROM ALL_TAB_COLUMNS WHERE TABLE_NAME = 'V_QLDA_NHANVIEN_NS' AND OWNER = 'QLDA';
+
+
 CREATE USER QLDA IDENTIFIED BY admin123
 ENABLE EDITIONS;
 /
@@ -454,5 +460,17 @@ select * from dba_tables where owner = 'QLDA';
 --Lấy role của user
 select * from dba_role_privs where grantee = 'NV001';
 
-
-
+--Xem quyền hệ thống
+select * from session_privs;
+--Xem quyền hệ thống của user hoặc role
+select * from dba_sys_privs where grantee = 'QLDA';
+--Xem danh sách table
+select * from dba_tables where owner = 'QLDA';
+--Xem danh sách view
+select * from dba_views where owner = 'QLDA';
+--Xem dtaa type
+select * from dba_types where owner = 'QLDA';
+--Cấp quyền tạo bảng
+revoke EXECUTE ANY TYPE FROM QLDA;
+--Danh sách user
+select * from dba_users;

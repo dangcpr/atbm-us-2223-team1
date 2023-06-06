@@ -51,7 +51,7 @@ namespace QLDeAn
                 this.Hide();
 
             }
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;

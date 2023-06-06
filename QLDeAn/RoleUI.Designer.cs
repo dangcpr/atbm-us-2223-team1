@@ -38,6 +38,7 @@ namespace QLDeAn
             this.findR = new System.Windows.Forms.Button();
             this.labelFR = new System.Windows.Forms.Label();
             this.textFR = new System.Windows.Forms.TextBox();
+            this.select = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -133,10 +134,23 @@ namespace QLDeAn
             this.textFR.TabIndex = 23;
             this.textFR.TextChanged += new System.EventHandler(this.textFR_TextChanged);
             // 
+            // select
+            // 
+            this.select.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.select.Location = new System.Drawing.Point(1138, 12);
+            this.select.Name = "select";
+            this.select.Size = new System.Drawing.Size(93, 42);
+            this.select.TabIndex = 24;
+            this.select.Text = "SELECT";
+            this.select.UseCompatibleTextRendering = true;
+            this.select.UseVisualStyleBackColor = true;
+            this.select.Click += new System.EventHandler(this.select_Click);
+            // 
             // RoleUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.select);
             this.Controls.Add(this.textFR);
             this.Controls.Add(this.findR);
             this.Controls.Add(this.labelFR);
@@ -166,5 +180,6 @@ namespace QLDeAn
         private System.Windows.Forms.Button findR;
         private System.Windows.Forms.Label labelFR;
         private System.Windows.Forms.TextBox textFR;
+        private System.Windows.Forms.Button select;
     }
 }
