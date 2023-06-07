@@ -101,13 +101,20 @@ namespace QLDeAn
 
         private void ThongBaoButton_Click(object sender, EventArgs e)
         {
-            string connectionString = @"DATA SOURCE = localhost:1521/PDB1;USER ID=" + LoginUI.userUser + ";PASSWORD=" + LoginUI.passUser;
-            conPDB = new OracleConnection();
-            conPDB.ConnectionString = connectionString;
-            conPDB.Open();
+            try
+            {
+                string connectionString = @"DATA SOURCE = localhost:1521/PDB1;USER ID=" + LoginUI.userUser + ";PASSWORD=" + LoginUI.passUser;
+                conPDB = new OracleConnection();
+                conPDB.ConnectionString = connectionString;
+                conPDB.Open();
 
-            ThongBaoUI TBUI = new ThongBaoUI();
-            TBUI.Show();
+                ThongBaoUI TBUI = new ThongBaoUI();
+                TBUI.Show();
+            } 
+            catch (OracleException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

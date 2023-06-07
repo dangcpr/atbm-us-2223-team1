@@ -79,7 +79,7 @@ namespace QLDeAn
                 
                 MessageBox.Show("Insert success!");
             }
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;
@@ -103,7 +103,7 @@ namespace QLDeAn
                 MessageBox.Show(count_update + " rows update success!");
                 return;                            
             }
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;
@@ -128,7 +128,7 @@ namespace QLDeAn
                MessageBox.Show(count_delete + " rows delete success!");
 
             }
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;
@@ -148,7 +148,7 @@ namespace QLDeAn
                 DataGridViewRow row = this.NhanVienTableView.Rows[e.RowIndex];
                 MaDATextBox.Text = row.Cells[0].Value.ToString();
                 TenDATextBox.Text = row.Cells[1].Value.ToString();
-                NgayBDTextBox.Text = row.Cells[2].Value.ToString();
+                NgayBDTextBox.Text = DateTime.ParseExact(row.Cells[2].Value.ToString(), "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture).ToString("dd/MM/yyyy");
                 PhongTextBox.Text = row.Cells[3].Value.ToString();
             }
 
@@ -182,7 +182,7 @@ namespace QLDeAn
                 adapter.Fill(dataTable);
                 NhanVienTableView.DataSource = dataTable;
             }
-            catch (System.Data.OracleClient.OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show(ex.Message);
                 return;

@@ -200,7 +200,7 @@ namespace QLDeAn
                 DataGridViewRow row = this.NhanVienTableView.Rows[e.RowIndex];
                 MaNVTextBox.Text = row.Cells[0].Value.ToString();
                 MaDATextBox.Text = row.Cells[1].Value.ToString();
-                ThoiGianTextBox.Text = row.Cells[2].Value.ToString();
+                ThoiGianTextBox.Text = DateTime.ParseExact(row.Cells[2].Value.ToString(), "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture).ToString("dd/MM/yyyy");
             }
 
         }
