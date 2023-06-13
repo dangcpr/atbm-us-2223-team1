@@ -10,8 +10,8 @@ BEGIN
          TO_DATE('01-JAN-1970', 'DD-MON-YYYY') + DBMS_RANDOM.VALUE(1, 20000),
          'HCM ' || i,
          '0123456789',
-         DBMS_RANDOM.VALUE(1000, 2000),
-         DBMS_RANDOM.VALUE(1000, 2000),
+         ROUND(DBMS_RANDOM.VALUE(1000, 2000)),
+         ROUND(DBMS_RANDOM.VALUE(1000, 2000)),
          'Nhân viên',
          NULL,
          NULL
