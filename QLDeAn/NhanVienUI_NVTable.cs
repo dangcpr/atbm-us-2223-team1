@@ -53,12 +53,16 @@ namespace QLDeAn
                     case "Trưởng dự án":
                     case "Tài chính":
 
-                        selectNVsql = "SELECT QLDA.QLDA_NHANVIEN.*, QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, '3F569C3F19E25B18B2C12B975F9BC5BB') AS luong_giaima, QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, '3F569C3F19E25B18B2C12B975F9BC5BB') AS phucap_giaima FROM QLDA.QLDA_NHANVIEN";
+                        selectNVsql = "SELECT NV1.*, " +
+                            "QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, QLDA.ENCRYPT_DECRYPT.CREATE_KEY((SELECT MANV FROM QLDA.QLDA_NHANVIEN NV2 WHERE NV1.MANV = NV2.MANV), QLDA.ENCRYPT_DECRYPT.SEQ_NUM)) AS luong_giaima, " +
+                            "QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, QLDA.ENCRYPT_DECRYPT.CREATE_KEY((SELECT MANV FROM QLDA.QLDA_NHANVIEN NV2 WHERE NV1.MANV = NV2.MANV), QLDA.ENCRYPT_DECRYPT.SEQ_NUM)) AS phucap_giaima FROM QLDA.QLDA_NHANVIEN NV1";
                         break;
                     case "Quản lý":
                     case "Trưởng phòng":
                     case "Nhân sự":
-                        selectNVsql = "SELECT QLDA.V_QLDA_NHANVIEN_NS.*, QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, '3F569C3F19E25B18B2C12B975F9BC5BB') AS luong_giaima, QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, '3F569C3F19E25B18B2C12B975F9BC5BB') AS phucap_giaima FROM QLDA.V_QLDA_NHANVIEN_NS";
+                        selectNVsql = "SELECT NV1.*, " +
+                            "QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, QLDA.ENCRYPT_DECRYPT.CREATE_KEY((SELECT MANV FROM QLDA.V_QLDA_NHANVIEN_NS NV2 WHERE NV1.MANV = NV2.MANV), QLDA.ENCRYPT_DECRYPT.SEQ_NUM)) AS luong_giaima, " +
+                            "QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, QLDA.ENCRYPT_DECRYPT.CREATE_KEY((SELECT MANV FROM QLDA.V_QLDA_NHANVIEN_NS NV2 WHERE NV1.MANV = NV2.MANV), QLDA.ENCRYPT_DECRYPT.SEQ_NUM)) AS phucap_giaima FROM QLDA.V_QLDA_NHANVIEN_NS NV1";
                         break;
                     case "Giám đốc":
                         selectNVsql = "SELECT QLDA.QLDA_NHANVIEN.* FROM QLDA.QLDA_NHANVIEN";
@@ -294,8 +298,8 @@ namespace QLDeAn
                 NgaySinhTextBox.Text = DateTime.ParseExact(row.Cells[3].Value.ToString(), "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture).ToString("dd/MM/yyyy");
                 DiaChiTextBox.Text = row.Cells[4].Value.ToString();
                 SDTTextBox.Text = row.Cells[5].Value.ToString();
-                LuongTextBox.Text = row.Cells[11].Value.ToString();
-                PhuCapTextBox.Text = row.Cells[12].Value.ToString();
+                if (NhanVienTableView.Columns.Count >= 12) LuongTextBox.Text = row.Cells[11].Value.ToString();
+                if (NhanVienTableView.Columns.Count >= 13) PhuCapTextBox.Text = row.Cells[12].Value.ToString();
                 VaiTroTextBox.Text = row.Cells[8].Value.ToString();
                 MaNQLTextBox.Text = row.Cells[9].Value.ToString();
                 MaPBTextBox.Text = row.Cells[10].Value.ToString();
@@ -315,12 +319,16 @@ namespace QLDeAn
                     case "Nhân viên":
                     case "Trưởng dự án":
                     case "Tài chính":
-                        selectNVsql = "SELECT QLDA.QLDA_NHANVIEN.*, QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, '3F569C3F19E25B18B2C12B975F9BC5BB') AS luong_giaima, QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, '3F569C3F19E25B18B2C12B975F9BC5BB') AS phucap_giaima FROM QLDA.QLDA_NHANVIEN WHERE MANV = :manv";
+                        selectNVsql = "SELECT NV1.*, " +
+                            "QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, QLDA.ENCRYPT_DECRYPT.CREATE_KEY((SELECT MANV FROM QLDA.QLDA_NHANVIEN NV2 WHERE NV1.MANV = NV2.MANV), QLDA.ENCRYPT_DECRYPT.SEQ_NUM)) AS luong_giaima, " +
+                            "QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, QLDA.ENCRYPT_DECRYPT.CREATE_KEY((SELECT MANV FROM QLDA.QLDA_NHANVIEN NV2 WHERE NV1.MANV = NV2.MANV), QLDA.ENCRYPT_DECRYPT.SEQ_NUM)) AS phucap_giaima FROM QLDA.QLDA_NHANVIEN NV1 WHERE MANV = :manv";
                         break;
                     case "Quản lý":
                     case "Trưởng phòng":
                     case "Nhân sự":
-                        selectNVsql = "SELECT QLDA.V_QLDA_NHANVIEN_NS.*, QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, '3F569C3F19E25B18B2C12B975F9BC5BB') AS luong_giaima, QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, '3F569C3F19E25B18B2C12B975F9BC5BB') AS phucap_giaima FROM QLDA.V_QLDA_NHANVIEN_NS WHERE MANV = :manv";
+                        selectNVsql = "SELECT NV1.*, " +
+                            "QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, QLDA.ENCRYPT_DECRYPT.CREATE_KEY((SELECT MANV FROM QLDA.V_QLDA_NHANVIEN_NS NV2 WHERE NV1.MANV = NV2.MANV), QLDA.ENCRYPT_DECRYPT.SEQ_NUM)) AS luong_giaima, " +
+                            "QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, QLDA.ENCRYPT_DECRYPT.CREATE_KEY((SELECT MANV FROM QLDA.V_QLDA_NHANVIEN_NS NV2 WHERE NV1.MANV = NV2.MANV), QLDA.ENCRYPT_DECRYPT.SEQ_NUM)) AS phucap_giaima FROM QLDA.V_QLDA_NHANVIEN_NS NV1 WHERE MANV = :manv";
                         break;
                     case "Giám đốc":
                         selectNVsql = "SELECT QLDA.QLDA_NHANVIEN.* WHERE MANV = :manv";
