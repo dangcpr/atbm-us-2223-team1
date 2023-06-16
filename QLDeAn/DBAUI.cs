@@ -39,8 +39,8 @@ namespace QLDeAn
         {
             try
             {
-                conNow.Dispose();
-                conNow.Close();
+                LoginUI.con.Dispose();
+                LoginUI.con.Close();
                 OracleConnection.ClearPool(conNow);
 
 
@@ -65,8 +65,8 @@ namespace QLDeAn
 
         private void Close_Click(object sender, EventArgs e)
         {
-            conNow.Dispose();
-            conNow.Close();
+            LoginUI.con.Dispose();
+            LoginUI.con.Close();
             OracleConnection.ClearPool(conNow);
 
             Application.Exit();

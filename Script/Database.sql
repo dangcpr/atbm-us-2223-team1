@@ -6,8 +6,6 @@ CREATE TABLE QLDA_PHONGBAN(
     TRPHG VARCHAR2(30)
 );
 
-
-
 CREATE TABLE QLDA_NHANVIEN(
     MANV VARCHAR2(30) PRIMARY KEY,
     TENNV VARCHAR2(30),
@@ -84,3 +82,26 @@ begin
     if(v_char = v_varchar) then dbms_output.put_line('Bằng'); end if;
     if(v_char <> v_varchar) then dbms_output.put_line('Khác'); end if;
 end;
+
+SELECT table_name FROM user_tables;
+--Get column name
+SELECT * FROM user_tab_columns WHERE table_name = 'TEST';
+--Danh sách Khóa ngoại
+SELECT * FROM user_constraints; --WHERE constraint_type = 'R';
+begin
+    for r in ( select table_name, constraint_name
+               from user_constraints
+               where table_name = 'TEST')
+    loop
+        execute immediate 'alter table '|| r.table_name
+                          ||' drop constraint '|| r.constraint_name;
+    end loop;
+end;
+CREATE TABLE TEST(
+    TEST INT
+    --PRIMARY KEY(MANV, MADA)
+);
+DROP TABLE QLDA.TEST cascade CONSTRAINTS;
+--Delete constraint name
+DELETE FROM QLDA_NHANVIEN WHERE MANV = 'NV301';
+DELETE FROM QLDA_PHONGBAN WHERE MAPB = 'PB009';

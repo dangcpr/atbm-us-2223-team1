@@ -100,6 +100,7 @@ namespace QLDeAn
             this.createTableButton.TabIndex = 5;
             this.createTableButton.Text = "CREATE \"TABLE\"";
             this.createTableButton.UseVisualStyleBackColor = true;
+            this.createTableButton.Click += new System.EventHandler(this.createTableButton_Click);
             // 
             // createViewButton
             // 

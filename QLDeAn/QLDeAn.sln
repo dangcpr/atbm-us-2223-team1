@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32802.440
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "..\Setup\Setup.vdproj", "{EFEE7A52-2645-417C-AADE-42B09EE3B444}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QLDeAn", "QLDeAn.csproj", "{436F84D2-0B21-45C8-A2DC-61264B8469D1}"
 EndProject
 Global
@@ -13,8 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EFEE7A52-2645-417C-AADE-42B09EE3B444}.Debug|Any CPU.ActiveCfg = Debug
-		{EFEE7A52-2645-417C-AADE-42B09EE3B444}.Release|Any CPU.ActiveCfg = Release
 		{436F84D2-0B21-45C8-A2DC-61264B8469D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{436F84D2-0B21-45C8-A2DC-61264B8469D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{436F84D2-0B21-45C8-A2DC-61264B8469D1}.Release|Any CPU.ActiveCfg = Release|Any CPU

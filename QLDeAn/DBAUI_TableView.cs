@@ -58,5 +58,11 @@ namespace QLDeAn
         {
 
         }
+
+        private void createTableButton_Click(object sender, EventArgs e)
+        {
+            DBAUI_TableView_CreateTable_F createTableUI = new DBAUI_TableView_CreateTable_F();
+            createTableUI.Show();
+        }
     }
 }
