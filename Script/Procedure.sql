@@ -282,7 +282,7 @@ CREATE OR REPLACE PROCEDURE QLDA.create_user(p_username IN VARCHAR2, p_password 
 IS
 BEGIN
   EXECUTE IMMEDIATE 'CREATE USER ' || p_username || ' IDENTIFIED BY ' || p_password;
-  EXECUTE IMMEDIATE 'GRANT CONNECT TO ' || p_username;
+  --EXECUTE IMMEDIATE 'GRANT CONNECT TO ' || p_username;
 END;
 /
 --BEGIN 
@@ -341,7 +341,7 @@ BEGIN
   IF p_password IS NULL THEN
   BEGIN
     EXECUTE IMMEDIATE ('CREATE ROLE ' || p_role_name);
-    EXECUTE IMMEDIATE 'GRANT CONNECT TO ' || p_role_name;
+    --EXECUTE IMMEDIATE 'GRANT CONNECT TO ' || p_role_name;
   END;
   ELSE
     EXECUTE IMMEDIATE ('CREATE ROLE ' || p_role_name || ' IDENTIFIED BY ' || p_password);
