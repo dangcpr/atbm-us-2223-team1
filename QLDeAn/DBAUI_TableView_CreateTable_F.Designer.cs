@@ -123,7 +123,7 @@ namespace QLDeAn
             "FLOAT",
             "NUMBER",
             "DATE",
-            "CHAR ",
+            "CHAR",
             "NCHAR",
             "VARCHAR2",
             "NVARCHAR2",
