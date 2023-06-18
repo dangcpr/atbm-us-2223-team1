@@ -145,6 +145,12 @@
     <Compile Include="DBAUI_SP_GrantF.Designer.cs">
       <DependentUpon>DBAUI_SP_GrantF.cs</DependentUpon>
     </Compile>
+    <Compile Include="DBA_Audit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DBA_Audit.Designer.cs">
+      <DependentUpon>DBA_Audit.cs</DependentUpon>
+    </Compile>
     <Compile Include="DeleteRole_F.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -275,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DBAUI_SP_GrantF.resx">
       <DependentUpon>DBAUI_SP_GrantF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DBA_Audit.resx">
+      <DependentUpon>DBA_Audit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DeleteRole_F.resx">
       <DependentUpon>DeleteRole_F.cs</DependentUpon>

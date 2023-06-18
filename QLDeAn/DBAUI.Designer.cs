@@ -38,17 +38,20 @@ namespace QLDeAn
             this.tabPrivilege = new System.Windows.Forms.TabPage();
             this.tabTableView = new System.Windows.Forms.TabPage();
             this.tabSystemPrivilege = new System.Windows.Forms.TabPage();
+            this.auditTab = new System.Windows.Forms.TabPage();
             this.userAndRoleUI1 = new QLDeAn.UserAndRoleUI();
             this.privilegeUI1 = new QLDeAn.PrivilegeUI();
             this.roleUI1 = new QLDeAn.RoleUI();
             this.dbauI_TableView1 = new QLDeAn.DBAUI_TableView();
             this.dbA_SP1 = new QLDeAn.DBAUI_SP();
+            this.dbA_Audit1 = new QLDeAn.DBA_Audit();
             this.tabRole.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabUserRole.SuspendLayout();
             this.tabPrivilege.SuspendLayout();
             this.tabTableView.SuspendLayout();
             this.tabSystemPrivilege.SuspendLayout();
+            this.auditTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // logout
@@ -80,7 +83,7 @@ namespace QLDeAn
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(997, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 17);
+            this.label1.Size = new System.Drawing.Size(77, 16);
             this.label1.TabIndex = 4;
             this.label1.Text = "XIN CHÀO";
             this.label1.Click += new System.EventHandler(this.label1_Click_1);
@@ -102,6 +105,7 @@ namespace QLDeAn
             this.tabControl.Controls.Add(this.tabRole);
             this.tabControl.Controls.Add(this.tabTableView);
             this.tabControl.Controls.Add(this.tabSystemPrivilege);
+            this.tabControl.Controls.Add(this.auditTab);
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -152,6 +156,17 @@ namespace QLDeAn
             this.tabSystemPrivilege.Text = "System Privilege";
             this.tabSystemPrivilege.UseVisualStyleBackColor = true;
             // 
+            // auditTab
+            // 
+            this.auditTab.Controls.Add(this.dbA_Audit1);
+            this.auditTab.Location = new System.Drawing.Point(4, 25);
+            this.auditTab.Name = "auditTab";
+            this.auditTab.Padding = new System.Windows.Forms.Padding(3);
+            this.auditTab.Size = new System.Drawing.Size(1261, 620);
+            this.auditTab.TabIndex = 6;
+            this.auditTab.Text = "Audit";
+            this.auditTab.UseVisualStyleBackColor = true;
+            // 
             // userAndRoleUI1
             // 
             this.userAndRoleUI1.Location = new System.Drawing.Point(4, 4);
@@ -187,6 +202,13 @@ namespace QLDeAn
             this.dbA_SP1.Size = new System.Drawing.Size(1261, 620);
             this.dbA_SP1.TabIndex = 0;
             // 
+            // dbA_Audit1
+            // 
+            this.dbA_Audit1.Location = new System.Drawing.Point(0, 0);
+            this.dbA_Audit1.Name = "dbA_Audit1";
+            this.dbA_Audit1.Size = new System.Drawing.Size(1261, 620);
+            this.dbA_Audit1.TabIndex = 0;
+            // 
             // DBAUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -206,6 +228,7 @@ namespace QLDeAn
             this.tabPrivilege.ResumeLayout(false);
             this.tabTableView.ResumeLayout(false);
             this.tabSystemPrivilege.ResumeLayout(false);
+            this.auditTab.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,5 +250,7 @@ namespace QLDeAn
         private DBAUI_TableView dbauI_TableView1;
         private System.Windows.Forms.TabPage tabSystemPrivilege;
         private DBAUI_SP dbA_SP1;
+        private System.Windows.Forms.TabPage auditTab;
+        private DBA_Audit dbA_Audit1;
     }
 }
