@@ -54,8 +54,8 @@ namespace QLDeAn
                     case "Tài chính":
 
                         selectNVsql = "SELECT NV1.*, " +
-                            "QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, QLDA.ENCRYPT_DECRYPT.CREATE_KEY((SELECT MANV FROM QLDA.QLDA_NHANVIEN NV2 WHERE NV1.MANV = NV2.MANV), QLDA.ENCRYPT_DECRYPT.SEQ_NUM)) AS luong_giaima, " +
-                            "QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, QLDA.ENCRYPT_DECRYPT.CREATE_KEY((SELECT MANV FROM QLDA.QLDA_NHANVIEN NV2 WHERE NV1.MANV = NV2.MANV), QLDA.ENCRYPT_DECRYPT.SEQ_NUM)) AS phucap_giaima FROM QLDA.QLDA_NHANVIEN NV1";
+                            "QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, QLDA.ENCRYPT_DECRYPT.CREATE_KEY((SELECT MANV FROM QLDA.V_QLDA_NHANVIEN NV2 WHERE NV1.MANV = NV2.MANV), QLDA.ENCRYPT_DECRYPT.SEQ_NUM)) AS luong_giaima, " +
+                            "QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, QLDA.ENCRYPT_DECRYPT.CREATE_KEY((SELECT MANV FROM QLDA.V_QLDA_NHANVIEN NV2 WHERE NV1.MANV = NV2.MANV), QLDA.ENCRYPT_DECRYPT.SEQ_NUM)) AS phucap_giaima FROM QLDA.V_QLDA_NHANVIEN NV1";
                         break;
                     case "Quản lý":
                     case "Trưởng phòng":
@@ -65,7 +65,7 @@ namespace QLDeAn
                             "QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, QLDA.ENCRYPT_DECRYPT.CREATE_KEY((SELECT MANV FROM QLDA.V_QLDA_NHANVIEN_NS NV2 WHERE NV1.MANV = NV2.MANV), QLDA.ENCRYPT_DECRYPT.SEQ_NUM)) AS phucap_giaima FROM QLDA.V_QLDA_NHANVIEN_NS NV1";
                         break;
                     case "Giám đốc":
-                        selectNVsql = "SELECT QLDA.QLDA_NHANVIEN.* FROM QLDA.QLDA_NHANVIEN";
+                        selectNVsql = "SELECT QLDA.V_QLDA_NHANVIEN.* FROM QLDA.V_QLDA_NHANVIEN";
                         break;
 
                 }
@@ -89,7 +89,7 @@ namespace QLDeAn
                 conNow = LoginUI.con;
                 if (LoginUI.roleUser != "Quản lý" && LoginUI.roleUser != "Trưởng phòng" && LoginUI.roleUser != "Nhân sự")
                 {
-                    string insertNVsql = "INSERT INTO QLDA.QLDA_NHANVIEN VALUES (:MaNV, :HoTen, :GioiTinh, :NgaySinh, :DiaChi, :SDT, :Luong, :PhuCap, :VaiTro, :MaNQL, :MaPB)";
+                    string insertNVsql = "INSERT INTO QLDA.V_QLDA_NHANVIEN VALUES (:MaNV, :HoTen, :GioiTinh, :NgaySinh, :DiaChi, :SDT, :Luong, :PhuCap, :VaiTro, :MaNQL, :MaPB)";
                     OracleCommand cmd = new OracleCommand(insertNVsql, conNow);
                     cmd.Parameters.Add(new OracleParameter("MaNV", OracleDbType.Varchar2, MaNVTextBox.Text, System.Data.ParameterDirection.Input));
                     cmd.Parameters.Add(new OracleParameter("HoTen", OracleDbType.Varchar2, HoTenTextBox.Text, System.Data.ParameterDirection.Input));
@@ -97,8 +97,8 @@ namespace QLDeAn
                     cmd.Parameters.Add(new OracleParameter("NgaySinh", OracleDbType.Char, NgaySinhTextBox.Text, System.Data.ParameterDirection.Input));
                     cmd.Parameters.Add(new OracleParameter("DiaChi", OracleDbType.Varchar2, DiaChiTextBox.Text, System.Data.ParameterDirection.Input));
                     cmd.Parameters.Add(new OracleParameter("SDT", OracleDbType.Char, SDTTextBox.Text, System.Data.ParameterDirection.Input));
-                    cmd.Parameters.Add(new OracleParameter("Luong", OracleDbType.BinaryFloat, LuongTextBox.Text, System.Data.ParameterDirection.Input));
-                    cmd.Parameters.Add(new OracleParameter("PhuCap", OracleDbType.BinaryFloat, PhuCapTextBox.Text, System.Data.ParameterDirection.Input));
+                    cmd.Parameters.Add(new OracleParameter("Luong", OracleDbType.Varchar2, LuongTextBox.Text, System.Data.ParameterDirection.Input));
+                    cmd.Parameters.Add(new OracleParameter("PhuCap", OracleDbType.Varchar2, PhuCapTextBox.Text, System.Data.ParameterDirection.Input));
                     cmd.Parameters.Add(new OracleParameter("VaiTro", OracleDbType.Varchar2, VaiTroTextBox.Text, System.Data.ParameterDirection.Input));
                     cmd.Parameters.Add(new OracleParameter("MaNQL", OracleDbType.Char, MaNQLTextBox.Text, System.Data.ParameterDirection.Input));
                     cmd.Parameters.Add(new OracleParameter("MaPB", OracleDbType.Char, MaPBTextBox.Text, System.Data.ParameterDirection.Input));
@@ -143,13 +143,18 @@ namespace QLDeAn
                 conNow = LoginUI.con;
                 if (LoginUI.roleUser != "Tài chính" && LoginUI.roleUser != "Nhân sự" && LoginUI.roleUser != "Trưởng phòng" && LoginUI.roleUser != "Quản lý")
                 {
-                    string updateNVsql = "UPDATE QLDA.QLDA_NHANVIEN SET NgaySinh = TO_DATE(:NgaySinh, 'DD/MM/YYYY'), DiaChi = :DiaChi, SODT = :SDT WHERE MaNV = :MaNV";
+                    string updateNVsql = "UPDATE QLDA.V_QLDA_NHANVIEN SET NgaySinh = TO_DATE(:NgaySinh, 'DD/MM/YYYY'), DiaChi = :DiaChi, SODT = :SDT WHERE MaNV = :MaNV";
                     OracleCommand cmd = new OracleCommand(updateNVsql, conNow);
                     cmd.Parameters.Add(new OracleParameter("NgaySinh", NgaySinhTextBox.Text));
                     cmd.Parameters.Add(new OracleParameter("DiaChi", DiaChiTextBox.Text));
                     cmd.Parameters.Add(new OracleParameter("SDT", SDTTextBox.Text));
                     cmd.Parameters.Add(new OracleParameter("MaNV", MaNVTextBox.Text));
+
                     int count_update = cmd.ExecuteNonQuery();
+
+                    OracleCommand cmdCommit = new OracleCommand("COMMIT", conNow);
+                    cmdCommit.ExecuteNonQuery();
+
                     MessageBox.Show(count_update + " rows update success!");
                     return;
                 }
@@ -171,7 +176,7 @@ namespace QLDeAn
                 }
                 if (LoginUI.roleUser == "Tài chính")
                 {
-                    string updateNVsql = "UPDATE QLDA.QLDA_NHANVIEN SET ";
+                    string updateNVsql = "UPDATE QLDA.V_QLDA_NHANVIEN SET ";
                     OracleCommand cmd = new OracleCommand(updateNVsql, conNow);
                     if (NgaySinhTextBox.Text != "NULL") 
                     {
@@ -251,7 +256,7 @@ namespace QLDeAn
             {
                 if (LoginUI.roleUser != "Nhân sự" && LoginUI.roleUser != "Trưởng phòng" && LoginUI.roleUser != "Quản lý") 
                 {
-                    string deleteNVsql = "DELETE FROM QLDA.QLDA_NHANVIEN WHERE MaNV = :MaNV";
+                    string deleteNVsql = "DELETE FROM QLDA.V_QLDA_NHANVIEN WHERE MaNV = :MaNV";
                     OracleCommand cmd = new OracleCommand(deleteNVsql, conNow);
                     cmd.Parameters.Add(new OracleParameter("MaNV", MaNVTextBox.Text));
                     int count_delete =  cmd.ExecuteNonQuery();
@@ -320,8 +325,8 @@ namespace QLDeAn
                     case "Trưởng dự án":
                     case "Tài chính":
                         selectNVsql = "SELECT NV1.*, " +
-                            "QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, QLDA.ENCRYPT_DECRYPT.CREATE_KEY((SELECT MANV FROM QLDA.QLDA_NHANVIEN NV2 WHERE NV1.MANV = NV2.MANV), QLDA.ENCRYPT_DECRYPT.SEQ_NUM)) AS luong_giaima, " +
-                            "QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, QLDA.ENCRYPT_DECRYPT.CREATE_KEY((SELECT MANV FROM QLDA.QLDA_NHANVIEN NV2 WHERE NV1.MANV = NV2.MANV), QLDA.ENCRYPT_DECRYPT.SEQ_NUM)) AS phucap_giaima FROM QLDA.QLDA_NHANVIEN NV1 WHERE MANV = :manv";
+                            "QLDA.encrypt_decrypt.decrypt_nhanvien_luong(luong, QLDA.ENCRYPT_DECRYPT.CREATE_KEY((SELECT MANV FROM QLDA.V_QLDA_NHANVIEN NV2 WHERE NV1.MANV = NV2.MANV), QLDA.ENCRYPT_DECRYPT.SEQ_NUM)) AS luong_giaima, " +
+                            "QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, QLDA.ENCRYPT_DECRYPT.CREATE_KEY((SELECT MANV FROM QLDA.V_QLDA_NHANVIEN NV2 WHERE NV1.MANV = NV2.MANV), QLDA.ENCRYPT_DECRYPT.SEQ_NUM)) AS phucap_giaima FROM QLDA.V_QLDA_NHANVIEN NV1 WHERE MANV = :manv";
                         break;
                     case "Quản lý":
                     case "Trưởng phòng":
@@ -331,7 +336,7 @@ namespace QLDeAn
                             "QLDA.encrypt_decrypt.decrypt_nhanvien_phucap(phucap, QLDA.ENCRYPT_DECRYPT.CREATE_KEY((SELECT MANV FROM QLDA.V_QLDA_NHANVIEN_NS NV2 WHERE NV1.MANV = NV2.MANV), QLDA.ENCRYPT_DECRYPT.SEQ_NUM)) AS phucap_giaima FROM QLDA.V_QLDA_NHANVIEN_NS NV1 WHERE MANV = :manv";
                         break;
                     case "Giám đốc":
-                        selectNVsql = "SELECT QLDA.QLDA_NHANVIEN.* WHERE MANV = :manv";
+                        selectNVsql = "SELECT QLDA.V_QLDA_NHANVIEN.* WHERE MANV = :manv";
                         break;
 
                 }

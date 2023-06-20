@@ -84,7 +84,7 @@ namespace QLDeAn
                     string sqlRole = "";
                     if(role.Text != "Nhân sự" && role.Text != "Trưởng phòng" && role.Text != "Quản lý")
                     {
-                        sqlRole = "SELECT VAITRO FROM QLDA.QLDA_NHANVIEN WHERE MANV = :manv";
+                        sqlRole = "SELECT VAITRO FROM QLDA.V_QLDA_NHANVIEN WHERE MANV = :manv";
                     }
                     else
                     {

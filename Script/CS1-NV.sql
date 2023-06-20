@@ -6,10 +6,13 @@ create role NV;
 GRANT CONNECT TO NV;
 grant NV to NV001;
 
-grant select,update on QLDA.QLDA_NHANVIEN to NV;
+
 grant select on QLDA.QLDA_PHANCONG to NV;
---CREATE OR REPLACE VIEW V_NV_QLDA_NHANVIEN AS
---select * from QLDA.QLDA_NHANVIEN;
+
+CREATE OR REPLACE VIEW V_QLDA_NHANVIEN AS
+select * from QLDA.QLDA_NHANVIEN;
+
+grant select on QLDA.V_QLDA_NHANVIEN to NV;
 --grant select on QLDA.V_NV_QLDA_NHANVIEN TO NV;
 SELECT *  FROM DBA_ROLE_PRIVS;
 -- Nhân viên ch? có th? xem thông tin c?a b?n thân (TA cũng vậy, các role khác có chính sách riêng)
@@ -45,7 +48,7 @@ END;
 
 BEGIN dbms_rls.add_policy 
 (object_schema =>'QLDA',
-object_name => 'QLDA_NHANVIEN',
+object_name => 'V_QLDA_NHANVIEN',
 policy_name => 'POLICY_NV_XEM_TT_CA_NHAN',
 function_schema => 'QLDA',
 policy_function => 'NV_XEM_TT_CA_NHAN',
@@ -56,7 +59,7 @@ END;
 BEGIN
   dbms_rls.drop_policy (
     object_schema => 'QLDA',
-    object_name   => 'QLDA_NHANVIEN',
+    object_name   => 'V_QLDA_NHANVIEN',
     policy_name   => 'POLICY_NV_XEM_TT_CA_NHAN');
 END;
 */
@@ -71,10 +74,10 @@ REVOKE SELECT ON QLDA.QLDA_NHANVIEN FROM TA;
 */
 
 --Các role NV, QL, TP, TA có quyền sửa các thuộc tính NGAYSINH, DIACHI, SODT của chính mình (còn role TC, NS có chính sách khác)
-GRANT UPDATE(NGAYSINH,DIACHI,SODT) ON QLDA.QLDA_NHANVIEN TO NV;
+GRANT UPDATE(NGAYSINH,DIACHI,SODT) ON QLDA.V_QLDA_NHANVIEN TO NV;
 --GRANT UPDATE(NGAYSINH,DIACHI,SODT) ON QLDA.QLDA_NHANVIEN TO QL;
 --GRANT UPDATE(NGAYSINH,DIACHI,SODT) ON QLDA.QLDA_NHANVIEN TO TP;
-GRANT UPDATE(NGAYSINH,DIACHI,SODT) ON QLDA.QLDA_NHANVIEN TO TA;
+GRANT UPDATE(NGAYSINH,DIACHI,SODT) ON QLDA.V_QLDA_NHANVIEN TO TA;
 GRANT UPDATE(NGAYSINH,DIACHI,SODT) ON QLDA.V_QLDA_NHANVIEN_NS TO TP;
 GRANT UPDATE(NGAYSINH,DIACHI,SODT) ON QLDA.V_QLDA_NHANVIEN_NS TO QL;
 
@@ -107,7 +110,7 @@ END;
 
 BEGIN dbms_rls.add_policy 
 (object_schema =>'QLDA',
-object_name => 'QLDA_NHANVIEN',
+object_name => 'V_QLDA_NHANVIEN',
 policy_name => 'POLICY_NV_SUA_TT_CA_NHAN',
 function_schema => 'QLDA',
 policy_function => 'NV_SUA_TT_CA_NHAN',
@@ -120,7 +123,7 @@ END;
 BEGIN
   dbms_rls.drop_policy (
     object_schema => 'QLDA',
-    object_name   => 'QLDA_NHANVIEN',
+    object_name   => 'V_QLDA_NHANVIEN',
     policy_name   => 'POLICY_NV_SUA_TT_CA_NHAN');
 END;
 */
@@ -144,7 +147,7 @@ CREATE USER NV001 IDENTIFIED BY NV001;
 create role NV;
 GRANT CONNECT TO NV;
 grant NV to NV001;
-grant select,update on QLDA.QLDA_NHANVIEN to NV;
+--grant select,update on QLDA.V_QLDA_NHANVIEN to NV;
 
 --drop USER NV002;
 CREATE USER NV002 IDENTIFIED BY NV002;
