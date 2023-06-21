@@ -44,6 +44,7 @@ END;
 --DROP function AUD_F_TABLE_NV;
 --Audit Table QLDA_NHANVIEN
 
+/*
 --Table (vì các user chính chỉ được quyền select view)
 begin
     dbms_fga.add_policy(
@@ -59,7 +60,7 @@ begin
         audit_trail => dbms_fga.db + dbms_fga.extended);
 end;
 /
-
+*/
 --View V_QLDA_NHANVIEN
 begin
     dbms_fga.add_policy(
@@ -192,7 +193,7 @@ end;
 BEGIN
        DBMS_FGA.drop_policy (object_schema      => 'QLDA',
                              object_name        => 'QLDA_NHANVIEN',
-                             policy_name        => 'AUDIT_UPDATE_LUONG_PHUCAP');
+                             policy_name        => 'AUDIT_UPDATE_LUONG_PHUCAP_OTHER');
 END;
 /
 BEGIN
