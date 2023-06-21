@@ -43,10 +43,28 @@ BEGIN
 END;
 --DROP function AUD_F_TABLE_NV;
 --Audit Table QLDA_NHANVIEN
+
+--Table (vì các user chính chỉ được quyền select view)
 begin
     dbms_fga.add_policy(
         object_schema => 'QLDA',
         object_name => 'QLDA_NHANVIEN',
+        policy_name => 'AUDIT_SELECT_LUONG_PHUCAP_OTHER',
+        audit_column => 'LUONG, PHUCAP',
+        audit_condition => 'MANV != USER AND QLDA.AUD_F_TABLE_NV(USER) = 0',
+        handler_schema     =>   NULL, 
+        handler_module     =>   NULL,
+        statement_types => 'SELECT',
+        --audit_column_opts => dbms_fga.all_columns,
+        audit_trail => dbms_fga.db + dbms_fga.extended);
+end;
+/
+
+--View V_QLDA_NHANVIEN
+begin
+    dbms_fga.add_policy(
+        object_schema => 'QLDA',
+        object_name => 'V_QLDA_NHANVIEN',
         policy_name => 'AUDIT_SELECT_LUONG_PHUCAP',
         audit_column => 'LUONG, PHUCAP',
         audit_condition => 'MANV != USER AND (QLDA.AUD_F_TABLE_NV(USER) = 1 OR QLDA.AUD_F_TABLE_NV(USER) = 0)',
@@ -79,10 +97,16 @@ end;
 --drop FGA
 BEGIN
        DBMS_FGA.drop_policy (object_schema      => 'QLDA',
-                             object_name        => 'QLDA_NHANVIEN',
+                             object_name        => 'V_QLDA_NHANVIEN',
+                             policy_name        => 'AUDIT_SELECT_LUONG_PHUCAP_OTHER');
+END;
+/
+BEGIN
+       DBMS_FGA.drop_policy (object_schema      => 'QLDA',
+                             object_name        => 'V_QLDA_NHANVIEN',
                              policy_name        => 'AUDIT_SELECT_LUONG_PHUCAP');
 END;
-
+/
 BEGIN
        DBMS_FGA.drop_policy (object_schema      => 'QLDA',
                              object_name        => 'V_QLDA_NHANVIEN_NS',
@@ -119,7 +143,22 @@ BEGIN
     END IF;
 END;
 */ 
---Table 
+--Table (điều kiện là NULL vì các role chính chỉ được quyền update trên view nên những user nào update được trên table chắc chắn không thuộc role TC)
+begin
+    dbms_fga.add_policy(
+        object_schema => 'QLDA',
+        object_name => 'QLDA_NHANVIEN',
+        policy_name => 'AUDIT_UPDATE_LUONG_PHUCAP_OTHER',
+        audit_column => 'LUONG, PHUCAP',
+        audit_condition => NULL,
+        handler_schema     =>   NULL,
+        handler_module     =>   NULL,
+        statement_types => 'UPDATE',
+        --audit_column_opts => dbms_fga.all_columns,
+        audit_trail => dbms_fga.db + dbms_fga.extended);
+end;
+/
+--View V_QLDA_NHANVIEN (dành cho role NV, TC, TA, GD)
 begin
     dbms_fga.add_policy(
         object_schema => 'QLDA',
@@ -134,6 +173,7 @@ begin
         audit_trail => dbms_fga.db + dbms_fga.extended);
 end;
 /
+--View V_QLDA_NHANVIEN_NS (dành cho role QL, TP, NS)
 begin
     dbms_fga.add_policy(
         object_schema => 'QLDA',
@@ -149,6 +189,12 @@ begin
 end;
 /*
 --drop FGA
+BEGIN
+       DBMS_FGA.drop_policy (object_schema      => 'QLDA',
+                             object_name        => 'QLDA_NHANVIEN',
+                             policy_name        => 'AUDIT_UPDATE_LUONG_PHUCAP');
+END;
+/
 BEGIN
        DBMS_FGA.drop_policy (object_schema      => 'QLDA',
                              object_name        => 'V_QLDA_NHANVIEN',
@@ -172,12 +218,12 @@ from unified_audit_trail;
 
 select AUDIT_TYPE, DBUSERNAME, EVENT_TIMESTAMP, ACTION_NAME, OBJECT_NAME, SQL_TEXT, FGA_POLICY_NAME, OBJECT_TYPE 
 from unified_audit_trail
-where FGA_POLICY_NAME = 'AUDIT_SELECT_LUONG_PHUCAP' OR FGA_POLICY_NAME = 'AUDIT_SELECT_V_LUONG_PHUCAP';
+where FGA_POLICY_NAME = 'AUDIT_SELECT_LUONG_PHUCAP' OR FGA_POLICY_NAME = 'AUDIT_SELECT_V_LUONG_PHUCAP' OR FGA_POLICY_NAME = 'AUDIT_SELECT_LUONG_OTHER';
 
 
 select AUDIT_TYPE, DBUSERNAME, EVENT_TIMESTAMP, ACTION_NAME, OBJECT_NAME, SQL_TEXT, FGA_POLICY_NAME, OBJECT_TYPE 
 from unified_audit_trail
-where FGA_POLICY_NAME = 'AUDIT_UPDATE_LUONG_PHUCAP' OR FGA_POLICY_NAME = 'AUDIT_V_UPDATE_LUONG_PHUCAP';
+where FGA_POLICY_NAME = 'AUDIT_UPDATE_LUONG_PHUCAP' OR FGA_POLICY_NAME = 'AUDIT_V_UPDATE_LUONG_PHUCAP'  OR FGA_POLICY_NAME = 'AUDIT_UPDATE_LUONG_PHUCAP_OTHER';
 
 
 --TEST
@@ -188,6 +234,8 @@ grant connect to ROLETEST;
 --revoke EXECUTE ON QLDA.ENCRYPT_DECRYPT from ROLETEST;
 --grant TC TO ROLETEST;
 --revoke TC from ROLETEST;
+--GRANT INSERT, SELECT, UPDATE ON QLDA.QLDA_NHANVIEN TO ROLETEST;
+--REVOKE INSERT, SELECT, UPDATE ON QLDA.QLDA_NHANVIEN FROM ROLETEST;
 GRANT INSERT, SELECT, UPDATE ON QLDA.V_QLDA_NHANVIEN TO ROLETEST;
 GRANT SELECT, UPDATE ON QLDA.QLDA_PHANCONG TO ROLETEST;
 GRANT SELECT, UPDATE ON QLDA.V_QLDA_NHANVIEN_NS TO ROLETEST;
