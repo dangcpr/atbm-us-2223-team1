@@ -82,7 +82,7 @@ namespace QLDeAn
 
                 LoginUI login = new LoginUI();
                 login.Show();
-                this.Hide();
+                this.Close();
 
             }
             catch (OracleException ex)

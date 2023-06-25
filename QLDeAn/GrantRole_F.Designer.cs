@@ -53,22 +53,22 @@ namespace QLDeAn
             this.userrolelabel.AutoSize = true;
             this.userrolelabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userrolelabel.ForeColor = System.Drawing.Color.Black;
-            this.userrolelabel.Location = new System.Drawing.Point(40, 27);
+            this.userrolelabel.Location = new System.Drawing.Point(24, 28);
             this.userrolelabel.Name = "userrolelabel";
-            this.userrolelabel.Size = new System.Drawing.Size(148, 18);
+            this.userrolelabel.Size = new System.Drawing.Size(188, 18);
             this.userrolelabel.TabIndex = 27;
-            this.userrolelabel.Text = "User cần cấp Role";
+            this.userrolelabel.Text = "User/Role cần cấp Role";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(40, 70);
+            this.label1.Location = new System.Drawing.Point(24, 71);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(196, 18);
+            this.label1.Size = new System.Drawing.Size(236, 18);
             this.label1.TabIndex = 29;
-            this.label1.Text = "Role muốn cấp cho User";
+            this.label1.Text = "Role muốn cấp cho User/Role";
             // 
             // grantButton
             // 
@@ -83,9 +83,9 @@ namespace QLDeAn
             // withadminoption
             // 
             this.withadminoption.AutoSize = true;
-            this.withadminoption.Location = new System.Drawing.Point(271, 99);
+            this.withadminoption.Location = new System.Drawing.Point(285, 102);
             this.withadminoption.Name = "withadminoption";
-            this.withadminoption.Size = new System.Drawing.Size(169, 21);
+            this.withadminoption.Size = new System.Drawing.Size(164, 20);
             this.withadminoption.TabIndex = 32;
             this.withadminoption.Text = "WITH ADMIN OPTION";
             this.withadminoption.UseVisualStyleBackColor = true;
@@ -94,7 +94,7 @@ namespace QLDeAn
             // role
             // 
             this.role.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.role.Location = new System.Drawing.Point(271, 67);
+            this.role.Location = new System.Drawing.Point(295, 65);
             this.role.Name = "role";
             this.role.Size = new System.Drawing.Size(162, 24);
             this.role.TabIndex = 34;
@@ -103,7 +103,7 @@ namespace QLDeAn
             // user
             // 
             this.user.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.user.Location = new System.Drawing.Point(271, 24);
+            this.user.Location = new System.Drawing.Point(295, 25);
             this.user.Name = "user";
             this.user.Size = new System.Drawing.Size(162, 24);
             this.user.TabIndex = 35;
@@ -123,7 +123,7 @@ namespace QLDeAn
             this.Controls.Add(this.userrolelabel);
             this.Controls.Add(this.Close);
             this.Name = "GrantRole_F";
-            this.Text = "CẤP ROLE CHO USER";
+            this.Text = "CẤP ROLE CHO USER/ROLE";
             this.Load += new System.EventHandler(this.GrantRole_F_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

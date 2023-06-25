@@ -223,7 +223,7 @@ as
     user_role_exist int;
 BEGIN
     check_user_role_exist(user_name, user_role_exist);
-    if user_role_exist = 0 or user_role_exist = 2 then --Nếu user_name không tồn tại
+    if user_role_exist = 0 then --Nếu user_name không tồn tại
         result_ := -1;
         return;
     end if;
@@ -416,7 +416,7 @@ IS
     res int;
 BEGIN
     check_user_role_exist(user_name, user_role_exist);
-    if user_role_exist = 0 or user_role_exist = 2 then --Nếu user_name không tồn tại
+    if user_role_exist = 0 then --Nếu user_name không tồn tại
         result_ := -1;
         return;
     end if;

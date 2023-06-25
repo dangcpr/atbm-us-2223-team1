@@ -49,7 +49,7 @@ namespace QLDeAn
             this.revokePrivilege.Name = "revokePrivilege";
             this.revokePrivilege.Size = new System.Drawing.Size(172, 42);
             this.revokePrivilege.TabIndex = 8;
-            this.revokePrivilege.Text = "HỦY ROLE CỦA USER";
+            this.revokePrivilege.Text = "HỦY ROLE CỦA USER/ROLE";
             this.revokePrivilege.UseCompatibleTextRendering = true;
             this.revokePrivilege.UseVisualStyleBackColor = true;
             this.revokePrivilege.Click += new System.EventHandler(this.revokePrivilege_Click);
@@ -73,7 +73,7 @@ namespace QLDeAn
             this.grantRole.Name = "grantRole";
             this.grantRole.Size = new System.Drawing.Size(172, 42);
             this.grantRole.TabIndex = 9;
-            this.grantRole.Text = "CẤP ROLE CHO USER";
+            this.grantRole.Text = "CẤP ROLE CHO USER/ROLE";
             this.grantRole.UseCompatibleTextRendering = true;
             this.grantRole.UseVisualStyleBackColor = true;
             this.grantRole.Click += new System.EventHandler(this.grantRole_Click);
@@ -92,7 +92,7 @@ namespace QLDeAn
             this.label_findU.AutoSize = true;
             this.label_findU.Location = new System.Drawing.Point(399, 12);
             this.label_findU.Name = "label_findU";
-            this.label_findU.Size = new System.Drawing.Size(98, 17);
+            this.label_findU.Size = new System.Drawing.Size(94, 16);
             this.label_findU.TabIndex = 12;
             this.label_findU.Text = "Tìm kiếm User";
             // 
@@ -121,7 +121,7 @@ namespace QLDeAn
             this.labelFR.AutoSize = true;
             this.labelFR.Location = new System.Drawing.Point(685, 12);
             this.labelFR.Name = "labelFR";
-            this.labelFR.Size = new System.Drawing.Size(97, 17);
+            this.labelFR.Size = new System.Drawing.Size(94, 16);
             this.labelFR.TabIndex = 21;
             this.labelFR.Text = "Tìm kiếm Role";
             // 

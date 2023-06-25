@@ -62,7 +62,7 @@ namespace QLDeAn
 
                 if (result_roleuser == "-1")
                 {
-                    MessageBox.Show("User cần thu hồi role không tồn tại");
+                    MessageBox.Show("User/Role cần thu hồi role không tồn tại");
                 }
                 else if (result_roleuser == "-2")
                 {

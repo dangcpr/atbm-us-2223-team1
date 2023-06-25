@@ -59,7 +59,7 @@ namespace QLDeAn
 
                 if (result_roleuser == "-1")
                 {
-                    MessageBox.Show("User cần cấp role không tồn tại");
+                    MessageBox.Show("User/Role cần cấp role không tồn tại");
                 }
                 else if (result_roleuser == "-2")
                 {
@@ -67,7 +67,7 @@ namespace QLDeAn
                 }
                 else if (result_roleuser == "3")
                 {
-                    MessageBox.Show("Cấp role " + role.Text.ToString() + " cho user " + user.Text.ToString() + " thành công");
+                    MessageBox.Show("Cấp role " + role.Text.ToString() + " cho user/role " + user.Text.ToString() + " thành công");
                     this.Hide();
 
                     string sql = "select * from dba_role_privs";

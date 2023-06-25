@@ -162,6 +162,7 @@ namespace QLDeAn
             if (e.ColumnIndex == 6)
             {
                 if (attributeTable.Rows[e.RowIndex].Cells[6].Value == null) return;
+                attributeTable.Rows[e.RowIndex].Cells[7].Value = null;
                 var attributeReference = GetAttributeTableReference(attributeTable.Rows[e.RowIndex].Cells[6].Value.ToString());
                 DataGridViewComboBoxCell cbCell = (DataGridViewComboBoxCell)attributeTable.Rows[e.RowIndex].Cells[7];
                 cbCell.Items.Clear();
