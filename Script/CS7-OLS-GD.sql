@@ -93,13 +93,14 @@ CREATE TABLE THONGBAO(
 );
 --DROP TABLE THONGBAO;
 INSERT INTO THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (1, 'Đây là thông báo cho trưởng phòng phụ trách lĩnh vực sản xuất miền Nam', 'Miền Nam');
-INSERT INTO THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (2, 'Đây là thông báo cho trưởng phòng phụ trách tất cả các lĩnh vực không phân biệt chi nhánh', NULL);
+INSERT INTO THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (2, 'Đây là thông báo cho trưởng phòng phụ trách bất kì lĩnh vực không phân biệt chi nhánh', NULL);
 INSERT INTO THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (3, 'Đây là thông báo cho trưởng phòng phụ trách lĩnh vực sản xuất ở miền Trung', 'Miền Trung');
 INSERT INTO THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (4, 'Đây là thông báo cho giám đốc có thể xem toàn bộ dữ liệu', NULL);
 INSERT INTO THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (5, 'Đây là thông báo cho giám đốc phụ trách bất kỳ lĩnh vực nào ở chi nhánh miền Bắc', 'Miền Bắc');
 INSERT INTO THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (6, 'Đây là thông báo cho trưởng phòng phụ trách bất kỳ lĩnh vực nào ở chi nhánh miền Nam', 'Miền Nam');
 INSERT INTO THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (7, 'Đây là thông báo cho nhân viên phụ trách bất kỳ lĩnh vực nào ở chi nhánh miền Trung', 'Miền Trung');
 INSERT INTO THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (8, 'Đây là thông báo cho nhân viên phụ trách lĩnh vực gia công không phân biệt chi nhánh', NULL);
+
 
 GRANT SELECT ON QLDA_PDB1.THONGBAO TO TP001;
 GRANT SELECT ON QLDA_PDB1.THONGBAO TO TP002;

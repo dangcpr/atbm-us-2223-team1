@@ -35,7 +35,6 @@ namespace QLDeAn
             this.label2 = new System.Windows.Forms.Label();
             this.selectButton = new System.Windows.Forms.Button();
             this.createTableButton = new System.Windows.Forms.Button();
-            this.createViewButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tableView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.viewView)).BeginInit();
             this.SuspendLayout();
@@ -102,21 +101,10 @@ namespace QLDeAn
             this.createTableButton.UseVisualStyleBackColor = true;
             this.createTableButton.Click += new System.EventHandler(this.createTableButton_Click);
             // 
-            // createViewButton
-            // 
-            this.createViewButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.createViewButton.Location = new System.Drawing.Point(1076, 122);
-            this.createViewButton.Name = "createViewButton";
-            this.createViewButton.Size = new System.Drawing.Size(166, 29);
-            this.createViewButton.TabIndex = 6;
-            this.createViewButton.Text = "CREATE \"VIEW\"";
-            this.createViewButton.UseVisualStyleBackColor = true;
-            // 
             // DBAUI_TableView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.createViewButton);
             this.Controls.Add(this.createTableButton);
             this.Controls.Add(this.selectButton);
             this.Controls.Add(this.label2);
@@ -141,6 +129,5 @@ namespace QLDeAn
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button selectButton;
         private System.Windows.Forms.Button createTableButton;
-        private System.Windows.Forms.Button createViewButton;
     }
 }

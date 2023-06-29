@@ -36,6 +36,9 @@ namespace QLDeAn
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.colLabel = new System.Windows.Forms.Label();
             this.select = new System.Windows.Forms.Button();
+            this.grantee = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.searchGranteeBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -122,10 +125,39 @@ namespace QLDeAn
             this.select.UseVisualStyleBackColor = true;
             this.select.Click += new System.EventHandler(this.select_Click);
             // 
+            // grantee
+            // 
+            this.grantee.Location = new System.Drawing.Point(917, 31);
+            this.grantee.Name = "grantee";
+            this.grantee.Size = new System.Drawing.Size(110, 22);
+            this.grantee.TabIndex = 10;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(914, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(113, 16);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Tìm kiếm Grantee";
+            // 
+            // searchGranteeBtn
+            // 
+            this.searchGranteeBtn.Location = new System.Drawing.Point(1033, 30);
+            this.searchGranteeBtn.Name = "searchGranteeBtn";
+            this.searchGranteeBtn.Size = new System.Drawing.Size(84, 23);
+            this.searchGranteeBtn.TabIndex = 12;
+            this.searchGranteeBtn.Text = "Search";
+            this.searchGranteeBtn.UseVisualStyleBackColor = true;
+            this.searchGranteeBtn.Click += new System.EventHandler(this.searchGranteeBtn_Click);
+            // 
             // PrivilegeUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.searchGranteeBtn);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.grantee);
             this.Controls.Add(this.select);
             this.Controls.Add(this.colLabel);
             this.Controls.Add(this.dataGridView2);
@@ -152,5 +184,8 @@ namespace QLDeAn
         public System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label colLabel;
         private System.Windows.Forms.Button select;
+        private System.Windows.Forms.TextBox grantee;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button searchGranteeBtn;
     }
 }
