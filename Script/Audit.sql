@@ -122,8 +122,9 @@ RETURN PLS_INTEGER
 AS
   USERROLE VARCHAR2(20);
 BEGIN
+    --Nếu là user QLDA admin thì bị audit
     IF(USER = 'QLDA') THEN
-        RETURN 1;
+        RETURN 0;
     END IF;
     
     SELECT GRANTED_ROLE INTO USERROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE = SYS_CONTEXT('userenv', 'SESSION_USER');
@@ -151,7 +152,7 @@ begin
         object_name => 'QLDA_NHANVIEN',
         policy_name => 'AUDIT_UPDATE_LUONG_PHUCAP_OTHER',
         audit_column => 'LUONG, PHUCAP',
-        audit_condition => NULL,
+        audit_condition => 'USER = ''QLDA''',
         handler_schema     =>   NULL,
         handler_module     =>   NULL,
         statement_types => 'UPDATE',

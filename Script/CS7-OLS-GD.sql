@@ -92,15 +92,16 @@ CREATE TABLE THONGBAO(
     CONSTRAINT PK_THONGBAO PRIMARY KEY(MaTB)
 );
 --DROP TABLE THONGBAO;
-INSERT INTO THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (1, 'Đây là thông báo cho trưởng phòng phụ trách lĩnh vực sản xuất miền Nam', 'Miền Nam');
-INSERT INTO THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (2, 'Đây là thông báo cho trưởng phòng phụ trách bất kì lĩnh vực không phân biệt chi nhánh', NULL);
-INSERT INTO THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (3, 'Đây là thông báo cho trưởng phòng phụ trách lĩnh vực sản xuất ở miền Trung', 'Miền Trung');
-INSERT INTO THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (4, 'Đây là thông báo cho giám đốc có thể xem toàn bộ dữ liệu', NULL);
-INSERT INTO THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (5, 'Đây là thông báo cho giám đốc phụ trách bất kỳ lĩnh vực nào ở chi nhánh miền Bắc', 'Miền Bắc');
-INSERT INTO THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (6, 'Đây là thông báo cho trưởng phòng phụ trách bất kỳ lĩnh vực nào ở chi nhánh miền Nam', 'Miền Nam');
-INSERT INTO THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (7, 'Đây là thông báo cho nhân viên phụ trách bất kỳ lĩnh vực nào ở chi nhánh miền Trung', 'Miền Trung');
-INSERT INTO THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (8, 'Đây là thông báo cho nhân viên phụ trách lĩnh vực gia công không phân biệt chi nhánh', NULL);
-
+INSERT INTO QLDA_PDB1.THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (1, 'Đây là thông báo cho trưởng phòng phụ trách lĩnh vực sản xuất miền Nam', 'Miền Nam');
+INSERT INTO QLDA_PDB1.THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (2, 'Đây là thông báo cho trưởng phòng phụ trách bất kì lĩnh vực không phân biệt chi nhánh', NULL);
+INSERT INTO QLDA_PDB1.THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (3, 'Đây là thông báo cho trưởng phòng phụ trách lĩnh vực sản xuất ở miền Trung', 'Miền Trung');
+INSERT INTO QLDA_PDB1.THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (4, 'Đây là thông báo cho giám đốc có thể xem toàn bộ dữ liệu', NULL);
+INSERT INTO QLDA_PDB1.THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (5, 'Đây là thông báo cho giám đốc phụ trách bất kỳ lĩnh vực nào ở chi nhánh miền Bắc', 'Miền Bắc');
+INSERT INTO QLDA_PDB1.THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (6, 'Đây là thông báo cho trưởng phòng phụ trách bất kỳ lĩnh vực nào ở chi nhánh miền Nam', 'Miền Nam');
+INSERT INTO QLDA_PDB1.THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (7, 'Đây là thông báo cho nhân viên phụ trách bất kỳ lĩnh vực nào ở chi nhánh miền Trung', 'Miền Trung');
+INSERT INTO QLDA_PDB1.THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (8, 'Đây là thông báo cho nhân viên phụ trách lĩnh vực gia công không phân biệt chi nhánh', NULL);
+--INSERT INTO QLDA_PDB1.THONGBAO (MaTB, NoiDung, DiaDiem) VALUES (9, 'Đây là thông báo cho nhân viên phụ trách cả 2 lĩnh vực gia công và sản xuất ở miền Bắc hoặc Trung', NULL);
+COMMIT;
 
 GRANT SELECT ON QLDA_PDB1.THONGBAO TO TP001;
 GRANT SELECT ON QLDA_PDB1.THONGBAO TO TP002;
@@ -164,6 +165,8 @@ EXECUTE SA_LABEL_ADMIN.CREATE_LABEL('OLS_QLDA', 800, 'NV::T');
 EXECUTE SA_LABEL_ADMIN.CREATE_LABEL('OLS_QLDA', 790, 'NV:GC:B'); 
 --Nhãn nhân viên gia công
 EXECUTE SA_LABEL_ADMIN.CREATE_LABEL('OLS_QLDA', 780, 'NV:GC'); 
+--Nhãn nhân viên cả 2 lĩnh vực gia công và sản xuất ở miền Bắc hoặc Trung
+EXECUTE SA_LABEL_ADMIN.CREATE_LABEL('OLS_QLDA', 770, 'NV:GC,SX:B,T'); 
 /*
 EXECUTE SA_LABEL_ADMIN.DROP_LABEL('OLS_QLDA', 1000);
 EXECUTE SA_LABEL_ADMIN.DROP_LABEL('OLS_QLDA', 990);
@@ -177,6 +180,7 @@ EXECUTE SA_LABEL_ADMIN.DROP_LABEL('OLS_QLDA', 860);
 EXECUTE SA_LABEL_ADMIN.DROP_LABEL('OLS_QLDA', 800);
 EXECUTE SA_LABEL_ADMIN.DROP_LABEL('OLS_QLDA', 790);
 EXECUTE SA_LABEL_ADMIN.DROP_LABEL('OLS_QLDA', 780);
+EXECUTE SA_LABEL_ADMIN.DROP_LABEL('OLS_QLDA', 770);
 */
 
 BEGIN
@@ -196,8 +200,11 @@ UPDATE QLDA_PDB1.THONGBAO SET OLS_THONGBAO=CHAR_TO_LABEL('OLS_QLDA', 'GD::B') WH
 UPDATE QLDA_PDB1.THONGBAO SET OLS_THONGBAO=CHAR_TO_LABEL('OLS_QLDA', 'TP::N') WHERE MaTB=6;
 UPDATE QLDA_PDB1.THONGBAO SET OLS_THONGBAO=CHAR_TO_LABEL('OLS_QLDA', 'NV::T') WHERE MaTB=7;
 UPDATE QLDA_PDB1.THONGBAO SET OLS_THONGBAO=CHAR_TO_LABEL('OLS_QLDA', 'NV:GC') WHERE MaTB=8;
+UPDATE QLDA_PDB1.THONGBAO SET OLS_THONGBAO=CHAR_TO_LABEL('OLS_QLDA', 'NV:GC,SX:B,T') WHERE MaTB=9;
+COMMIT;
 
 SELECT * FROM QLDA_PDB1.THONGBAO;
+
 
 BEGIN
 SA_POLICY_ADMIN.REMOVE_TABLE_POLICY(
@@ -288,5 +295,7 @@ SA_USER_ADMIN.SET_USER_LABELS(
     MAX_WRITE_LABEL  => 'NV:GC:N'
 );
 END;
+
+SELECT * FROM QLDA_PDB1.THONGBAO;
 
 
